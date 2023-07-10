@@ -35,23 +35,18 @@ public class Map {
     }
 
     public void summon(AbstractTetramino tetr){
-
         if(height == 5)tetr.setCentralCoordinate(2,2 );
         else{
-            tetr.setCentralCoordinate(2, 2);
+            tetr.setCentralCoordinate(10, 18);
         }
         addTetramino(tetr);
     }
 
     public void addTetramino(AbstractTetramino tetr){
         if(isTetraminoConflict(tetr)){
-            Gdx.app.debug("", "" + tetr.INDEX);
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
-
-                Gdx.app.debug("", "" + tetr.coordinatesY[i] + " " + tetr.coordinatesX[i]);
             }
-
         }
     }
     public void deleteTetramino(AbstractTetramino tetr){
@@ -70,6 +65,7 @@ public class Map {
 
     public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
+            if(0 < tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 < tetr.coordinatesX[i] && tetr.coordinatesX[i] < width )
             if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesY[i]).type != 0){
                 return false;
             }

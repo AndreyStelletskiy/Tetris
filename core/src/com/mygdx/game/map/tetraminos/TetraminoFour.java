@@ -5,7 +5,7 @@ import com.mygdx.game.map.Map;
 public class TetraminoFour extends AbstractTetramino{
     private boolean isVertical;
     public TetraminoFour(int centralX, int centralY) {
-        INDEX = 5;
+        INDEX = 4;
         isVertical = false;
         coordinatesX = new int[4];
         coordinatesY = new int[4];

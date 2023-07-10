@@ -3,8 +3,9 @@ package com.mygdx.game.map.tetraminos;
 import com.mygdx.game.map.Map;
 
 public class TetraminoThree extends AbstractTetramino{
-    public static int INDEX = 3;
+
     public TetraminoThree(int centralX, int centralY) {
+        INDEX = 3;
         coordinatesX = new int[4];
         coordinatesY = new int[4];
         coordinatesX[0] = centralX - 1;

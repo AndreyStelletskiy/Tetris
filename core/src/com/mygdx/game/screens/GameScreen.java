@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
     MyGdxGame myGdxGame;
     Map gameMap, miniMap;
     int time = 0;
-    int moveTime = 180;
+    int moveTime = 20;
     AbstractTetramino currentTetramino, nextTetramino;
     AbstractTetramino[] forRandomArray;
     Random random;
@@ -81,10 +81,11 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         time = (time + 1) % moveTime;
-        if (time == -1){
-            Gdx.app.debug("moving down", "moving down");
+        if (time == 0){
+            Gdx.app.debug("", "moving down");
             currentTetramino.moveDown(gameMap);
             if(currentTetramino.isMovable == false){
+                Gdx.app.debug("", "moving down stopped");
                 miniMap.deleteTetramino(nextTetramino);
                 try {
                     currentTetramino =  nextTetramino.clone();
