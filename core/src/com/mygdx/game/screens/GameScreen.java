@@ -177,18 +177,21 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "toleftButtonClickListener");
+            currentTetramino.moveLeft(gameMap);
         }
     };
     UiComponent.OnClickListener torightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "torightButtonClickListener");
+            currentTetramino.moveRight(gameMap);
         }
     };
     UiComponent.OnClickListener toleftrButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "toleftrButtonClickListener");
+            //currentTetramino.rotateLeft(gameMap);
 
         }
     };
@@ -196,12 +199,14 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "torightrButtonClickListener");
+            //currentTetramino.rotateRight(gameMap);
         }
     };
     UiComponent.OnClickListener todounButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "todounButtonClickListener");
+            currentTetramino.moveDown(gameMap);
         }
     };
     UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
