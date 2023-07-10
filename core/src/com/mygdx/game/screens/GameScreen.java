@@ -13,6 +13,7 @@ import com.mygdx.game.map.tetraminos.TetraminoThree;
 import com.mygdx.game.map.tetraminos.TetraminoTwo;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
+import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class GameScreen implements Screen {
     Random random;
 
     int gameState;
+    int gameMapWidht;
+    int gameMapHeight;
     TextButton Stop;
     TextButton buttonExit;
 
@@ -38,10 +41,12 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
+        gameMapWidht=20;
+        gameMapHeight=20;
 
         random = new Random();
 
-        gameMap = new Map(300, 620, 20, 20, 30);
+        gameMap = new Map(300, 620, gameMapWidht, gameMapHeight, 30);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
         forRandomArray = new AbstractTetramino[5];
@@ -180,11 +185,15 @@ public class GameScreen implements Screen {
         torightrButton.setOnClickListener(torightrButtonClickListener);
         ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
         todounButton.setOnClickListener(todounButtonClickListener);
+        TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
+        TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "-", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
         Stop.setOnClickListener(pauseButtonClickListener);
         buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "", 25, 85);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         uiComponentsList.add(Stop);
+        uiComponentsList.add(score);
+        uiComponentsList.add(scoreR);
         uiComponentsListGame.add(toleftButton);
         uiComponentsListGame.add(torightButton);
         uiComponentsListGame.add(toleftrButton);
