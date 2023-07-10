@@ -1,5 +1,6 @@
 package com.mygdx.game.map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.tetraminos.AbstractTetramino;
@@ -11,8 +12,8 @@ public class Map {
     float posX, posY;
     public int width, height;
     float blockSize;
-    ArrayList<ArrayList<Block>> mapList;
-    AbstractTetramino currentTetramino, nextTetramino;
+    public ArrayList<ArrayList<Block>> mapList;
+    public AbstractTetramino currentTetramino, nextTetramino;
 
 
 
@@ -42,6 +43,7 @@ public class Map {
 
     public void addTetramino(AbstractTetramino tetr){
         if(isTetraminoConflict(tetr)){
+            Gdx.app.debug("addTetr", "" + tetr.INDEX);
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
             }
@@ -64,7 +66,7 @@ public class Map {
 
     public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
-            if(tetr.coordinatesX[i]!= 0 || tetr.coordinatesY[i] != 0){
+            if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesY[i]).type != 0){
                 return false;
             }
         }

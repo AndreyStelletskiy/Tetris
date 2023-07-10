@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ui.ImageView;
 
 public class Block extends ImageView {
-    int type;
+    public int type;
 
     public Block(float x, float y, float width, float height, String imgSource, int type) {
         super(x, y, width, height, imgSource);
