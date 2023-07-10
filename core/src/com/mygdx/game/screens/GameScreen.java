@@ -191,7 +191,7 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "toleftrButtonClickListener");
-            //currentTetramino.rotateLeft(gameMap);
+            currentTetramino.rotateLeft(gameMap);
 
         }
     };
