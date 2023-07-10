@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.map.Map;
 import com.mygdx.game.ui.Blackout;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
@@ -22,6 +23,7 @@ public class GameScreen implements Screen {
     ArrayList<UiComponent> uiComponentsList;
     ArrayList<ImageView> healthBar;
     MyGdxGame myGdxGame;
+    Map gameMap;
 
     GameSession gameSession;
 
@@ -33,6 +35,8 @@ public class GameScreen implements Screen {
         gameSession = new GameSession();
 
         uiComponentsList = new ArrayList<>();
+
+        gameMap = new Map();
 
         healthBar = new ArrayList<>();
         ImageView hearth1 = new ImageView(0,0,100, 100, "icons/hearth.png");

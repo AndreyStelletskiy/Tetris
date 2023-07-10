@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Map {
     float posX, posY;
-    int width, height;
+    public int width, height;
     float blockSize;
     ArrayList<ArrayList<Block>> mapList;
     AbstractTetramino currentTetramino, nextTetramino;
@@ -42,7 +42,7 @@ public class Map {
         }
     }
 
-    boolean isTetraminoConflict(AbstractTetramino tetr) {
+    public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
 
 
