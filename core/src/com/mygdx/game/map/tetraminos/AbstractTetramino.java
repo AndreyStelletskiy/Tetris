@@ -1,12 +1,13 @@
 package com.mygdx.game.map.tetraminos;
 
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.map.Map;
 
 public class AbstractTetramino implements Cloneable{
     public int INDEX = 0;
     public int[] coordinatesX;
     public int[] coordinatesY;
-    public boolean isMovable;
+    public boolean isMovable = true;
 
     public void rotateRight(Map map) {}
     public void rotateLeft(Map map) {}
@@ -20,27 +21,30 @@ public class AbstractTetramino implements Cloneable{
     }
 
     protected void moveUp(Map map) {
-        for (int y : coordinatesX) y++;
+        for (int i = 0; i < 4; i++) {
+            coordinatesY[i]++;
+        }
     }
 
     public void moveDown(Map map) {
-        for (int y : coordinatesX) y--;
-        if (map.isTetraminoConflict(this)) {
+        map.deleteTetramino(this);
+        for (int i = 0; i < 4; i++) {
+            coordinatesY[i]--;
+        }
+
+        if (!map.isTetraminoConflict(this)) {
             this.moveUp(map);
             this.isMovable = false;
         }
-        else{
-            for (int y : coordinatesX) y++;
-            map.deleteTetramino(this);
-            for (int y : coordinatesX) y--;
-            map.addTetramino(this);
-        }
+        map.addTetramino(this);
+
     }
 
     public void setCentralCoordinate(int newX, int newY) {
+        int x = coordinatesX[1], y = coordinatesY[1];
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] += (newX - coordinatesX[1]);
-            coordinatesY[i] += (newY - coordinatesY[1]);
+            coordinatesX[i] += (newX - x);
+            coordinatesY[i] += (newY - y);
         }
     }
 
