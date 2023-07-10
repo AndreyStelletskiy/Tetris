@@ -23,6 +23,7 @@ public class MyGdxGame extends Game {
 
 	public MyCustomFont commonFont;
 	public MyCustomFont largeFont;
+	public MyCustomFont largeFontb;
 	public MyCustomFont largeFont1;
 	public MyCustomFont bblargeFont;
 	public MyCustomFont secondaryFont;
@@ -45,6 +46,7 @@ public class MyGdxGame extends Game {
 		camera.setToOrtho(false, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
 
 		largeFont = new MyCustomFont(100, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
+		largeFontb = new MyCustomFont(100, "fonts/arnamu.ttf", new Color(0, 0, 0, 1));
 		bblargeFont = new MyCustomFont(130, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		largeFont1 = new MyCustomFont(75, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		commonFont = new MyCustomFont(50, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
