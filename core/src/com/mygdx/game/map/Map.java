@@ -27,13 +27,18 @@ public class Map {
         for (int i = 0; i < height; i++) {
             mapList.add(new ArrayList<Block>());
             for (int j = 0; j < width; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "badlogic.jpg", 0);
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
                 mapList.get(i).add(zeroBlock);
             }
 
         }
     }
 
+    public void summon(AbstractTetramino tetr){
+        addTetramino(tetr);
+
+
+    }
 
     public void addTetramino(AbstractTetramino tetr){
         if(isTetraminoConflict(tetr)){
