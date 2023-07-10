@@ -36,7 +36,6 @@ public class GameScreen implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
-        gameMap = new Map();
 
         healthBar = new ArrayList<>();
         ImageView hearth1 = new ImageView(0,0,100, 100, "icons/hearth.png");

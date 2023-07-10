@@ -13,10 +13,11 @@ public class Map {
     float blockSize;
     ArrayList<ArrayList<Block>> mapList;
     AbstractTetramino currentTetramino, nextTetramino;
-    MyGdxGame myGdxGame;
 
-    public Map(float posX, float posY, int width, int height, float blockSize, MyGdxGame myGdxGame) {
-        this.myGdxGame = myGdxGame;
+
+
+
+    public Map(float posX, float posY, int width, int height, float blockSize ) {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
@@ -34,7 +35,21 @@ public class Map {
     }
 
 
-    public void draw() {
+    public void addTetramino(AbstractTetramino tetr){
+        if(isTetraminoConflict(tetr)){
+            for (int i = 0; i < 4; i++) {
+                mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
+            }
+
+        }
+    }
+    public void deleteTetramino(AbstractTetramino tetr){
+        for (int i = 0; i < 4; i++) {
+            mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(0);
+        }
+    }
+
+    public void draw(MyGdxGame myGdxGame) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 mapList.get(i).get(j).draw(myGdxGame);
@@ -44,8 +59,9 @@ public class Map {
 
     public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
-
-
+            if(tetr.coordinatesX[i]!= 0 || tetr.coordinatesY[i] != 0){
+                return false;
+            }
         }
         return true;
     }

@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,6 +12,7 @@ import com.mygdx.game.screens.AboutScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.SettingsScreen;
+import com.mygdx.game.screens.TestScreen;
 import com.mygdx.game.utils.GameSettings;
 
 public class MyGdxGame extends Game {
@@ -34,11 +36,12 @@ public class MyGdxGame extends Game {
 
 
 		aboutScreen = new AboutScreen();
-		gameScreen = new GameScreen(this);
-		menuScreen = new MenuScreen(this);
-		settingsScreen = new SettingsScreen(this);
+		//gameScreen = new GameScreen(this);
+		//menuScreen = new MenuScreen(this);
+		//settingsScreen = new SettingsScreen(this);
 
-		setScreen(menuScreen);
+		TestScreen testScreen = new TestScreen(this);
+		setScreen(testScreen);
 	}
 	
 	@Override
