@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
         uiComponentsList = new ArrayList<>();
 
 
+
     }
 
     @Override
