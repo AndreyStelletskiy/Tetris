@@ -9,12 +9,8 @@ public class AbstractTetramino {
     public int[] coordinatesY;
     public boolean isMovable;
 
-    public void rotateRight(Map map) {
-
-    }
-    public void rotateLeft(Map map) {
-
-    }
+    public void rotateRight(Map map) {}
+    public void rotateLeft(Map map) {}
     public void moveRight(Map map) {
         for (int x : coordinatesX) x = ++x % map.height;
         if (map.isTetraminoConflict(this)) for (int x : coordinatesX) x = --x % map.height;
