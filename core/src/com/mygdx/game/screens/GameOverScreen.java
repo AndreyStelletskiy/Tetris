@@ -22,14 +22,14 @@ public class GameOverScreen implements Screen {
         uiComponentsList = new ArrayList<>();
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
-        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Game Over", -1, 1800);
+        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Game Over", -1, 1825);
         TextView titleGO = new TextView(myGdxGame.largeFont.bitmapFont, "Your results", 35, 1600);
-        TextView titleGOt = new TextView(myGdxGame.largeFont.bitmapFont, "-", 625, 1600);
+        TextView titleGOt = new TextView(myGdxGame.largeFont.bitmapFont, "-", 605, 1600);
 
         TextView prResults = new TextView(myGdxGame.largeFont.bitmapFont, "previous result", 35, 1450);
-        TextView prResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 725, 1450);
+        TextView prResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 705, 1450);
         TextView bResults = new TextView(myGdxGame.largeFont.bitmapFont, "best result", 35, 1300);
-        TextView bResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 525, 1300);
+        TextView bResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 505, 1300);
 
 
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "To home", 25, 175);

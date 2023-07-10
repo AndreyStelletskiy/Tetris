@@ -16,10 +16,6 @@ public class ShopScreen implements Screen {
 
     ArrayList<UiComponent> uiComponentsList;
     MyGdxGame myGdxGame;
-    TextButton difficultyButton;
-    TextButton soundsButton;
-    TextButton resetButton;
-    TextView difficultyText;
 
 
     public ShopScreen(MyGdxGame myGdxGame) {
@@ -27,7 +23,7 @@ public class ShopScreen implements Screen {
         uiComponentsList = new ArrayList<>();
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
-        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1800);
+        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1825);
 
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 25, 175);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
