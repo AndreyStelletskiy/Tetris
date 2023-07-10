@@ -21,9 +21,7 @@ public class ImageView extends UiComponent{
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
-        myGdxGame.batch.begin();
         myGdxGame.batch.draw(imgTexture, x, y, width, height);
-        myGdxGame.batch.end();
     }
     @Override
     public boolean isHit(float tx, float ty) {

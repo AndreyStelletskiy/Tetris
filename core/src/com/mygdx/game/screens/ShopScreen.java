@@ -29,7 +29,7 @@ public class ShopScreen implements Screen {
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1800);
 
-        TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 75, 175);
+        TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 25, 175);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         uiComponentsList.add(background);
         uiComponentsList.add(title);
