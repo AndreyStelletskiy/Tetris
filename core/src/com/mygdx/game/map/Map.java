@@ -12,7 +12,6 @@ public class Map {
     public int width, height;
     float blockSize;
     public ArrayList<ArrayList<Block>> mapList;
-    public AbstractTetramino currentTetramino, nextTetramino;
 
 
 
@@ -72,6 +71,23 @@ public class Map {
         }
         return true;
     }
-
+    public boolean isStringFull(int indx){
+        for (int i = 0; i < width; i++) {
+            if(mapList.get(indx).get(i).type == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    public void deleteString(int indx){
+        for (int i = 0; i < width; i++) {
+            mapList.get(indx).get(i).setType(0);
+        }
+        for (int i = indx; i <height-1 ; i++) {
+            for (int j = 0; j < width; j++) {
+                mapList.get(i).get(j).setType(mapList.get(i+1).get(j).type);
+            }
+        }
+    }
 }
 

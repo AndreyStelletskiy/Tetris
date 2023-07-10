@@ -3,27 +3,50 @@ package com.mygdx.game.map.tetraminos;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.map.Map;
 
-public class AbstractTetramino implements Cloneable{
+public class AbstractTetramino implements Cloneable {
     public int INDEX = 0;
     public int[] coordinatesX;
     public int[] coordinatesY;
     public boolean isMovable = true;
 
-    public void rotateRight(Map map) {}
-    public void rotateLeft(Map map) {}
-    public void moveRight(Map map) {
-        for (int x : coordinatesX) x = ++x % map.height;
-        if (map.isTetraminoConflict(this)) for (int x : coordinatesX) x = --x % map.height;
+    public void rotateRight(Map map) {
     }
+
+    public void rotateLeft(Map map) {
+    }
+
+    public void moveRight(Map map) {
+        map.deleteTetramino(this);
+        for (int i = 0; i < 4; i++) {
+            coordinatesX[i] = ++coordinatesX[i] % map.width;
+        }
+        if (!map.isTetraminoConflict(this)) {
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = --coordinatesX[i] % map.width;
+            }
+        }
+        map.addTetramino(this);
+    }
+
     public void moveLeft(Map map) {
-        for (int x : coordinatesX) x = --x % map.height;
-        if (map.isTetraminoConflict(this)) for (int x : coordinatesX) x = ++x % map.height;
+        map.deleteTetramino(this);
+        for (int i = 0; i < 4; i++) {
+            coordinatesX[i] = --coordinatesX[i] % map.width;
+        }
+        if (!map.isTetraminoConflict(this)) {
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = ++coordinatesX[i] % map.width;
+            }
+        }
+        map.addTetramino(this);
     }
 
     protected void moveUp(Map map) {
+        map.deleteTetramino(this);
         for (int i = 0; i < 4; i++) {
             coordinatesY[i]++;
         }
+        map.addTetramino(this);
     }
 
     public void moveDown(Map map) {
@@ -33,10 +56,13 @@ public class AbstractTetramino implements Cloneable{
         }
 
         if (!map.isTetraminoConflict(this)) {
-            this.moveUp(map);
+            for (int i = 0; i < 4; i++) {
+                coordinatesY[i]++;
+            }
             this.isMovable = false;
         }
         map.addTetramino(this);
+
 
     }
 
@@ -48,7 +74,7 @@ public class AbstractTetramino implements Cloneable{
         }
     }
 
-    public AbstractTetramino clone() throws CloneNotSupportedException{
+    public AbstractTetramino clone() throws CloneNotSupportedException {
         return (AbstractTetramino) super.clone();
     }
 

@@ -42,29 +42,20 @@ public class GameScreen implements Screen {
         miniMap = new Map(800, 1600, 5, 5, 30);
 
         forRandomArray = new AbstractTetramino[5];
-        forRandomArray[0] = new TetraminoOne(2,2);
-        forRandomArray[1] = new TetraminoTwo(2,2);
-        forRandomArray[2] = new TetraminoThree(2,2);
-        forRandomArray[4] = new TetraminoFive(2,2);
-        forRandomArray[3] = new TetraminoFour(2,2);
+        forRandomArray[0] = new TetraminoOne(2, 2);
+        forRandomArray[1] = new TetraminoTwo(2, 2);
+        forRandomArray[2] = new TetraminoThree(2, 2);
+        forRandomArray[4] = new TetraminoFive(2, 2);
+        forRandomArray[3] = new TetraminoFour(2, 2);
 
-        try {
-            currentTetramino = forRandomArray[random.nextInt( 5)].clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+
+        currentTetramino = generateWithSameType(forRandomArray[random.nextInt(5)]);
+
         gameMap.summon(currentTetramino);
 
-        try {
-            nextTetramino = forRandomArray[random.nextInt( 5)].clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+
+        nextTetramino = generateWithSameType(forRandomArray[random.nextInt(5)]);
         miniMap.summon(nextTetramino);
-
-        Gdx.app.debug("current", "" + currentTetramino.INDEX);
-
-
 
         UIInitialize();
 
@@ -77,6 +68,15 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if (Gdx.input.justTouched()) {
+            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
+            for (UiComponent component : uiComponentsList) {
+                if (component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
+            }
+        }
+
         if (gameState == 0) {
             time = (time + 1) % moveTime;
 
@@ -84,27 +84,19 @@ public class GameScreen implements Screen {
                 Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
                 if (currentTetramino.isMovable == false) {
+                    for (int i = 0; i < gameMap.height; i++) {
+                        if(gameMap.isStringFull(i)){
+                            gameMap.deleteString(i);
+                        }
+                    }
                     miniMap.deleteTetramino(nextTetramino);
-                    try {
-                        currentTetramino = nextTetramino.clone();
-                    } catch (CloneNotSupportedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    currentTetramino = generateWithSameType(nextTetramino);
                     gameMap.summon(currentTetramino);
-                    try {
-                        nextTetramino = forRandomArray[random.nextInt(5)].clone();
-                    } catch (CloneNotSupportedException e) {
-                        throw new RuntimeException(e);
-                    }
+
+                    nextTetramino = generateWithSameType(forRandomArray[random.nextInt(5)]);
+
                     miniMap.summon(nextTetramino);
                 }
-            }
-        }
-        if (Gdx.input.justTouched()) {
-            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
-            for (UiComponent component : uiComponentsList) {
-                if(component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
             }
         }
 
@@ -149,18 +141,18 @@ public class GameScreen implements Screen {
 
     }
 
-    public void UIInitialize(){
+    public void UIInitialize() {
         uiComponentsList = new ArrayList<>();
         ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
-        toleftButton.setOnClickListener(toleftButtonClickListener);
+        toleftButton.setOnClickListener(toLeftButtonClickListener);
         ImageView torightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
-        torightButton.setOnClickListener(torightButtonClickListener);
+        torightButton.setOnClickListener(toRightButtonClickListener);
         ImageView toleftrButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
-        toleftrButton.setOnClickListener(toleftrButtonClickListener);
+        toleftrButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView torightrButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
-        torightrButton.setOnClickListener(torightrButtonClickListener);
+        torightrButton.setOnClickListener(toRightRButtonClickListener);
         ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
-        todounButton.setOnClickListener(todounButtonClickListener);
+        todounButton.setOnClickListener(toDownButtonClickListener);
         uiComponentsList.add(toleftButton);
         uiComponentsList.add(torightButton);
         uiComponentsList.add(toleftrButton);
@@ -168,32 +160,35 @@ public class GameScreen implements Screen {
         uiComponentsList.add(todounButton);
     }
 
-    UiComponent.OnClickListener toleftButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toLeftButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "toleftButtonClickListener");
+            currentTetramino.moveLeft(gameMap);
         }
     };
-    UiComponent.OnClickListener torightButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "torightButtonClickListener");
+            currentTetramino.moveRight(gameMap);
         }
     };
-    UiComponent.OnClickListener toleftrButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "toleftrButtonClickListener");
-
+            gameMap.deleteTetramino(currentTetramino);
+            currentTetramino.rotateLeft(gameMap);
+            gameMap.addTetramino(currentTetramino);
         }
     };
-    UiComponent.OnClickListener torightrButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toRightRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "torightrButtonClickListener");
+            gameMap.deleteTetramino(currentTetramino);
+            currentTetramino.rotateRight(gameMap);
+            gameMap.addTetramino(currentTetramino);
         }
     };
-    UiComponent.OnClickListener todounButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toDownButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "todounButtonClickListener");
@@ -205,6 +200,25 @@ public class GameScreen implements Screen {
             gameState = 1 - gameState;
         }
     };
+
+    public AbstractTetramino generateWithSameType(AbstractTetramino abstractTetramino) {
+        switch (abstractTetramino.INDEX) {
+            case 1:
+                return new TetraminoOne(5, 5);
+            case 2:
+                return new TetraminoTwo(5, 5);
+
+            case 3:
+                return new TetraminoThree(5, 5);
+
+            case 4:
+                return new TetraminoFour(5, 5);
+
+            default:
+                return new TetraminoFive(5, 5);
+
+        }
+    }
 
 
 }

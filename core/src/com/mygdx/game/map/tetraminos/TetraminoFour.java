@@ -40,6 +40,10 @@ public class TetraminoFour extends AbstractTetramino{
             coordinatesX[2] = coordinatesX[1];
             coordinatesX[3] = coordinatesX[1];
         }
+        for(int i = 0; i < 4; i ++){
+            coordinatesX[i] = coordinatesX[i] % map.width;
+            coordinatesY[i] = coordinatesY[i] % map.height;
+        }
 
         if (map.isTetraminoConflict(this)) {
             this.moveLeft(map);
@@ -79,6 +83,10 @@ public class TetraminoFour extends AbstractTetramino{
             coordinatesX[0] = coordinatesX[1];
             coordinatesX[2] = coordinatesX[1];
             coordinatesX[3] = coordinatesX[1];
+        }
+        for(int i = 0; i < 4; i ++){
+            coordinatesX[i] = coordinatesX[i] % map.width;
+            coordinatesY[i] = coordinatesY[i] % map.height;
         }
 
         if (map.isTetraminoConflict(this)) {
