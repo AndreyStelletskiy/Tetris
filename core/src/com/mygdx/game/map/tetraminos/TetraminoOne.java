@@ -11,8 +11,8 @@ public class TetraminoOne extends AbstractTetramino{ //квадратик
         coordinatesX[3] = centralX + 1;
         coordinatesY[0] = centralY;
         coordinatesY[1] = centralY;
-        coordinatesY[2] = centralY + 1;
-        coordinatesY[3] = centralY + 1;
+        coordinatesY[2] = centralY - 1;
+        coordinatesY[3] = centralY - 1;
     }
     
 }
