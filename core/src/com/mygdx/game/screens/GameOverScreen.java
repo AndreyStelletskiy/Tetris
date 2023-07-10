@@ -21,7 +21,7 @@ public class GameOverScreen implements Screen {
         this.myGdxGame = myGdxGame;
         uiComponentsList = new ArrayList<>();
 
-        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
+        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/gameOver.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Game Over", -1, 1825);
         TextView titleGO = new TextView(myGdxGame.largeFont.bitmapFont, "Your results", 35, 1600);
         TextView titleGOt = new TextView(myGdxGame.largeFont.bitmapFont, "-", 605, 1600);
@@ -109,7 +109,7 @@ public class GameOverScreen implements Screen {
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
-    private final UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "onButtonStartClicked");
