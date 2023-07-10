@@ -15,4 +15,9 @@ public class Block extends ImageView {
         super(x, y, width, height, imgTexture);
         this.type = type;
     }
+
+    public void setType(int type) {
+        this.type = type;
+        setImgTexture(new Texture("block_" + type + ".jpg" ));
+    }
 }

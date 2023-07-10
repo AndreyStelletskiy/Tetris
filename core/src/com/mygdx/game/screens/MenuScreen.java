@@ -22,27 +22,8 @@ public class MenuScreen implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
-        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.jpg");
-        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Welcome to Mosquito game", -1, 950);
 
-        TextButton buttonStart = new TextButton(myGdxGame.commonFont.bitmapFont, "Start", 200, 700);
-        buttonStart.setOnClickListener(onButtonStartClicked);
 
-        TextButton buttonSettings = new TextButton(myGdxGame.commonFont.bitmapFont, "Settings", 200, 600);
-        buttonSettings.setOnClickListener(onButtonSettingsClicked);
-
-        TextButton buttonAbout = new TextButton(myGdxGame.commonFont.bitmapFont, "About", 200, 500);
-        buttonAbout.setOnClickListener(onButtonAboutClicked);
-
-        TextButton buttonExit = new TextButton(myGdxGame.commonFont.bitmapFont, "Exit", 200, 400);
-        buttonExit.setOnClickListener(onButtonExitClicked);
-
-        uiComponentsList.add(background);
-        uiComponentsList.add(title);
-        uiComponentsList.add(buttonStart);
-        uiComponentsList.add(buttonSettings);
-        uiComponentsList.add(buttonAbout);
-        uiComponentsList.add(buttonExit);
     }
 
     @Override

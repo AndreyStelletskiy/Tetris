@@ -28,42 +28,6 @@ public class SettingsScreen implements Screen {
         this.myGdxGame = myGdxGame;
         uiComponentsList = new ArrayList<>();
 
-        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/settingsBG.jpg");
-        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Settings", -1, 950);
-        ImageView returnButton = new ImageView(200, 950, 100, 100, "icons/backIcon.png");
-        returnButton.setOnClickListener(onReturnButtonClickListener);
-
-        difficultyText = new TextView(myGdxGame.secondaryFont.bitmapFont,MemoryLoader.loadDifficultyLevel().getDifficultyName(), 700,700 );
-        difficultyButton = new TextButton(myGdxGame.commonFont.bitmapFont, "Change difficulty", 200, 700);
-        difficultyButton.setOnClickListener(new UiComponent.OnClickListener() {
-            @Override
-            public void onClicked() {
-                DifficultyLevel difficultyLevel = MemoryLoader.loadDifficultyLevel();
-                switch (difficultyLevel){
-                    case EASY:
-                        difficultyLevel = DifficultyLevel.MEDIUM;
-                        break;
-                    case MEDIUM:
-                        difficultyLevel = DifficultyLevel.HARD;
-                        break;
-                    case HARD:
-                        difficultyLevel = DifficultyLevel.EASY;
-                        break;
-                }
-                difficultyText.text = difficultyLevel.getDifficultyName();
-                MemoryLoader.saveDifficultyLevel(difficultyLevel);
-            }
-        });
-        soundsButton = new TextButton(myGdxGame.commonFont.bitmapFont, getSoundButtonText(), 200, 600);
-        resetButton = new TextButton(myGdxGame.commonFont.bitmapFont, "Clear all saves", 200, 500);
-
-        uiComponentsList.add(background);
-        uiComponentsList.add(title);
-        uiComponentsList.add(returnButton);
-        uiComponentsList.add(difficultyButton);
-        uiComponentsList.add(difficultyText);
-        uiComponentsList.add(soundsButton);
-        uiComponentsList.add(resetButton);
     }
 
     @Override
