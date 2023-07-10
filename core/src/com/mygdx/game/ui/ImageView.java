@@ -8,10 +8,6 @@ public class ImageView extends UiComponent{
     String imgSource;
     Texture imgTexture;
 
-    public void setImgTexture(Texture imgTexture) {
-        this.imgTexture = imgTexture;
-    }
-
     public ImageView(float x, float y, float width, float height, String imgSource) {
         super(x, y, width, height);
         this.imgSource = imgSource;
@@ -25,13 +21,17 @@ public class ImageView extends UiComponent{
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
+        myGdxGame.batch.begin();
         myGdxGame.batch.draw(imgTexture, x, y, width, height);
+        myGdxGame.batch.end();
     }
-
     @Override
     public boolean isHit(float tx, float ty) {
         boolean isTouchHitComponent = x < tx && tx < x + width && y < ty && ty < y + height;
         if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
         return isTouchHitComponent;
+    }
+    public void setImgTexture(Texture texture) {
+        imgTexture = texture;
     }
 }

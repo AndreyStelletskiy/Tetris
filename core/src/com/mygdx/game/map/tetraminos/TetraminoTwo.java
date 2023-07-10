@@ -1,12 +1,14 @@
 package com.mygdx.game.map.tetraminos;
 
-public class TetraminoOne extends AbstractTetramino{ //квадратик
-    public static int INDEX = 1;
-    TetraminoOne(int centralX, int centralY) {
+import com.mygdx.game.map.Map;
+
+public class TetraminoTwo extends AbstractTetramino{
+    public static int INDEX = 2;
+    TetraminoTwo(int centralX, int centralY) {
         coordinatesX = new int[4];
         coordinatesY = new int[4];
-        coordinatesX[0] = centralX;
-        coordinatesX[1] = centralX + 1;
+        coordinatesX[0] = centralX - 1;
+        coordinatesX[1] = centralX;
         coordinatesX[2] = centralX;
         coordinatesX[3] = centralX + 1;
         coordinatesY[0] = centralY;
@@ -14,5 +16,8 @@ public class TetraminoOne extends AbstractTetramino{ //квадратик
         coordinatesY[2] = centralY + 1;
         coordinatesY[3] = centralY + 1;
     }
-    
+    @Override
+    public void rotateRight(Map map) {
+
+    }
 }
