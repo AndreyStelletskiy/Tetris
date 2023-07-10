@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.Map;
@@ -31,8 +32,10 @@ public class GameScreen implements Screen {
 
     int gameState;
 
+    Sound backSound;
 
     public GameScreen(final MyGdxGame myGdxGame) {
+        backSound = Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"));
         this.myGdxGame = myGdxGame;
         gameState = 0;
 
@@ -64,6 +67,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        long soundId = backSound.play();
+        backSound.setLooping(soundId, true);
     }
 
     @Override
@@ -85,7 +90,7 @@ public class GameScreen implements Screen {
                 currentTetramino.moveDown(gameMap);
                 if (currentTetramino.isMovable == false) {
                     for (int i = 0; i < gameMap.height; i++) {
-                        if(gameMap.isStringFull(i)){
+                        if (gameMap.isStringFull(i)) {
                             gameMap.deleteString(i);
                         }
                     }
