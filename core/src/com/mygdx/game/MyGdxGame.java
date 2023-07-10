@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.screens.GameOverScreen;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.SettingScreen;
 import com.mygdx.game.screens.ShopScreen;
 import com.mygdx.game.utils.GameSettings;
 
@@ -31,6 +32,8 @@ public class MyGdxGame extends Game {
 	public MenuScreen menuScreen;
 	public ShopScreen shopScreen;
 
+	public SettingScreen settingScreen;
+
 	@Override
 	public void create () {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -50,6 +53,7 @@ public class MyGdxGame extends Game {
 		gameScreen = new GameScreen(this);
 		menuScreen = new MenuScreen(this);
 		shopScreen = new ShopScreen(this);
+		settingScreen = new SettingScreen(this);
 
 		setScreen(gameOverScreen);
 	}
