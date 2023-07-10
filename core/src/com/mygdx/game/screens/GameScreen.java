@@ -40,8 +40,8 @@ public class GameScreen implements Screen {
 
         random = new Random();
 
-        gameMap = new Map(200, 700, 20, 20, 30);
-        miniMap = new Map(800, 1600, 5, 5, 30);
+        gameMap = new Map(300, 620, 20, 20, 30);
+        miniMap = new Map(900, 1600, 5, 5, 30);
 
         forRandomArray = new AbstractTetramino[5];
         forRandomArray[0] = new TetraminoOne(2,2);
@@ -165,7 +165,6 @@ public class GameScreen implements Screen {
         todounButton.setOnClickListener(todounButtonClickListener);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
         Stop.setOnClickListener(pauseButtonClickListener);
-
         uiComponentsList.add(Stop);
         uiComponentsList.add(toleftButton);
         uiComponentsList.add(torightButton);
@@ -209,8 +208,8 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             gameState = 1 - gameState;
-            if (gameState ==0){Stop.setText("Pause");}
-            if (gameState ==1){Stop.setText("Renew");}
+            if(gameState==0){Stop.setText("Pause");}
+            if(gameState==1){Stop.setText("Renew");}
         }
     };
 
