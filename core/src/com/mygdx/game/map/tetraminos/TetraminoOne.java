@@ -1,8 +1,8 @@
 package com.mygdx.game.map.tetraminos;
 
 public class TetraminoOne extends AbstractTetramino{ //квадратик
-    public static int INDEX = 1;
-    TetraminoOne(int centralX, int centralY) {
+    public TetraminoOne(int centralX, int centralY) {
+        INDEX = 1;
         coordinatesX = new int[4];
         coordinatesY = new int[4];
         coordinatesX[0] = centralX;
