@@ -65,8 +65,8 @@ public class Map {
 
     public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
-            if(0 < tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 < tetr.coordinatesX[i] && tetr.coordinatesX[i] < width )
-            if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesY[i]).type != 0){
+            if(!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width ))       return false;
+            if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != 0){
                 return false;
             }
         }

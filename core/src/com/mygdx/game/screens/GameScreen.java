@@ -2,8 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ModelInfluencer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.Map;
@@ -13,12 +11,8 @@ import com.mygdx.game.map.tetraminos.TetraminoFour;
 import com.mygdx.game.map.tetraminos.TetraminoOne;
 import com.mygdx.game.map.tetraminos.TetraminoThree;
 import com.mygdx.game.map.tetraminos.TetraminoTwo;
-import com.mygdx.game.ui.Blackout;
 import com.mygdx.game.ui.ImageView;
-import com.mygdx.game.ui.TextButton;
-import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
-import com.mygdx.game.utils.GameSettings;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,9 +29,12 @@ public class GameScreen implements Screen {
     AbstractTetramino[] forRandomArray;
     Random random;
 
+    int gameState;
+
 
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
+        gameState = 0;
 
         random = new Random();
 
@@ -69,7 +66,7 @@ public class GameScreen implements Screen {
 
 
 
-        draw();
+        UIInitialize();
 
 
     }
@@ -80,25 +77,27 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        time = (time + 1) % moveTime;
-        if (time == 0){
-            Gdx.app.debug("", "moving down");
-            currentTetramino.moveDown(gameMap);
-            if(currentTetramino.isMovable == false){
-                Gdx.app.debug("", "moving down stopped");
-                miniMap.deleteTetramino(nextTetramino);
-                try {
-                    currentTetramino =  nextTetramino.clone();
-                } catch (CloneNotSupportedException e) {
-                    throw new RuntimeException(e);
+        if (gameState == 0) {
+            time = (time + 1) % moveTime;
+
+            if (time == 0) {
+                Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
+                currentTetramino.moveDown(gameMap);
+                if (currentTetramino.isMovable == false) {
+                    miniMap.deleteTetramino(nextTetramino);
+                    try {
+                        currentTetramino = nextTetramino.clone();
+                    } catch (CloneNotSupportedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    gameMap.summon(currentTetramino);
+                    try {
+                        nextTetramino = forRandomArray[random.nextInt(5)].clone();
+                    } catch (CloneNotSupportedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    miniMap.summon(nextTetramino);
                 }
-                gameMap.summon(currentTetramino);
-                try {
-                    nextTetramino = forRandomArray[random.nextInt( 5)].clone();
-                } catch (CloneNotSupportedException e) {
-                    throw new RuntimeException(e);
-                }
-                miniMap.summon(nextTetramino);
             }
         }
         if (Gdx.input.justTouched()) {
@@ -150,7 +149,7 @@ public class GameScreen implements Screen {
 
     }
 
-    public void draw(){
+    public void UIInitialize(){
         uiComponentsList = new ArrayList<>();
         ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
         toleftButton.setOnClickListener(toleftButtonClickListener);
@@ -198,6 +197,12 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "todounButtonClickListener");
+        }
+    };
+    UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            gameState = 1 - gameState;
         }
     };
 
