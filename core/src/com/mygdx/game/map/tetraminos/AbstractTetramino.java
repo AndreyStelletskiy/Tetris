@@ -31,4 +31,13 @@ public class AbstractTetramino {
             this.isMovable = false;
         }
     }
+
+    public void setCentralCoordinare(int newX, int newY) {
+        for (int i = 0; i < 4; i++) {
+            coordinatesX[i] += (newX - coordinatesX[1]);
+            coordinatesY[i] += (newY - coordinatesY[1]);
+        }
+    }
+
+
 }
