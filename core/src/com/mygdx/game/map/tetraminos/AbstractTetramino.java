@@ -4,6 +4,7 @@ import com.mygdx.game.map.Map;
 import com.mygdx.game.screens.GameScreen;
 
 public class AbstractTetramino {
+    public static int INDEX = 0;
     public int[] coordinatesX;
     public int[] coordinatesY;
     public boolean isMovable;
