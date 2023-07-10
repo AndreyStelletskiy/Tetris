@@ -1,10 +1,9 @@
 package com.mygdx.game.map.tetraminos;
 
 import com.mygdx.game.map.Map;
-import com.mygdx.game.screens.GameScreen;
 
-public class AbstractTetramino {
-    public static int INDEX = 0;
+public class AbstractTetramino implements Cloneable{
+    public int INDEX = 0;
     public int[] coordinatesX;
     public int[] coordinatesY;
     public boolean isMovable;
@@ -30,14 +29,23 @@ public class AbstractTetramino {
             this.moveUp(map);
             this.isMovable = false;
         }
+        else{
+            for (int y : coordinatesX) y++;
+            map.deleteTetramino(this);
+            for (int y : coordinatesX) y--;
+            map.addTetramino(this);
+        }
     }
 
-    public void setCentralCoordinare(int newX, int newY) {
+    public void setCentralCoordinate(int newX, int newY) {
         for (int i = 0; i < 4; i++) {
             coordinatesX[i] += (newX - coordinatesX[1]);
             coordinatesY[i] += (newY - coordinatesY[1]);
         }
     }
 
+    public AbstractTetramino clone() throws CloneNotSupportedException{
+        return (AbstractTetramino) super.clone();
+    }
 
 }

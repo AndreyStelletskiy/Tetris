@@ -1,7 +1,6 @@
 package com.mygdx.game.map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.tetraminos.AbstractTetramino;
 import com.mygdx.game.map.tetraminos.Block;
@@ -36,16 +35,21 @@ public class Map {
     }
 
     public void summon(AbstractTetramino tetr){
+
+        if(height == 5)tetr.setCentralCoordinate(2,2 );
+        else{
+            tetr.setCentralCoordinate(2, 2);
+        }
         addTetramino(tetr);
-
-
     }
 
     public void addTetramino(AbstractTetramino tetr){
         if(isTetraminoConflict(tetr)){
-            Gdx.app.debug("addTetr", "" + tetr.INDEX);
+            Gdx.app.debug("", "" + tetr.INDEX);
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
+
+                Gdx.app.debug("", "" + tetr.coordinatesY[i] + " " + tetr.coordinatesX[i]);
             }
 
         }

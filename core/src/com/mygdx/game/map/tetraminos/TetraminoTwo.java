@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class TetraminoTwo extends AbstractTetramino{
 
     private boolean isPositionVertical;
-    TetraminoTwo(int centralX, int centralY) { //опорная координата - x[1]y[1]
+    public TetraminoTwo(int centralX, int centralY) { //опорная координата - x[1]y[1]
         INDEX = 2;
         coordinatesX = new int[4];
         coordinatesY = new int[4];

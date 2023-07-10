@@ -147,7 +147,7 @@ public class MenuScreen implements Screen {
         @Override
         public void onClicked() {
             Gdx.app.debug("onClicked", "onButtonShopClicked");
-            myGdxGame.setScreen(myGdxGame.settingScreen);
+
         }
     };
 
