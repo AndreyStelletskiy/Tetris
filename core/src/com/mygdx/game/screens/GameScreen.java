@@ -153,16 +153,53 @@ public class GameScreen implements Screen {
     public void draw(){
         uiComponentsList = new ArrayList<>();
         ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
+        toleftButton.setOnClickListener(toleftButtonClickListener);
         ImageView torightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
+        torightButton.setOnClickListener(torightButtonClickListener);
         ImageView toleftrButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
+        toleftrButton.setOnClickListener(toleftrButtonClickListener);
         ImageView torightrButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
+        torightrButton.setOnClickListener(torightrButtonClickListener);
         ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
+        todounButton.setOnClickListener(todounButtonClickListener);
         uiComponentsList.add(toleftButton);
         uiComponentsList.add(torightButton);
         uiComponentsList.add(toleftrButton);
         uiComponentsList.add(torightrButton);
         uiComponentsList.add(todounButton);
     }
+
+    UiComponent.OnClickListener toleftButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "toleftButtonClickListener");
+        }
+    };
+    UiComponent.OnClickListener torightButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "torightButtonClickListener");
+        }
+    };
+    UiComponent.OnClickListener toleftrButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "toleftrButtonClickListener");
+
+        }
+    };
+    UiComponent.OnClickListener torightrButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "torightrButtonClickListener");
+        }
+    };
+    UiComponent.OnClickListener todounButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "todounButtonClickListener");
+        }
+    };
 
 
 }
