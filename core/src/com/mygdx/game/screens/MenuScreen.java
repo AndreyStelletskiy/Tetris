@@ -146,7 +146,8 @@ public class MenuScreen implements Screen {
     private final UiComponent.OnClickListener onButtonSettingsClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonShopClicked");
+            Gdx.app.debug("onClicked", "onButtonSettingClicked");
+            myGdxGame.setScreen(myGdxGame.settingScreen);
 
         }
     };

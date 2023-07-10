@@ -18,6 +18,7 @@ import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
+import com.mygdx.game.utils.GameSettings;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,7 +44,6 @@ public class GameScreen implements Screen {
         gameMap = new Map(300, 500, 20, 20, 30);
         miniMap = new Map(800, 1600, 5, 5, 30);
 
-        uiComponentsList = new ArrayList<>();
         forRandomArray = new AbstractTetramino[5];
         forRandomArray[0] = new TetraminoOne(2,2);
         forRandomArray[1] = new TetraminoTwo(2,2);
@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 
 
 
-
+        draw();
 
 
     }
@@ -108,7 +108,7 @@ public class GameScreen implements Screen {
             }
         }
 
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
@@ -147,6 +147,20 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    public void draw(){
+        uiComponentsList = new ArrayList<>();
+        ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
+        ImageView torightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
+        ImageView toleftrButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
+        ImageView torightrButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
+        ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
+        uiComponentsList.add(toleftButton);
+        uiComponentsList.add(torightButton);
+        uiComponentsList.add(toleftrButton);
+        uiComponentsList.add(torightrButton);
+        uiComponentsList.add(todounButton);
     }
 
 
