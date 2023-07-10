@@ -5,9 +5,10 @@ import com.mygdx.game.map.Map;
 import java.util.Arrays;
 
 public class TetraminoTwo extends AbstractTetramino{
-    public static int INDEX = 2;
+
     private boolean isPositionVertical;
     TetraminoTwo(int centralX, int centralY) { //опорная координата - x[1]y[1]
+        INDEX = 2;
         coordinatesX = new int[4];
         coordinatesY = new int[4];
         coordinatesX[0] = centralX - 1;

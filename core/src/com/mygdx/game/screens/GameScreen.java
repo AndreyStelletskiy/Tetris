@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.Map;
+import com.mygdx.game.map.tetraminos.TetraminoOne;
 import com.mygdx.game.ui.Blackout;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
@@ -27,8 +28,10 @@ public class GameScreen implements Screen {
         this.myGdxGame = myGdxGame;
 
 
-        gameMap = new Map(50, 10, 6, 10, 30);
-        miniMap = new Map(500, 300, 4, 4, 30);
+        gameMap = new Map(500, 500, 10, 20, 30);
+        miniMap = new Map(900, 1600, 4, 4, 30);
+        miniMap.summon(new TetraminoOne(1, 1));
+        //miniMap.mapList.get(0).get(0).setImgTexture(new Texture("block_1.jpg"));
 
         uiComponentsList = new ArrayList<>();
 
