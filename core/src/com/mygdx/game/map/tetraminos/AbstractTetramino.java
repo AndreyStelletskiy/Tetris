@@ -1,8 +1,8 @@
 package com.mygdx.game.map.tetraminos;
 
 public class AbstractTetramino {
-    int[] coordinatesX;
-    int[] getCoordinatesY;
+    public int[] coordinatesX;
+    public int[] coordinatesY;
 
     public void rotateRight() {
 
@@ -15,11 +15,14 @@ public class AbstractTetramino {
     }
     public void moveLeft() {
 
+        for (int x : coordinatesX) x--;
+
     }
     protected void moveUp() {
+        for (int y : coordinatesX) y++;
 
     }
     public void moveDown() {
-        for (int x : coordinatesX) x--;
+        for (int y : coordinatesX) y--;
     }
 }
