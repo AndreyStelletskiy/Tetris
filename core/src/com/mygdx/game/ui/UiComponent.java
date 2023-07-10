@@ -6,8 +6,8 @@ public class UiComponent {
 
     public float x;
     public float y;
-    public float width;
-    public float height;
+    float width;
+    float height;
     public boolean isVisible;
     public OnClickListener onClickListener;
 

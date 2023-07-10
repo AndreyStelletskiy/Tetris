@@ -8,13 +8,11 @@ import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
-import com.mygdx.game.utils.DifficultyLevel;
 import com.mygdx.game.utils.GameSettings;
-import com.mygdx.game.utils.MemoryLoader;
 
 import java.util.ArrayList;
 
-public class SettingsScreen implements Screen {
+public class ShopScreen implements Screen {
 
     ArrayList<UiComponent> uiComponentsList;
     MyGdxGame myGdxGame;
@@ -24,9 +22,18 @@ public class SettingsScreen implements Screen {
     TextView difficultyText;
 
 
-    public SettingsScreen(MyGdxGame myGdxGame) {
+    public ShopScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         uiComponentsList = new ArrayList<>();
+
+        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
+        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1800);
+
+        TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 75, 175);
+        buttonExit.setOnClickListener(onReturnButtonClickListener);
+        uiComponentsList.add(background);
+        uiComponentsList.add(title);
+        uiComponentsList.add(buttonExit);
 
     }
 
@@ -83,11 +90,6 @@ public class SettingsScreen implements Screen {
 
     }
 
-    private String getSoundButtonText() {
-        boolean musicState = MemoryLoader.loadMusicState();
-        if (musicState) return "Turn on music";
-        else return "Turn of music";
-    }
 
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override

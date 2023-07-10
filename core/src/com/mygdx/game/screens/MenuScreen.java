@@ -22,7 +22,42 @@ public class MenuScreen implements Screen {
 
         uiComponentsList = new ArrayList<>();
 
+        ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
+        TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Tetris", -1, 1800);
 
+        TextView scrboard = new TextView(myGdxGame.largeFont.bitmapFont, "Score Board!", 100, 1600);
+        TextView scrboard1 = new TextView(myGdxGame.largeFont1.bitmapFont, "1.", 100, 1500);
+        TextView scrboard2 = new TextView(myGdxGame.largeFont1.bitmapFont, "2.", 100, 1400);
+        TextView scrboard3 = new TextView(myGdxGame.largeFont1.bitmapFont, "3.", 100, 1300);
+        TextView scrboard4 = new TextView(myGdxGame.largeFont1.bitmapFont, "4.", 100, 1200);
+        TextView scrboard5 = new TextView(myGdxGame.largeFont1.bitmapFont, "5.", 100, 1100);
+
+        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 300, 1500);
+        TextView scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 300, 1400);
+        TextView scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 300, 1300);
+        TextView scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 300, 1200);
+        TextView scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 300, 1100);
+
+        TextButton buttonStart = new TextButton(myGdxGame.bblargeFont.bitmapFont, "Play", 75, 850);
+        buttonStart.setOnClickListener(onButtonStartClicked);
+
+        TextButton buttonSettings = new TextButton(myGdxGame.largeFont.bitmapFont, "Shop", 75, 700);
+        buttonSettings.setOnClickListener(onButtonSettingsClicked);
+
+        TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Exit", 75, 175);
+        buttonExit.setOnClickListener(onButtonExitClicked);
+
+        uiComponentsList.add(background);
+        uiComponentsList.add(title);
+        uiComponentsList.add(scrboard);
+        uiComponentsList.add(scrboard1);
+        uiComponentsList.add(scrboard2);
+        uiComponentsList.add(scrboard3);
+        uiComponentsList.add(scrboard4);
+        uiComponentsList.add(scrboard5);
+        uiComponentsList.add(buttonStart);
+        uiComponentsList.add(buttonSettings);
+        uiComponentsList.add(buttonExit);
 
     }
 
@@ -90,19 +125,12 @@ public class MenuScreen implements Screen {
         }
     };
 
-    private final UiComponent.OnClickListener onButtonAboutClicked = new UiComponent.OnClickListener() {
-        @Override
-        public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonAboutClicked");
-            myGdxGame.setScreen(myGdxGame.aboutScreen);
-        }
-    };
 
     private final UiComponent.OnClickListener onButtonSettingsClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonSettingsClicked");
-            myGdxGame.setScreen(myGdxGame.settingsScreen);
+            Gdx.app.debug("onClicked", "onButtonShopClicked");
+            myGdxGame.setScreen(myGdxGame.shopScreen);
         }
     };
 
