@@ -82,6 +82,7 @@ public class TetraminoFour extends AbstractTetramino{
             coordinatesY[0] = coordinatesY[1];
             coordinatesY[2] = coordinatesY[1];
             coordinatesY[3] = coordinatesY[1];
+            isVertical = false;
         } else {
             coordinatesY[0] = coordinatesY[1] - 1;
             coordinatesY[2] = coordinatesY[1] + 1;
@@ -89,11 +90,15 @@ public class TetraminoFour extends AbstractTetramino{
             coordinatesX[0] = coordinatesX[1];
             coordinatesX[2] = coordinatesX[1];
             coordinatesX[3] = coordinatesX[1];
+            isVertical = true;
         }
+        this.moveRight(map);
+        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
         }
+
 
         if (map.isTetraminoConflict(this)) {
             this.moveLeft(map);
