@@ -13,6 +13,10 @@ public class SoundExecutor {
             Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"))
     };
 
+    static Sound[] GameOverSound = {
+            Gdx.audio.newSound(Gdx.files.internal("GameOver.mp3"))
+    };
+
     public static void playBackSound() {
         long soundId = backSound.play();
         backSound.setLooping(soundId, true);
@@ -26,6 +30,10 @@ public class SoundExecutor {
     }
     public static void pausePlaying() {
         backSound.pause();
+    }
+
+    public static void playGameOutSound() {
+        GameOverSound[MathUtils.random(0, GameOverSound.length - 1)].play();
     }
 
     public static void playTetrisSound() {
