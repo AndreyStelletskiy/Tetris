@@ -112,6 +112,8 @@ public class TetraminoThree extends AbstractTetramino{
             coordinatesY[3] = coordinatesY[1] + 1;
             coordinatesY[2] = coordinatesY[1] - 1;
         }
+        this.moveRight(map);
+        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);

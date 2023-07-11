@@ -44,6 +44,8 @@ public class TetraminoFour extends AbstractTetramino{
             coordinatesX[3] = coordinatesX[1];
             isVertical = true;
         }
+        this.moveRight(map);
+        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
