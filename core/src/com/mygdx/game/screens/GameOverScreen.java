@@ -35,7 +35,7 @@ public class GameOverScreen implements Screen {
 
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "To home", 25, 175);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
-        TextButton buttonStart = new TextButton(myGdxGame.largeFont.bitmapFont, "Start over", 625, 175);
+        TextButton buttonStart = new TextButton(myGdxGame.largeFont.bitmapFont, "restart", 625, 175);
         buttonStart.setOnClickListener(onButtonStartClicked);
         uiComponentsList.add(background);
         uiComponentsList.add(prResults);
@@ -52,6 +52,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void show() {
+        SoundExecutor.stopPlaying();
         SoundExecutor.playGameOutSound();
     }
 
