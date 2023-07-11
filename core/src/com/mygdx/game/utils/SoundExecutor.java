@@ -21,6 +21,12 @@ public class SoundExecutor {
     public static void stopPlaying() {
         backSound.stop();
     }
+    public static void resumePlaying() {
+        backSound.resume();
+    }
+    public static void pausePlaying() {
+        backSound.pause();
+    }
 
     public static void playTetrisSound() {
         tetrisSound[MathUtils.random(0, tetrisSound.length - 1)].play();
