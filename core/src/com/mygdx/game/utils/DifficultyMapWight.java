@@ -7,10 +7,10 @@ public enum DifficultyMapWight {
             20),
 
     MEDIUM(GameSettings.COUNT_OF_SIZE_WIGHT_MEDIUM,
-            26),
+            22),
 
     HARD(GameSettings.COUNT_OF_SIZE_WIGHT_HARD,
-            30);
+            24);
 
     private final int difficultyLevelWightIdx;
     private final int countOfSize;
