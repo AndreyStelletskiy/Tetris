@@ -46,8 +46,8 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyIdx();
-        gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyIdx();
+        gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyMapWightIdx();
+        gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
         blockSize = 30;
         random = new Random();
 
