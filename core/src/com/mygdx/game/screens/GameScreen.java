@@ -286,20 +286,20 @@ public class GameScreen implements Screen {
     AbstractTetramino createTetraminoWithSameType(int type){
         switch (type){
             case 1:
-                //return new TetraminoOne(4,4);
-                return new TetraminoFour(4,4);
-            case 2:
-                //return new TetraminoTwo(4,4);
-                return new TetraminoFour(4,4);
-            case 3:
-                //return new TetraminoThree(4,4);
-                return new TetraminoFour(4,4);
-            case 4:
+                return new TetraminoOne(4,4);
                 //return new TetraminoFour(4,4);
+            case 2:
+                return new TetraminoTwo(4,4);
+                //return new TetraminoFour(4,4);
+            case 3:
+                return new TetraminoThree(4,4);
+                //return new TetraminoFour(4,4);
+            case 4:
                 return new TetraminoFour(4,4);
+                //return new TetraminoFour(4,4);
             default:
-                //return new TetraminoFive(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoFive(4,4);
+                //return new TetraminoFour(4,4);
         }
     }
 

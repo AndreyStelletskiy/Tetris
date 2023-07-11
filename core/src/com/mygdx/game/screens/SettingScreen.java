@@ -145,8 +145,8 @@ public class SettingScreen implements Screen {
 
     private String getSoundButtonText() {
         boolean musicState = MemoryLoader.loadMusicState();
-        if (musicState) return "Turn off game music";
-        else return "Turn on game music";
+        if (musicState) return "Turn on game music";
+        else return "Turn off game music";
     }
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
