@@ -32,7 +32,7 @@ public class GameScreen implements Screen {
     int time = 0;
     int moveTime = 20;
     int localScore = 0;
-    AbstractTetramino currentTetramino, nextTetramino;
+    AbstractTetramino currentTetramino, previewTetramino, nextTetramino;
 
     Random random;
 
@@ -84,6 +84,20 @@ public class GameScreen implements Screen {
         //обрабатывает касания
         touchListen();
         myGdxGame.timer = (myGdxGame.timer + 1) % 2;
+
+        try {
+            if(previewTetramino != null){
+                gameMap.deleteTetramino(previewTetramino);
+            }
+            previewTetramino = nextTetramino.clone();
+            previewTetramino.INDEX = -2;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        while (previewTetramino.isMovable){
+            previewTetramino.moveDown(gameMap);
+        }
+        gameMap.addTetramino(previewTetramino);
 
 
         if (gameState == 0) {
