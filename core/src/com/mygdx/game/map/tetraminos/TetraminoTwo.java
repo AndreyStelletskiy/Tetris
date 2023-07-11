@@ -1,5 +1,7 @@
 package com.mygdx.game.map.tetraminos;
 
+import static com.mygdx.game.utils.MathHelper.percent;
+
 import com.mygdx.game.map.Map;
 
 import java.util.Arrays;
@@ -45,8 +47,8 @@ public class TetraminoTwo extends AbstractTetramino{
             isPositionVertical = true;
         }
         for(int i = 0; i < 4; i ++){
-            coordinatesX[i] = coordinatesX[i] % map.width;
-            coordinatesY[i] = coordinatesY[i] % map.height;
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+            coordinatesY[i] = percent(coordinatesY[i], map.height);
         }
         if (map.isTetraminoConflict(this)) {
             this.moveLeft(map);
@@ -89,8 +91,8 @@ public class TetraminoTwo extends AbstractTetramino{
             isPositionVertical = true;
         }
         for(int i = 0; i < 4; i ++){
-            coordinatesX[i] = coordinatesX[i] % map.width;
-            coordinatesY[i] = coordinatesY[i] % map.height;
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+            coordinatesY[i] = percent(coordinatesY[i], map.height);
         }
         if (map.isTetraminoConflict(this)) {
             this.moveLeft(map);

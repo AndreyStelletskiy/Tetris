@@ -1,5 +1,7 @@
 package com.mygdx.game.map.tetraminos;
 
+import static com.mygdx.game.utils.MathHelper.percent;
+
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.map.Map;
 
@@ -18,11 +20,11 @@ public class AbstractTetramino implements Cloneable {
     public void moveRight(Map map) {
         map.deleteTetramino(this);
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = ++coordinatesX[i] % map.width;
+            coordinatesX[i] = percent(++coordinatesX[i], map.width);
         }
         if (!map.isTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = --coordinatesX[i] % map.width;
+                coordinatesX[i] = percent(--coordinatesX[i], map.width);
             }
         }
         map.addTetramino(this);
@@ -31,11 +33,11 @@ public class AbstractTetramino implements Cloneable {
     public void moveLeft(Map map) {
         map.deleteTetramino(this);
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = --coordinatesX[i] % map.width;
+            coordinatesX[i] = percent(--coordinatesX[i], map.width);
         }
         if (!map.isTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = ++coordinatesX[i] % map.width;
+                coordinatesX[i] = percent(++coordinatesX[i], map.width);
             }
         }
         map.addTetramino(this);
