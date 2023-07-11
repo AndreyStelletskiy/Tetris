@@ -74,11 +74,11 @@ public class SettingScreen implements Screen {
     private String getDifficultyLabelText(DifficultyMapHeight difficultyMapHeight) {
         switch (difficultyMapHeight) {
             case EASY:
-                return "20";
-            case HARD:
                 return "30";
+            case HARD:
+                return "40";
             case MEDIUM:
-                return "26";
+                return "36";
             default:
                 return "(error)";
         }
