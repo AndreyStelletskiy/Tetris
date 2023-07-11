@@ -79,11 +79,21 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         if (gameState == 0) {
             time = (time + 1) % moveTime;
-
             if (time == 0) {
                 Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
+                ArrayList<Integer> stringsToDelete = new ArrayList<>();
+                for (int i = 0; i < gameMapHeight; i++) {
+                    if (gameMap.isStringFull(i)){
+                        stringsToDelete.add(i);
+                    }
+                }
+                for (int i = 0; i < stringsToDelete.size(); i++){
+                    gameMap.deleteString(stringsToDelete.get(i) - i);
+                }
+
                 if (!currentTetramino.isMovable) {
+
                     miniMap.deleteTetramino(nextTetramino);
                     currentTetramino = createTetraminoWithSameType(nextTetramino.INDEX);
                     gameMap.summon(currentTetramino);
@@ -159,16 +169,16 @@ public class GameScreen implements Screen {
         uiComponentsList = new ArrayList<>();
         uiComponentsListGame = new ArrayList<>();
 
-        ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
-        toleftButton.setOnClickListener(toLeftButtonClickListener);
-        ImageView torightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
-        torightButton.setOnClickListener(toRightButtonClickListener);
-        ImageView toleftrButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
-        toleftrButton.setOnClickListener(toLeftRButtonClickListener);
-        ImageView torightrButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
-        torightrButton.setOnClickListener(toRightRButtonClickListener);
-        ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
-        todounButton.setOnClickListener(toDownButtonClickListener);
+        ImageView toLeftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
+        toLeftButton.setOnClickListener(toLeftButtonClickListener);
+        ImageView toRightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
+        toRightButton.setOnClickListener(toRightButtonClickListener);
+        ImageView toLeftRButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
+        toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
+        ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
+        toRightRButton.setOnClickListener(toRightRButtonClickListener);
+        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
+        toDownButton.setOnClickListener(toDownButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "-", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
@@ -178,11 +188,11 @@ public class GameScreen implements Screen {
         uiComponentsList.add(Stop);
         uiComponentsList.add(score);
         uiComponentsList.add(scoreR);
-        uiComponentsListGame.add(toleftButton);
-        uiComponentsListGame.add(torightButton);
-        uiComponentsListGame.add(toleftrButton);
-        uiComponentsListGame.add(torightrButton);
-        uiComponentsListGame.add(todounButton);
+        uiComponentsListGame.add(toLeftButton);
+        uiComponentsListGame.add(toRightButton);
+        uiComponentsListGame.add(toLeftRButton);
+        uiComponentsListGame.add(toRightRButton);
+        uiComponentsListGame.add(toDownButton);
         uiComponentsList.add(buttonExit);
     }
 
