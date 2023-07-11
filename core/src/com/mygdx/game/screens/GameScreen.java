@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
     int time = 0;
     int moveTime = 20;
     AbstractTetramino currentTetramino, nextTetramino;
-    AbstractTetramino[] forRandomArray;
+
     Random random;
 
     int gameState, blockSize;
@@ -51,25 +51,14 @@ public class GameScreen implements Screen {
         gameMap = new Map((GameSettings.SCR_WIDTH-gameMapWidht*blockSize)/2-(gameMapWidht-1)/10*blockSize, 620, gameMapWidht, gameMapHeight, blockSize);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
-        forRandomArray = new AbstractTetramino[5];
-        forRandomArray[0] = new TetraminoOne(2,2);
-        forRandomArray[1] = new TetraminoTwo(2,2);
-        forRandomArray[2] = new TetraminoThree(2,2);
-        forRandomArray[4] = new TetraminoFive(2,2);
-        forRandomArray[3] = new TetraminoFour(2,2);
 
-        try {
-            currentTetramino = forRandomArray[random.nextInt( 5)].clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+        currentTetramino = createTetraminoWithSameType(random.nextInt( 5));
+
         gameMap.summon(currentTetramino);
 
-        try {
-            nextTetramino = forRandomArray[random.nextInt( 5)].clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+
+        nextTetramino = createTetraminoWithSameType(random.nextInt( 5));
+
         miniMap.summon(nextTetramino);
 
         Gdx.app.debug("current", "" + currentTetramino.INDEX);
@@ -94,19 +83,11 @@ public class GameScreen implements Screen {
             if (time == 0) {
                 Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
-                if (currentTetramino.isMovable == false) {
+                if (!currentTetramino.isMovable) {
                     miniMap.deleteTetramino(nextTetramino);
-                    try {
-                        currentTetramino = nextTetramino.clone();
-                    } catch (CloneNotSupportedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    currentTetramino = createTetraminoWithSameType(nextTetramino.INDEX);
                     gameMap.summon(currentTetramino);
-                    try {
-                        nextTetramino = forRandomArray[random.nextInt(5)].clone();
-                    } catch (CloneNotSupportedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    nextTetramino = createTetraminoWithSameType(random.nextInt( 5));
                     miniMap.summon(nextTetramino);
                 }
             }
@@ -264,6 +245,20 @@ public class GameScreen implements Screen {
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
+    AbstractTetramino createTetraminoWithSameType(int type){
+        switch (type){
+            case 1:
+                return new TetraminoOne(4,4);
+            case 2:
+                return new TetraminoTwo(4,4);
+            case 3:
+                return new TetraminoThree(4,4);
+            case 4:
+                return new TetraminoFour(4,4);
+            default:
+                return new TetraminoFive(4,4);
 
+        }
+    }
 
 }
