@@ -4,13 +4,13 @@ package com.mygdx.game.utils;
 public enum DifficultyMapWight {
 
     EASY(GameSettings.COUNT_OF_SIZE_WIGHT_EASY,
-            20),
+            GameSettings.COUNT_OF_SIZE_WIGHT_EASY),
 
     MEDIUM(GameSettings.COUNT_OF_SIZE_WIGHT_MEDIUM,
-            22),
+            GameSettings.COUNT_OF_SIZE_WIGHT_MEDIUM),
 
     HARD(GameSettings.COUNT_OF_SIZE_WIGHT_HARD,
-            24);
+            GameSettings.COUNT_OF_SIZE_WIGHT_HARD);
 
     private final int difficultyLevelWightIdx;
     private final int countOfSize;

@@ -4,19 +4,19 @@ package com.mygdx.game.utils;
 public enum DifficultyMapHeight {
 
     EASY(GameSettings.COUNT_OF_SIZE_HEIGHT_EASY,
-            26),
+            GameSettings.COUNT_OF_SIZE_HEIGHT_EASY),
 
     MEDIUM(GameSettings.COUNT_OF_SIZE_HEIGHT_MEDIUM,
-            28),
+            GameSettings.COUNT_OF_SIZE_HEIGHT_MEDIUM),
 
     HARD(GameSettings.COUNT_OF_SIZE_HEIGHT_HARD,
-            30);
+            GameSettings.COUNT_OF_SIZE_HEIGHT_HARD);
 
     private final int DifficultyMapHeightIdx;
     private final int countOfSize;
 
-    DifficultyMapHeight(int countOfSize, int difficultyMapWightIdx) {
-        this.DifficultyMapHeightIdx = difficultyMapWightIdx;
+    DifficultyMapHeight(int countOfSize, int difficultyMapHeightIdx) {
+        this.DifficultyMapHeightIdx = difficultyMapHeightIdx;
         this.countOfSize = countOfSize;
 
     }
