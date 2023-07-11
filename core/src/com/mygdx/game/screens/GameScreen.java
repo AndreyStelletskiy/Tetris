@@ -46,8 +46,8 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyIdx();
-        gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyIdx();
+        gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyMapWightIdx();
+        gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
         blockSize = 30;
         random = new Random();
 
@@ -63,9 +63,6 @@ public class GameScreen implements Screen {
         nextTetramino = createTetraminoWithSameType(random.nextInt(5));
 
         miniMap.summon(nextTetramino);
-
-        Gdx.app.debug("current", "" + currentTetramino.INDEX);
-
 
         UIInitialize();
 
@@ -85,20 +82,7 @@ public class GameScreen implements Screen {
         touchListen();
         myGdxGame.timer = (myGdxGame.timer + 1) % 2;
 
-        try {
-            if(previewTetramino != null){
-                gameMap.deleteTetramino(previewTetramino);
-            }
-            previewTetramino = nextTetramino.clone();
-            previewTetramino.INDEX = -2;
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-        while (previewTetramino.isMovable){
-            previewTetramino.moveDown(gameMap);
-        }
-        gameMap.addTetramino(previewTetramino);
-
+        previewTetraminoRender();
 
         if (gameState == 0) {
             time = (time + 1) % moveTime;
@@ -106,13 +90,13 @@ public class GameScreen implements Screen {
                 //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
                 for (int i = 0; i < gameMapHeight; i++) {
-                    if (gameMap.isStringFull(i)){
-                        Gdx.app.debug("" + i , "string colored");
+                    if (gameMap.isStringFull(i)) {
+                        Gdx.app.debug("" + i, "string colored");
                         gameMap.colorString(i);
-                   }
+                    }
                 }
             }
-            if(time == 0){
+            if (time == 0) {
                 if (!currentTetramino.isMovable) {
                     ArrayList<Integer> stringsToDelete = new ArrayList<>();
                     for (int i = 0; i < gameMapHeight; i++) {
@@ -152,7 +136,7 @@ public class GameScreen implements Screen {
             component.draw(myGdxGame);
         }
         //score Drawing
-        TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, ""+localScore, 935, 1825);
+        TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "" + localScore, 935, 1825);
         scoreR.draw(myGdxGame);
 
 
@@ -160,6 +144,26 @@ public class GameScreen implements Screen {
         miniMap.draw(myGdxGame);
 
         myGdxGame.batch.end();
+
+    }
+
+    private void previewTetraminoRender() {
+        if (previewTetramino != null) {
+            gameMap.deleteTetramino(previewTetramino);
+        }
+        previewTetramino = createTetraminoWithSameType(currentTetramino.INDEX);
+        for (int i = 0; i < 4; i++) {
+            previewTetramino.coordinatesX[i] = currentTetramino.coordinatesX[i];
+            previewTetramino.coordinatesY[i] = currentTetramino.coordinatesY[i];
+        }
+        previewTetramino.INDEX = -2;
+        gameMap.deleteTetramino(currentTetramino);
+        while (previewTetramino.isMovable) {
+            previewTetramino.moveDown(gameMap);
+        }
+        gameMap.addTetramino(previewTetramino);
+        gameMap.addTetramino(currentTetramino);
+        Gdx.app.debug("" + previewTetramino.INDEX, "" + previewTetramino.coordinatesX[1] + " " + previewTetramino.coordinatesY[1]);
 
     }
 
@@ -284,7 +288,7 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener toDown2ButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            if(currentTetramino.isMovable) {
+            if (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
             }
         }

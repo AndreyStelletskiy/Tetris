@@ -54,7 +54,9 @@ public class Map {
 
     public void deleteTetramino(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
-            mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(0);
+            if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type == tetr.INDEX) {
+                mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(0);
+            }
         }
     }
 
@@ -70,16 +72,19 @@ public class Map {
         for (int i = 0; i < 4; i++) {
             if (!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width))
                 return false;
-            if (mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != 0) {
+            if (mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != 0 && mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != -2) {
                 return false;
             }
         }
         return true;
     }
+    public boolean downCheck(){
+        return true;
+    }
 
     public boolean isStringFull(int indx) {
         for (int i = 0; i < width; i++) {
-            if (mapList.get(indx).get(i).type == 0) {
+            if (mapList.get(indx).get(i).type == 0 || mapList.get(indx).get(i).type == -2) {
                 return false;
             }
         }

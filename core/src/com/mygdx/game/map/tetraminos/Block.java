@@ -43,7 +43,7 @@ public class Block extends ImageView {
             setImgTexture(new Texture("block_" + type + "_0.jpg"));
         }
         else{
-            setImgTexture(Textures.textures[type]);
+            setImgTexture(Textures.textures.get(type));
         }
     }
 }
