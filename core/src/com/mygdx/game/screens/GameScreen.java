@@ -177,15 +177,15 @@ public class GameScreen implements Screen {
         uiComponentsListGame = new ArrayList<>();
 
         ImageView toleftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
-        toleftButton.setOnClickListener(toleftButtonClickListener);
+        toleftButton.setOnClickListener(toLeftButtonClickListener);
         ImageView torightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
-        torightButton.setOnClickListener(torightButtonClickListener);
+        torightButton.setOnClickListener(toRightButtonClickListener);
         ImageView toleftrButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
-        toleftrButton.setOnClickListener(toleftrButtonClickListener);
+        toleftrButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView torightrButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
-        torightrButton.setOnClickListener(torightrButtonClickListener);
+        torightrButton.setOnClickListener(toRightRButtonClickListener);
         ImageView todounButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
-        todounButton.setOnClickListener(todounButtonClickListener);
+        todounButton.setOnClickListener(toDownButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "-", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
@@ -203,39 +203,39 @@ public class GameScreen implements Screen {
         uiComponentsList.add(buttonExit);
     }
 
-    UiComponent.OnClickListener toleftButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toLeftButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "toleftButtonClickListener");
+
             currentTetramino.moveLeft(gameMap);
         }
     };
-    UiComponent.OnClickListener torightButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "torightButtonClickListener");
             currentTetramino.moveRight(gameMap);
         }
     };
-    UiComponent.OnClickListener toleftrButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "toleftrButtonClickListener");
+            gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateLeft(gameMap);
+            gameMap.addTetramino(currentTetramino);
 
         }
     };
-    UiComponent.OnClickListener torightrButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toRightRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "torightrButtonClickListener");
+            gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateRight(gameMap);
+            gameMap.addTetramino(currentTetramino);
         }
     };
-    UiComponent.OnClickListener todounButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toDownButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "todounButtonClickListener");
             currentTetramino.moveDown(gameMap);
         }
     };
@@ -256,7 +256,7 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onReturnButtonClicked");
+
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
