@@ -53,6 +53,8 @@ public class TetraminoFive extends AbstractTetramino{
             coordinatesY[2] = coordinatesY[0];
             coordinatesY[3] = coordinatesY[0] - 1;
         }
+        this.moveRight(map);
+        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
@@ -111,6 +113,9 @@ public class TetraminoFive extends AbstractTetramino{
             coordinatesY[2] = coordinatesY[0];
             coordinatesY[3] = coordinatesY[0] - 1;
         }
+
+        this.moveRight(map);
+        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
