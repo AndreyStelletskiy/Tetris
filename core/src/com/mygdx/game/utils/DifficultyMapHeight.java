@@ -22,7 +22,7 @@ public enum DifficultyMapHeight {
     }
 
 
-    public int getDifficultyIdx() {
+    public int getDifficultyMapHeightIdx() {
         return DifficultyMapHeightIdx;
     }
 
