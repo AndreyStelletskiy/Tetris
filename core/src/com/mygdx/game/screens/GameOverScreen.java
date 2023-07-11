@@ -52,6 +52,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void show() {
+        SoundExecutor.stopPlaying();
         SoundExecutor.playGameOutSound();
     }
 
