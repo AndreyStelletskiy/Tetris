@@ -25,6 +25,7 @@ public class SettingScreen implements Screen {
 
     TextView difficultyHeight;
     TextButton difficultyHeightButton;
+    TextButton resetButton;
 
 
     public SettingScreen(MyGdxGame myGdxGame) {
@@ -47,6 +48,9 @@ public class SettingScreen implements Screen {
         difficultyHeightButton = new TextButton(myGdxGame.largeFont1.bitmapFont, "Change map height = ", 120, 1500);
         difficultyHeightButton.setOnClickListener(onChangeDifficultyHeightClickListener);
 
+        resetButton = new TextButton(myGdxGame.largeFont1.bitmapFont, "Clear all saves", 25, 325);
+        resetButton.setOnClickListener(onResetButtonClickListener);
+
         uiComponentsList.add(background);
         uiComponentsList.add(title);
         uiComponentsList.add(buttonExit);
@@ -55,6 +59,7 @@ public class SettingScreen implements Screen {
         uiComponentsList.add(difficultyWightButton);
         uiComponentsList.add(difficultyHeight);
         uiComponentsList.add(difficultyHeightButton);
+        uiComponentsList.add(resetButton);
 
     }
 
@@ -74,11 +79,11 @@ public class SettingScreen implements Screen {
     private String getDifficultyLabelText(DifficultyMapHeight difficultyMapHeight) {
         switch (difficultyMapHeight) {
             case EASY:
-                return "30";
-            case HARD:
-                return "40";
-            case MEDIUM:
                 return "36";
+            case HARD:
+                return "44";
+            case MEDIUM:
+                return "40";
             default:
                 return "(error)";
         }
@@ -148,6 +153,24 @@ public class SettingScreen implements Screen {
         public void onClicked() {
             Gdx.app.debug("onClicked", "onReturnButtonClicked");
             myGdxGame.setScreen(myGdxGame.menuScreen);
+        }
+    };
+
+    UiComponent.OnClickListener onResetButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            DifficultyMapWight difficultyMapWight;
+            difficultyMapWight = GameSettings.DEFAULT_DIFFICULTY_WIGHT;
+            difficultyWight.text = getDifficultyLabelText(difficultyMapWight);
+            MemoryLoader.saveDifficultyLevelWight(difficultyMapWight);
+
+            DifficultyMapHeight difficultyMapHeight;
+            difficultyMapHeight = GameSettings.DEFAULT_DIFFICULTY_HEIGHT;
+            difficultyHeight.text = getDifficultyLabelText(difficultyMapHeight);
+            MemoryLoader.saveDifficultyLevelHeight(difficultyMapHeight);
+
+            MemoryLoader.saveMusicState(GameSettings.DEFAULT_SOUND_STATE);
+            soundsButton.text = getSoundButtonText();
         }
     };
 
