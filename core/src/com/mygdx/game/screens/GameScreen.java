@@ -16,6 +16,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
+import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
@@ -43,8 +44,8 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht=20;
-        gameMapHeight=20;
+        gameMapWidht=MemoryLoader.loadDifficultyMapWight().getDifficultyMapWightIdx();
+        gameMapHeight=MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
         blockSize=30;
         random = new Random();
 
@@ -72,7 +73,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        SoundExecutor.playBackSound();
+        boolean isMusicOn = MemoryLoader.loadMusicState();
+        if (isMusicOn) SoundExecutor.playBackSound();
+        else SoundExecutor.stopPlaying();
     }
 
     @Override
