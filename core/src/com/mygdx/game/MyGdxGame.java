@@ -34,6 +34,7 @@ public class MyGdxGame extends Game {
 	public ShopScreen shopScreen;
 	public SettingScreen settingScreen;
 
+	public int timer;
 
 
 	@Override

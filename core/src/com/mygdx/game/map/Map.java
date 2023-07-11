@@ -1,6 +1,5 @@
 package com.mygdx.game.map;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.tetraminos.AbstractTetramino;
 import com.mygdx.game.map.tetraminos.Block;
@@ -34,11 +33,11 @@ public class Map {
     public boolean summon(AbstractTetramino tetr) {
         if (height == 5) {
             tetr.setCentralCoordinate(2, 2);
-            if(!isTetraminoConflict(tetr))return false;
+            if(!dontTetraminoConflict(tetr))return false;
         }
         else {
             tetr.setCentralCoordinate(width / 2, height - 2);
-            if(!isTetraminoConflict(tetr))return false;
+            if(!dontTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);
         return true;
@@ -46,7 +45,7 @@ public class Map {
     }
 
     public void addTetramino(AbstractTetramino tetr) {
-        if (isTetraminoConflict(tetr)) {
+        if (dontTetraminoConflict(tetr)) {
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
             }
@@ -67,7 +66,7 @@ public class Map {
         }
     }
 
-    public boolean isTetraminoConflict(AbstractTetramino tetr) {
+    public boolean dontTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
             if (!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width))
                 return false;
@@ -95,6 +94,12 @@ public class Map {
             for (int j = 0; j < width; j++) {
                 mapList.get(i).get(j).setType(mapList.get(i + 1).get(j).type);
             }
+        }
+    }
+
+    public void colorString(int i) {
+        for(int j = 0; j < width; j++){
+            mapList.get(i).get(j).setType(-1);
         }
     }
 }

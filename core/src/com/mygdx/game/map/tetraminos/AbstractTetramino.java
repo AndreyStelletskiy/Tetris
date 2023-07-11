@@ -2,7 +2,6 @@ package com.mygdx.game.map.tetraminos;
 
 import static com.mygdx.game.utils.MathHelper.percent;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.game.map.Map;
 
 public class AbstractTetramino implements Cloneable {
@@ -18,29 +17,25 @@ public class AbstractTetramino implements Cloneable {
     }
 
     public void moveRight(Map map) {
-        map.deleteTetramino(this);
         for (int i = 0; i < 4; i++) {
             coordinatesX[i] = percent(++coordinatesX[i], map.width);
         }
-        if (!map.isTetraminoConflict(this)) {
+        if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
                 coordinatesX[i] = percent(--coordinatesX[i], map.width);
             }
         }
-        map.addTetramino(this);
     }
 
     public void moveLeft(Map map) {
-        map.deleteTetramino(this);
         for (int i = 0; i < 4; i++) {
             coordinatesX[i] = percent(--coordinatesX[i], map.width);
         }
-        if (!map.isTetraminoConflict(this)) {
+        if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
                 coordinatesX[i] = percent(++coordinatesX[i], map.width);
             }
         }
-        map.addTetramino(this);
     }
 
     protected void moveUp(Map map) {
@@ -57,14 +52,22 @@ public class AbstractTetramino implements Cloneable {
             coordinatesY[i]--;
         }
 
-        if (!map.isTetraminoConflict(this)) {
+        if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
                 coordinatesY[i]++;
             }
             this.isMovable = false;
         }
-        map.addTetramino(this);
+        for (int i = 0; i < 4; i++) {
+            coordinatesY[i]--;
+        }
+        if (!map.dontTetraminoConflict(this)) this.isMovable = false;
 
+        for (int i = 0; i < 4; i++) {
+            coordinatesY[i]++;
+        }
+
+        map.addTetramino(this);
 
     }
 

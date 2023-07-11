@@ -53,23 +53,21 @@ public class TetraminoFive extends AbstractTetramino{
             coordinatesY[2] = coordinatesY[0];
             coordinatesY[3] = coordinatesY[0] - 1;
         }
-        this.moveRight(map);
-        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
         }
 
-        if (map.isTetraminoConflict(this)) {
+        if (!map.dontTetraminoConflict(this)) {
             this.moveLeft(map);
-            if (map.isTetraminoConflict(this)) {
+            if (!map.dontTetraminoConflict(this)) {
                 this.moveRight(map);
                 this.moveRight(map);
             }
-            if (map.isTetraminoConflict(this)) {
+            if (!map.dontTetraminoConflict(this)) {
                 this.moveLeft(map);
                 this.moveUp(map);
-                if (map.isTetraminoConflict(this)) {
+                if (!map.dontTetraminoConflict(this)) {
                     System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
                     System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
                     this.isMovable = false;
@@ -114,23 +112,21 @@ public class TetraminoFive extends AbstractTetramino{
             coordinatesY[3] = coordinatesY[0] - 1;
         }
 
-        this.moveRight(map);
-        this.moveDown(map);
         for(int i = 0; i < 4; i ++){
             coordinatesX[i] = percent(coordinatesX[i], map.width);
             coordinatesY[i] = percent(coordinatesY[i], map.height);
         }
 
-        if (map.isTetraminoConflict(this)) {
+        if (!map.dontTetraminoConflict(this)) {
             this.moveLeft(map);
-            if (map.isTetraminoConflict(this)) {
+            if (!map.dontTetraminoConflict(this)) {
                 this.moveRight(map);
                 this.moveRight(map);
             }
-            if (map.isTetraminoConflict(this)) {
+            if (!map.dontTetraminoConflict(this)) {
                 this.moveLeft(map);
                 this.moveUp(map);
-                if (map.isTetraminoConflict(this)) {
+                if (!map.dontTetraminoConflict(this)) {
                     System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
                     System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
                     this.isMovable = false;

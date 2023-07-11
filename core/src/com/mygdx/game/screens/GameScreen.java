@@ -77,6 +77,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        myGdxGame.timer=(myGdxGame.timer + 1)%2;
+
         if(gameState == 2){
             myGdxGame.setScreen(myGdxGame.gameOverScreen);
         }
@@ -85,17 +87,25 @@ public class GameScreen implements Screen {
             if (time == 0) {
                 Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
-                ArrayList<Integer> stringsToDelete = new ArrayList<>();
-                for (int i = 0; i < gameMapHeight; i++) {
-                    if (gameMap.isStringFull(i)){
-                        stringsToDelete.add(i);
-                    }
-                }
-                for (int i = 0; i < stringsToDelete.size(); i++){
-                    gameMap.deleteString(stringsToDelete.get(i) - i);
-                }
+
+                //for (int i = 0; i < gameMapHeight; i++) {
+                //    if (gameMap.isStringFull(i)){
+                //        Gdx.app.debug("", "colored string");
+                //        gameMap.colorString(i);
+                //   }
+                //}
 
                 if (!currentTetramino.isMovable) {
+
+                    ArrayList<Integer> stringsToDelete = new ArrayList<>();
+                    for (int i = 0; i < gameMapHeight; i++) {
+                        if (gameMap.isStringFull(i)){
+                            stringsToDelete.add(i);
+                        }
+                    }
+                    for (int i = 0; i < stringsToDelete.size(); i++){
+                        gameMap.deleteString(stringsToDelete.get(i) - i);
+                    }
 
                     miniMap.deleteTetramino(nextTetramino);
                     currentTetramino = createTetraminoWithSameType(nextTetramino.INDEX);
@@ -202,14 +212,17 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener toLeftButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-
+            gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveLeft(gameMap);
+            gameMap.addTetramino(currentTetramino);
         }
     };
     UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
+            gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveRight(gameMap);
+            gameMap.addTetramino(currentTetramino);
         }
     };
     UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
@@ -270,16 +283,20 @@ public class GameScreen implements Screen {
     AbstractTetramino createTetraminoWithSameType(int type){
         switch (type){
             case 1:
-                return new TetraminoOne(4,4);
+                //return new TetraminoOne(4,4);
+                return new TetraminoFour(4,4);
             case 2:
-                return new TetraminoTwo(4,4);
+                //return new TetraminoTwo(4,4);
+                return new TetraminoFour(4,4);
             case 3:
-                return new TetraminoThree(4,4);
+                //return new TetraminoThree(4,4);
+                return new TetraminoFour(4,4);
             case 4:
+                //return new TetraminoFour(4,4);
                 return new TetraminoFour(4,4);
             default:
-                return new TetraminoFive(4,4);
-
+                //return new TetraminoFive(4,4);
+                return new TetraminoFour(4,4);
         }
     }
 
