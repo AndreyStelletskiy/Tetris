@@ -15,6 +15,7 @@ import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
+import com.mygdx.game.utils.GameSettings;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,9 +32,9 @@ public class GameScreen implements Screen {
     AbstractTetramino[] forRandomArray;
     Random random;
 
-    int gameState;
-    int gameMapWidht;
-    int gameMapHeight;
+    int gameState, blockSize;
+    public int gameMapWidht;
+    public int gameMapHeight;
     TextButton Stop;
     TextButton buttonExit;
 
@@ -41,12 +42,12 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht=20;
+        gameMapWidht=30;
         gameMapHeight=20;
-
+        blockSize=30;
         random = new Random();
 
-        gameMap = new Map(300, 620, gameMapWidht, gameMapHeight, 30);
+        gameMap = new Map((GameSettings.SCR_WIDTH-gameMapWidht*blockSize)/2-(gameMapWidht-1)/10*blockSize, 620, gameMapWidht, gameMapHeight, blockSize);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
         forRandomArray = new AbstractTetramino[5];

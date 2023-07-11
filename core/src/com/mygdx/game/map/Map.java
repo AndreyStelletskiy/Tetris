@@ -36,7 +36,7 @@ public class Map {
     public void summon(AbstractTetramino tetr){
         if(height == 5)tetr.setCentralCoordinate(2,2 );
         else{
-            tetr.setCentralCoordinate(10, 18);
+            tetr.setCentralCoordinate(width/2, height-2);
         }
         addTetramino(tetr);
     }
