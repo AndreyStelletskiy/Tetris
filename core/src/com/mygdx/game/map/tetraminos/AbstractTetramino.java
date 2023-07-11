@@ -58,14 +58,14 @@ public class AbstractTetramino implements Cloneable {
             }
             this.isMovable = false;
         }
-        for (int i = 0; i < 4; i++) {
-            coordinatesY[i]--;
-        }
-        if (!map.dontTetraminoConflict(this)) this.isMovable = false;
-
-        for (int i = 0; i < 4; i++) {
-            coordinatesY[i]++;
-        }
+//        for (int i = 0; i < 4; i++) {
+//            coordinatesY[i]--;
+//        }
+//        if (!map.dontTetraminoConflict(this)) this.isMovable = false;
+//
+//        for (int i = 0; i < 4; i++) {
+//            coordinatesY[i]++;
+//        }
 
         map.addTetramino(this);
 

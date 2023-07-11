@@ -4,28 +4,29 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.ImageView;
+import com.mygdx.game.utils.Textures;
 
 public class Block extends ImageView {
     public int type;
-    private Texture[] textures;
+    //private Texture[] textures;
 
     public Block(float x, float y, float width, float height, String imgSource, int type) {
         super(x, y, width, height, imgSource);
         this.type = type;
-        createTextures();
+        //createTextures();
     }
 
     public Block(float x, float y, float width, float height, Texture imgTexture, int type) {
         super(x, y, width, height, imgTexture);
         this.type = type;
-        createTextures();
+        //createTextures();
     }
-    void createTextures(){
+    /*void createTextures(){
         textures = new Texture[6];
         for(int i = 0; i < 6; i++){
             textures[i] = new Texture("block_" + i + ".jpg");
         }
-    }
+    }*/
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
@@ -42,7 +43,7 @@ public class Block extends ImageView {
             setImgTexture(new Texture("block_" + type + "_0.jpg"));
         }
         else{
-            setImgTexture(textures[type]);
+            setImgTexture(Textures.textures[type]);
         }
     }
 }

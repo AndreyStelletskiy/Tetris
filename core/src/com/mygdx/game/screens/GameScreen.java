@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
@@ -16,6 +17,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
+import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class GameScreen implements Screen {
     Map gameMap, miniMap;
     int time = 0;
     int moveTime = 20;
+    int localScore = 0;
     AbstractTetramino currentTetramino, nextTetramino;
 
     Random random;
@@ -43,26 +46,25 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht=20;
-        gameMapHeight=20;
-        blockSize=30;
+        gameMapWidht = 20;
+        gameMapHeight = 40;
+        blockSize = 30;
         random = new Random();
 
-        gameMap = new Map((GameSettings.SCR_WIDTH-gameMapWidht*blockSize)/2-(gameMapWidht-1)/10*blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
+        gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
 
-        currentTetramino = createTetraminoWithSameType(random.nextInt( 5));
+        currentTetramino = createTetraminoWithSameType(random.nextInt(5));
 
         gameMap.summon(currentTetramino);
 
 
-        nextTetramino = createTetraminoWithSameType(random.nextInt( 5));
+        nextTetramino = createTetraminoWithSameType(random.nextInt(5));
 
         miniMap.summon(nextTetramino);
 
         Gdx.app.debug("current", "" + currentTetramino.INDEX);
-
 
 
         UIInitialize();
@@ -77,61 +79,52 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        myGdxGame.timer=(myGdxGame.timer + 1)%2;
+        //обрабатывает нажатие клавиш
+        keyListen();
+        //обрабатывает касания
+        touchListen();
+        myGdxGame.timer = (myGdxGame.timer + 1) % 2;
 
-        if(gameState == 2){
-            myGdxGame.setScreen(myGdxGame.gameOverScreen);
-        }
+
         if (gameState == 0) {
             time = (time + 1) % moveTime;
             if (time == 0) {
-                Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
+                //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
-
-                //for (int i = 0; i < gameMapHeight; i++) {
-                //    if (gameMap.isStringFull(i)){
-                //        Gdx.app.debug("", "colored string");
-                //        gameMap.colorString(i);
-                //   }
-                //}
-
+                for (int i = 0; i < gameMapHeight; i++) {
+                    if (gameMap.isStringFull(i)){
+                        Gdx.app.debug("" + i , "string colored");
+                        gameMap.colorString(i);
+                   }
+                }
+            }
+            if(time == 0){
                 if (!currentTetramino.isMovable) {
-
                     ArrayList<Integer> stringsToDelete = new ArrayList<>();
                     for (int i = 0; i < gameMapHeight; i++) {
-                        if (gameMap.isStringFull(i)){
+                        if (gameMap.isStringFull(i)) {
                             stringsToDelete.add(i);
                         }
                     }
-                    for (int i = 0; i < stringsToDelete.size(); i++){
+                    for (int i = 0; i < stringsToDelete.size(); i++) {
                         gameMap.deleteString(stringsToDelete.get(i) - i);
+                    }
+                    if (stringsToDelete.size() >= 4)
+                        localScore += stringsToDelete.size() * gameMapWidht * 4;
+                    else {
+                        localScore += stringsToDelete.size() * gameMapWidht;
                     }
 
                     miniMap.deleteTetramino(nextTetramino);
                     currentTetramino = createTetraminoWithSameType(nextTetramino.INDEX);
-                    if(!gameMap.summon(currentTetramino)) gameState = 2;
-                    nextTetramino = createTetraminoWithSameType(random.nextInt( 5));
+                    if (!gameMap.summon(currentTetramino)) {
+                        gameOver();
+                    }
+                    nextTetramino = createTetraminoWithSameType(random.nextInt(5));
                     miniMap.summon(nextTetramino);
                 }
             }
         }
-        if (Gdx.input.justTouched()) {
-            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
-            for (UiComponent component : uiComponentsList) {
-                if(component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
-            }
-        }
-
-        if (Gdx.input.justTouched()) {
-            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
-            for (UiComponent component : uiComponentsListGame) {
-                if(component.isVisible&&gameState==0) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
-            }
-        }
-
-
 
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
@@ -144,12 +137,36 @@ public class GameScreen implements Screen {
         for (UiComponent component : uiComponentsListGame) {
             component.draw(myGdxGame);
         }
+        //score Drawing
+        TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, ""+localScore, 935, 1825);
+        scoreR.draw(myGdxGame);
 
 
         gameMap.draw(myGdxGame);
         miniMap.draw(myGdxGame);
 
         myGdxGame.batch.end();
+
+    }
+
+    private void touchListen() {
+        if (Gdx.input.justTouched()) {
+            myGdxGame.touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            myGdxGame.touch = myGdxGame.camera.unproject(myGdxGame.touch);
+            for (UiComponent component : uiComponentsList) {
+                if (component.isVisible) component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
+            }
+            for (UiComponent component : uiComponentsListGame) {
+                if (component.isVisible && gameState == 0)
+                    component.isHit(myGdxGame.touch.x, myGdxGame.touch.y);
+            }
+        }
+    }
+
+    private void gameOver() {
+        MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
+        gameState = 2;
+        myGdxGame.setScreen(myGdxGame.gameOverScreen);
 
     }
 
@@ -178,7 +195,7 @@ public class GameScreen implements Screen {
 
     }
 
-    public void UIInitialize(){
+    public void UIInitialize() {
         uiComponentsList = new ArrayList<>();
         uiComponentsListGame = new ArrayList<>();
 
@@ -191,16 +208,16 @@ public class GameScreen implements Screen {
         ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
         ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
-        toDownButton.setOnClickListener(toDownButtonClickListener);
+        toDownButton.setOnClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
-        TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "-", 935, 1825);
+        //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
         Stop.setOnClickListener(pauseButtonClickListener);
         buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "", 25, 85);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         uiComponentsList.add(Stop);
         uiComponentsList.add(score);
-        uiComponentsList.add(scoreR);
+        //uiComponentsList.add(scoreR);
         uiComponentsListGame.add(toLeftButton);
         uiComponentsListGame.add(toRightButton);
         uiComponentsListGame.add(toLeftRButton);
@@ -242,7 +259,7 @@ public class GameScreen implements Screen {
             gameMap.addTetramino(currentTetramino);
         }
     };
-    UiComponent.OnClickListener toDownButtonClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener toDown1ButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             while (currentTetramino.isMovable) {
@@ -250,10 +267,19 @@ public class GameScreen implements Screen {
             }
         }
     };
+    UiComponent.OnClickListener toDown2ButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            if(currentTetramino.isMovable) {
+                currentTetramino.moveDown(gameMap);
+            }
+        }
+    };
+
     UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            switch (gameState){
+            switch (gameState) {
                 case 1:
                     gameState = 0;
                     break;
@@ -261,12 +287,12 @@ public class GameScreen implements Screen {
                     gameState = 1;
                     break;
             }
-            if(gameState==0){
+            if (gameState == 0) {
                 Stop.setText("Pause");
                 SoundExecutor.resumePlaying();
                 buttonExit.setText("");
             }
-            if(gameState==1){
+            if (gameState == 1) {
                 Stop.setText("Renew");
                 SoundExecutor.pausePlaying();
                 buttonExit.setText("Return Home");
@@ -276,27 +302,49 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-
+            MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
-    AbstractTetramino createTetraminoWithSameType(int type){
-        switch (type){
+
+    AbstractTetramino createTetraminoWithSameType(int type) {
+        switch (type) {
             case 1:
-                //return new TetraminoOne(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoOne(4, 4);
+            //return new TetraminoFour(4,4);
             case 2:
-                //return new TetraminoTwo(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoTwo(4, 4);
+            //return new TetraminoFour(4,4);
             case 3:
-                //return new TetraminoThree(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoThree(4, 4);
+            //return new TetraminoFour(4,4);
             case 4:
-                //return new TetraminoFour(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoFour(4, 4);
+            //return new TetraminoFour(4,4);
             default:
-                //return new TetraminoFive(4,4);
-                return new TetraminoFour(4,4);
+                return new TetraminoFive(4, 4);
+            //return new TetraminoFour(4,4);
+        }
+    }
+
+    void keyListen() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            toLeftButtonClickListener.onClicked();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+            toDown1ButtonClickListener.onClicked();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            toDown2ButtonClickListener.onClicked();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            toRightButtonClickListener.onClicked();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            toRightRButtonClickListener.onClicked();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            toLeftRButtonClickListener.onClicked();
         }
     }
 
