@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         blockSize=30;
         random = new Random();
 
-        gameMap = new Map((GameSettings.SCR_WIDTH-gameMapWidht*blockSize)/2-(gameMapWidht-1)/10*blockSize, 620, gameMapWidht, gameMapHeight, blockSize);
+        gameMap = new Map((GameSettings.SCR_WIDTH-gameMapWidht*blockSize)/2-(gameMapWidht-1)/10*blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
 
@@ -72,7 +72,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        SoundExecutor.playTetrisSound();
+        SoundExecutor.playBackSound();
     }
 
     @Override
@@ -230,10 +230,12 @@ public class GameScreen implements Screen {
             gameState = 1 - gameState;
             if(gameState==0){
                 Stop.setText("Pause");
+                SoundExecutor.resumePlaying();
                 buttonExit.setText("");
             }
             if(gameState==1){
                 Stop.setText("Renew");
+                SoundExecutor.pausePlaying();
                 buttonExit.setText("Return Home");
             }
         }
