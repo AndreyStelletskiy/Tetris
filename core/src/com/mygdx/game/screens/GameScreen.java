@@ -77,6 +77,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if(gameState == 2){
+            myGdxGame.setScreen(myGdxGame.gameOverScreen);
+        }
         if (gameState == 0) {
             time = (time + 1) % moveTime;
             if (time == 0) {
@@ -96,7 +99,7 @@ public class GameScreen implements Screen {
 
                     miniMap.deleteTetramino(nextTetramino);
                     currentTetramino = createTetraminoWithSameType(nextTetramino.INDEX);
-                    gameMap.summon(currentTetramino);
+                    if(!gameMap.summon(currentTetramino)) gameState = 2;
                     nextTetramino = createTetraminoWithSameType(random.nextInt( 5));
                     miniMap.summon(nextTetramino);
                 }
@@ -237,7 +240,14 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            gameState = 1 - gameState;
+            switch (gameState){
+                case 1:
+                    gameState = 0;
+                    break;
+                case 0:
+                    gameState = 1;
+                    break;
+            }
             if(gameState==0){
                 Stop.setText("Pause");
                 SoundExecutor.resumePlaying();

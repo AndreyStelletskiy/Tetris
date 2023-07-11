@@ -14,9 +14,7 @@ public class Map {
     public ArrayList<ArrayList<Block>> mapList;
 
 
-
-
-    public Map(float posX, float posY, int width, int height, float blockSize ) {
+    public Map(float posX, float posY, int width, int height, float blockSize) {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
@@ -33,22 +31,29 @@ public class Map {
         }
     }
 
-    public void summon(AbstractTetramino tetr){
-        if(height == 5)tetr.setCentralCoordinate(2,2 );
-        else{
-            tetr.setCentralCoordinate(width/2, height-2);
+    public boolean summon(AbstractTetramino tetr) {
+        if (height == 5) {
+            tetr.setCentralCoordinate(2, 2);
+            if(!isTetraminoConflict(tetr))return false;
+        }
+        else {
+            tetr.setCentralCoordinate(width / 2, height - 2);
+            if(!isTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);
+        return true;
+
     }
 
-    public void addTetramino(AbstractTetramino tetr){
-        if(isTetraminoConflict(tetr)){
+    public void addTetramino(AbstractTetramino tetr) {
+        if (isTetraminoConflict(tetr)) {
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
             }
         }
     }
-    public void deleteTetramino(AbstractTetramino tetr){
+
+    public void deleteTetramino(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
             mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(0);
         }
@@ -64,28 +69,31 @@ public class Map {
 
     public boolean isTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
-            if(!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width ))       return false;
-            if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != 0){
+            if (!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width))
+                return false;
+            if (mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type != 0) {
                 return false;
             }
         }
         return true;
     }
-    public boolean isStringFull(int indx){
+
+    public boolean isStringFull(int indx) {
         for (int i = 0; i < width; i++) {
-            if(mapList.get(indx).get(i).type == 0){
+            if (mapList.get(indx).get(i).type == 0) {
                 return false;
             }
         }
         return true;
     }
-    public void deleteString(int indx){
+
+    public void deleteString(int indx) {
         for (int i = 0; i < width; i++) {
             mapList.get(indx).get(i).setType(0);
         }
-        for (int i = indx; i <height-1 ; i++) {
+        for (int i = indx; i < height - 1; i++) {
             for (int j = 0; j < width; j++) {
-                mapList.get(i).get(j).setType(mapList.get(i+1).get(j).type);
+                mapList.get(i).get(j).setType(mapList.get(i + 1).get(j).type);
             }
         }
     }
