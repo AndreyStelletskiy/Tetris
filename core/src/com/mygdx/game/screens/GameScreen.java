@@ -236,7 +236,9 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener toDownButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            currentTetramino.moveDown(gameMap);
+            while (currentTetramino.isMovable) {
+                currentTetramino.moveDown(gameMap);
+            }
         }
     };
     UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
