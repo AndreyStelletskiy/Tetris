@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameState = 0;
-        gameMapWidht=30;
+        gameMapWidht=20;
         gameMapHeight=20;
         blockSize=30;
         random = new Random();
