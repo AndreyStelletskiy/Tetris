@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.UiComponent;
 
 import java.util.ArrayList;
@@ -11,9 +12,14 @@ import java.util.ArrayList;
 public class ShopAssetScreen implements Screen {
     MyGdxGame myGdxGame;
     ArrayList<UiComponent> uiComponentsList;
+    TextButton buttonExit;
 
     public ShopAssetScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
+        uiComponentsList = new ArrayList<>();
+        buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "Return Shop", 25, 85);
+        buttonExit.setOnClickListener(onReturnButtonClickListener);
+        uiComponentsList.add(buttonExit);
 
     }
     @Override
@@ -68,4 +74,12 @@ public class ShopAssetScreen implements Screen {
     public void dispose() {
 
     }
+
+    UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+
+            myGdxGame.setScreen(myGdxGame.shopScreen);
+        }
+    };
 }

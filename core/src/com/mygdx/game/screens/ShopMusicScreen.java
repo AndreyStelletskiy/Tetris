@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.ImageView;
+import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
@@ -18,6 +19,7 @@ public class ShopMusicScreen implements Screen {
     ArrayList<UiComponent> uiComponentsList;
     int itemIdx = 0;
     int songsCount = 3;
+    TextButton buttonExit;
     ArrayList<ArrayList<UiComponent>> widgets;
 
     public ShopMusicScreen(MyGdxGame myGdxGame) {
@@ -34,9 +36,12 @@ public class ShopMusicScreen implements Screen {
         uiComponentsList = new ArrayList<>();
         uiComponentsList.add(nextSongButton);
         uiComponentsList.add(previousSongButton);
+        buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "Return Shop", 25, 85);
+        buttonExit.setOnClickListener(onReturnButtonClickListener);
+        uiComponentsList.add(buttonExit);
         for (int i = 0; i < songsCount; i++) {
             widgets.add(new ArrayList<UiComponent>());
-            TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, "song name" + i, GameSettings.SCR_WIDTH/2, GameSettings.SCR_HEIGHT/2);
+            TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, "song name" + i, GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
             widgets.get(i).add(songName);
         }
     }
@@ -112,6 +117,14 @@ public class ShopMusicScreen implements Screen {
         public void onClicked() {
             itemIdx -= 1;
             itemIdx = MathHelper.percent(itemIdx, songsCount);
+        }
+    };
+
+    UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+
+            myGdxGame.setScreen(myGdxGame.shopScreen);
         }
     };
 }
