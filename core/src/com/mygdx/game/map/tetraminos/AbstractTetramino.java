@@ -11,7 +11,7 @@ public class AbstractTetramino implements Cloneable {
     public boolean isMovable = true;
 
     public void rotateLeft(Map map) {
-        if(!isMovable)return;
+        //if(!isMovable)return;
         if (INDEX == 1) return;
 
         int[] bufferX = new int[4];
@@ -19,19 +19,35 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesX, 0, bufferX, 0, 4);
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
-        for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = bufferX[1] - bufferY[i] + bufferY[1];
-            coordinatesY[i] = bufferY[1] + bufferX[i] - bufferX[1];
+        if (coordinatesX[1] <= 2 || coordinatesX[1] >= map.width - 3) {
+            for (int i = 0; i < 4; i++) {
+                if (bufferX[1] - bufferX[i] > 2) coordinatesX[i] = bufferX[i] + map.width;
+                if (bufferX[1] - bufferX[i] < -2) coordinatesX[i] = bufferX[i] - map.width;
+            }
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(bufferX[1] - bufferY[i] + bufferY[1], map.width);
+                coordinatesY[i] = percent(bufferY[1] + bufferX[i] - bufferX[1], map.height);
+            }
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(coordinatesX[i], map.width);
+            }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(bufferX[1] - bufferY[i] + bufferY[1], map.width);
+                coordinatesY[i] = percent(bufferY[1] + bufferX[i] - bufferX[1], map.height);
+            }
         }
-
-        if (!map.dontTetraminoConflict(this)) {
+        for (int i = 0; i < 4; i++) {
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+        }
+        /*if (!map.dontTetraminoConflict(this)) {
             System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
             System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
-        }
+        }*/
     }
 
     public void rotateRight(Map map) {
-        if(!isMovable)return;
+        //if(!isMovable)return;
         if (INDEX == 1) return;
 
         int[] bufferX = new int[4];
@@ -39,26 +55,42 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesX, 0, bufferX, 0, 4);
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
-        for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = bufferX[1] + bufferY[i] - bufferY[1];
-            coordinatesY[i] = bufferY[1] - bufferX[i] + bufferX[1];
+        if (coordinatesX[1] <= 2 || coordinatesX[1] >= map.width - 3) {
+            for (int i = 0; i < 4; i++) {
+                if (bufferX[1] - bufferX[i] > 2) coordinatesX[i] = bufferX[i] + map.width;
+                if (bufferX[1] - bufferX[i] < -2) coordinatesX[i] = bufferX[i] - map.width;
+            }
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(bufferX[1] + bufferY[i] - bufferY[1], map.width);
+                coordinatesY[i] = percent(bufferY[1] - bufferX[i] + bufferX[1], map.height);
+            }
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(coordinatesX[i], map.width);
+            }
+        } else {
+            for (int i = 0; i < 4; i++) {
+                coordinatesX[i] = percent(bufferX[1] + bufferY[i] - bufferY[1], map.width);
+                coordinatesY[i] = percent(bufferY[1] - bufferX[i] + bufferX[1], map.height);
+            }
         }
-
-        if (!map.dontTetraminoConflict(this)) {
+        for (int i = 0; i < 4; i++) {
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+        }
+        /*if (!map.dontTetraminoConflict(this)) {
             System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
             System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
-        }
+        }*/
 
     }
 
     public void moveRight(Map map) {
         if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = ++coordinatesX[i];
+            coordinatesX[i] = percent(++coordinatesX[i], map.width);
         }
         if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = --coordinatesX[i];
+                coordinatesX[i] = percent(--coordinatesX[i], map.width);
             }
         }
     }
@@ -66,11 +98,11 @@ public class AbstractTetramino implements Cloneable {
     public void moveLeft(Map map) {
         if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = --coordinatesX[i];
+            coordinatesX[i] = percent(--coordinatesX[i], map.width);
         }
         if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = ++coordinatesX[i];
+                coordinatesX[i] = percent(++coordinatesX[i], map.width);
             }
         }
     }
