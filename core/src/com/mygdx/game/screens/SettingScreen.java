@@ -30,6 +30,10 @@ public class SettingScreen implements Screen {
 
     public SettingScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
+
+        uiInitialize();
+    }
+    private void uiInitialize(){
         uiComponentsList = new ArrayList<>();
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
@@ -60,9 +64,7 @@ public class SettingScreen implements Screen {
         uiComponentsList.add(difficultyHeight);
         uiComponentsList.add(difficultyHeightButton);
         uiComponentsList.add(resetButton);
-
     }
-
     private String getDifficultyLabelText(DifficultyMapWight difficultyLevelWight) {
         switch (difficultyLevelWight) {
             case EASY:
@@ -93,6 +95,7 @@ public class SettingScreen implements Screen {
     public void show() {
 
     }
+
 
     @Override
     public void render(float delta) {
@@ -151,27 +154,20 @@ public class SettingScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
+
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
 
+
     UiComponent.OnClickListener onResetButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            DifficultyMapWight difficultyMapWight;
-            difficultyMapWight = GameSettings.DEFAULT_DIFFICULTY_WIGHT;
-            difficultyWight.text = getDifficultyLabelText(difficultyMapWight);
-            MemoryLoader.saveDifficultyLevelWight(difficultyMapWight);
-
-            DifficultyMapHeight difficultyMapHeight;
-            difficultyMapHeight = GameSettings.DEFAULT_DIFFICULTY_HEIGHT;
-            difficultyHeight.text = getDifficultyLabelText(difficultyMapHeight);
-            MemoryLoader.saveDifficultyLevelHeight(difficultyMapHeight);
-
-            MemoryLoader.saveMusicState(GameSettings.DEFAULT_SOUND_STATE);
-            soundsButton.text = getSoundButtonText();
+            MemoryLoader.clearAllSaves();
+            uiInitialize();
         }
     };
+
 
     UiComponent.OnClickListener onChangeMusicClickListener = new UiComponent.OnClickListener() {
         @Override
