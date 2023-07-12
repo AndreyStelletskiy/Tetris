@@ -263,8 +263,11 @@ public class GameScreen implements Screen {
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
-        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todounf.png");
-        toDownButton.setOnClickListener(toDown1ButtonClickListener);
+        ImageView toDownfButton = new ImageView(430, 50, 220, 220, "Buttons/todownf.png");
+        toDownfButton.setOnClickListener(toDown1ButtonClickListener);
+
+        ImageView toDownButton = new ImageView(430, 270, 220, 220, "Buttons/todown.png");
+        toDownButton.setOnClickListener(toDown2ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
@@ -279,6 +282,7 @@ public class GameScreen implements Screen {
         uiComponentsListGame.add(toLeftRButton);
         uiComponentsListGame.add(toRightRButton);
         uiComponentsListGame.add(toDownButton);
+        uiComponentsList.add(toDownfButton);
         uiComponentsList.add(buttonExit);
     }
 
@@ -333,7 +337,9 @@ public class GameScreen implements Screen {
         public void onClicked() {
             if (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
+                currentTetramino.moveDown(gameMap);
             }
+            SoundExecutor.playlrSound();
         }
     };
 
