@@ -11,12 +11,15 @@ public class AbstractTetramino implements Cloneable {
     public boolean isMovable = true;
 
     public void rotateRight(Map map) {
+        if(!isMovable)return;
     }
 
     public void rotateLeft(Map map) {
+        if(!isMovable)return;
     }
 
     public void moveRight(Map map) {
+        if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
             coordinatesX[i] = percent(++coordinatesX[i], map.width);
         }
@@ -28,6 +31,7 @@ public class AbstractTetramino implements Cloneable {
     }
 
     public void moveLeft(Map map) {
+        if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
             coordinatesX[i] = percent(--coordinatesX[i], map.width);
         }
