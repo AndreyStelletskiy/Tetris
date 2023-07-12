@@ -19,6 +19,13 @@ public class MenuScreen implements Screen {
 
     public MyGdxGame myGdxGame;
     ArrayList<UiComponent> uiComponentsList;
+    TextView scr1;
+    TextView scr2;
+    TextView scr3;
+    TextView scr4;
+    TextView scr5;
+    TextView scrTotal;
+
 
     public MenuScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -36,12 +43,12 @@ public class MenuScreen implements Screen {
         TextView scrboard4 = new TextView(myGdxGame.largeFont1.bitmapFont, "4.", 95, 1100);
         TextView scrboard5 = new TextView(myGdxGame.largeFont1.bitmapFont, "5.", 95, 1000);
 
-        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+ MemoryLoader.loadScoreBoard().get(0), 175, 1400);
-        TextView scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(1), 175, 1300);
-        TextView scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(2), 175, 1200);
-        TextView scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(3), 175, 1100);
-        TextView scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(4), 175, 1000);
-        TextView scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 575, 1625);
+         scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+ MemoryLoader.loadScoreBoard().get(0), 175, 1400);
+         scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(1), 175, 1300);
+         scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(2), 175, 1200);
+         scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(3), 175, 1100);
+         scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(4), 175, 1000);
+         scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 575, 1625);
 
         TextButton buttonStart = new TextButton(myGdxGame.bblargeFont.bitmapFont, "Play", 75, 850);
         buttonStart.setOnClickListener(onButtonStartClicked);
@@ -80,6 +87,12 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
         SoundExecutor.stopPlaying();
+        scr1.text = ""+ MemoryLoader.loadScoreBoard().get(0);
+        scr1.text = ""+ MemoryLoader.loadScoreBoard().get(1);
+        scr1.text = ""+ MemoryLoader.loadScoreBoard().get(2);
+        scr1.text = ""+ MemoryLoader.loadScoreBoard().get(3);
+        scr1.text = ""+ MemoryLoader.loadScoreBoard().get(4);
+        scrTotal.text = ""+MemoryLoader.loadScore();
     }
 
     @Override
