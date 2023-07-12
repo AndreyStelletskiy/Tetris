@@ -103,4 +103,12 @@ public class MemoryLoader {
         }
         return ans;
     }
+
+    public static void clearAllSaves() {
+        MemoryLoader.saveDifficultyLevelWight(DEFAULT_DIFFICULTY_WIGHT);
+        MemoryLoader.saveDifficultyLevelHeight(DEFAULT_DIFFICULTY_HEIGHT);
+        MemoryLoader.saveMusicState(GameSettings.DEFAULT_SOUND_STATE);
+        MemoryLoader.saveScoreBoard(parseStringToArray("0 0 0 0 0"));
+        MemoryLoader.saveScore(0);
+    }
 }

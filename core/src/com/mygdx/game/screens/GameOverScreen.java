@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class GameOverScreen implements Screen {
 
     ArrayList<UiComponent> uiComponentsList;
-    GameScreen gameScreen;
     MyGdxGame myGdxGame;
     TextView bResultst;
     TextView prResultst;
@@ -25,21 +24,18 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        gameScreen = new GameScreen(myGdxGame);
         uiComponentsList = new ArrayList<>();
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Game Over", -1, 1825);
         TextView titleGO = new TextView(myGdxGame.largeFont.bitmapFont, "Your results", 35, 1600);
-        titleGOt = new TextView(myGdxGame.largeFont.bitmapFont,""+gameScreen.getLocalScore() , 605, 1600);
+        titleGOt = new TextView(myGdxGame.largeFont.bitmapFont,""+myGdxGame.gameScreen.getLocalScore() , 605, 1600);
 
         TextView prResults = new TextView(myGdxGame.largeFont.bitmapFont, "Total score", 35, 1450);
         prResultst = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 525, 1450);
         TextView bResults = new TextView(myGdxGame.largeFont.bitmapFont, "Best result", 35, 1300);
         bResultst = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(0), 525, 1300);
-        if(MemoryLoader.loadScoreBoard().get(0)<=gameScreen.localScore){
-            bResults.text = gameScreen.getLocalScore()+"";
-        }
+
 
 
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "To home", 25, 175);
@@ -56,6 +52,7 @@ public class GameOverScreen implements Screen {
         uiComponentsList.add(titleGOt);
         uiComponentsList.add(buttonExit);
         uiComponentsList.add(buttonStart);
+        myGdxGame.gameScreen = new GameScreen(myGdxGame);
 
     }
 
@@ -63,7 +60,6 @@ public class GameOverScreen implements Screen {
     public void show() {
         SoundExecutor.stopPlaying();
         SoundExecutor.playGameOutSound();
-        titleGOt.text= ""+MemoryLoader.loadScore();
 
     }
 

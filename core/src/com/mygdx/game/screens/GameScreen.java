@@ -208,18 +208,22 @@ public class GameScreen implements Screen {
     }
 
     private void gameOver() {
-        MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
 
+        updateScore();
+
+        gameState = 2;
+        myGdxGame.setScreen(myGdxGame.gameOverScreen);
+
+    }
+
+    private void updateScore() {
+        MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
         ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
         arrayList.add(localScore);
         Collections.sort(arrayList);
         Collections.reverse(arrayList);
         arrayList.remove(arrayList.size()-1);
         MemoryLoader.saveScoreBoard(arrayList);
-
-        gameState = 2;
-        myGdxGame.setScreen(myGdxGame.gameOverScreen);
-
     }
 
     @Override
@@ -356,14 +360,7 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
 
-            MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
-
-            ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
-            arrayList.add(localScore);
-            Collections.sort(arrayList);
-            Collections.reverse(arrayList);
-            arrayList.remove(arrayList.size()-1);
-            MemoryLoader.saveScoreBoard(arrayList);
+           updateScore();
 
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
