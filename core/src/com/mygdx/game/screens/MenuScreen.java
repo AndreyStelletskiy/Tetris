@@ -36,12 +36,12 @@ public class MenuScreen implements Screen {
         TextView scrboard4 = new TextView(myGdxGame.largeFont1.bitmapFont, "4.", 95, 1100);
         TextView scrboard5 = new TextView(myGdxGame.largeFont1.bitmapFont, "5.", 95, 1000);
 
-        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+ MemoryLoader.loadScore(), 175, 1400);
-        TextView scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1300);
-        TextView scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1200);
-        TextView scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1100);
-        TextView scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1000);
-        TextView scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, "-", 575, 1625);
+        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+ MemoryLoader.loadScoreBoard().get(0), 175, 1400);
+        TextView scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(1), 175, 1300);
+        TextView scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(2), 175, 1200);
+        TextView scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(3), 175, 1100);
+        TextView scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(4), 175, 1000);
+        TextView scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 575, 1625);
 
         TextButton buttonStart = new TextButton(myGdxGame.bblargeFont.bitmapFont, "Play", 75, 850);
         buttonStart.setOnClickListener(onButtonStartClicked);
