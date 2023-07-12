@@ -340,7 +340,7 @@ public class GameScreen implements Screen {
                 buttonExit.setText("");
             }
             if (gameState == 1) {
-                Stop.setText("Renew");
+                Stop.setText("Continue");
                 SoundExecutor.pausePlaying();
                 buttonExit.setText("Return Home");
             }
