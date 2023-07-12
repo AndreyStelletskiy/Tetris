@@ -21,6 +21,7 @@ import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class GameScreen implements Screen {
@@ -30,7 +31,8 @@ public class GameScreen implements Screen {
     MyGdxGame myGdxGame;
     Map gameMap, miniMap;
     int time = 0;
-    int moveTime = 20;
+    int moveTime = GameSettings.MOVE_TIME;
+    int difficultyStep = GameSettings.DIFFICULTY_STEP;
     int localScore = 0;
     AbstractTetramino currentTetramino, previewTetramino, nextTetramino;
 
@@ -87,8 +89,27 @@ public class GameScreen implements Screen {
         previewTetraminoRender();
 
         if (gameState == 0) {
-            time = (time + 1) % moveTime;
-            if (time == 0) {
+            time ++;
+
+            if(time % difficultyStep == 0){
+                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS){
+                    gameMap.addColumns(1);
+                    for (int i = 0; i < 4; i++) {
+                        currentTetramino.coordinatesX[i]++;
+                        previewTetramino.coordinatesX[i]++;
+                    }
+                    gameMapWidht+=2;
+                    gameMap.posX =( GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
+                }
+                else{
+                    moveTime -= 1;
+                    if(moveTime == 0){
+                        moveTime = 1;
+                    }
+                }
+            }
+
+            if (time%moveTime == 0) {
                 //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
                 currentTetramino.moveDown(gameMap);
                 for (int i = 0; i < gameMapHeight; i++) {
@@ -98,7 +119,7 @@ public class GameScreen implements Screen {
                     }
                 }
             }
-            if (time == 0) {
+            if (time%moveTime == 0) {
                 if (!currentTetramino.isMovable) {
                     ArrayList<Integer> stringsToDelete = new ArrayList<>();
                     for (int i = 0; i < gameMapHeight; i++) {
@@ -185,6 +206,12 @@ public class GameScreen implements Screen {
 
     private void gameOver() {
         MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
+        ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
+        arrayList.add(localScore);
+        Collections.sort(arrayList);
+        arrayList.remove(arrayList.size()-1);
+        MemoryLoader.saveScoreBoard(arrayList);
+
         gameState = 2;
         myGdxGame.setScreen(myGdxGame.gameOverScreen);
 
@@ -323,6 +350,11 @@ public class GameScreen implements Screen {
         @Override
         public void onClicked() {
             MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
+            ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
+            arrayList.add(localScore);
+            Collections.sort(arrayList);
+            arrayList.remove(arrayList.size()-1);
+            MemoryLoader.saveScoreBoard(arrayList);
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };

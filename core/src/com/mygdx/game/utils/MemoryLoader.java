@@ -4,12 +4,23 @@ import static com.mygdx.game.utils.GameSettings.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.sun.org.apache.bcel.internal.generic.INEG;
+
+import java.util.ArrayList;
 
 public class MemoryLoader {
 
     private static final Preferences prefs = Gdx.app.getPreferences("User saves");
 
 
+    public static void saveScoreBoard(ArrayList<Integer> arrayList){
+        prefs.putString("scoreBoard", parseArrayToString(arrayList));
+        prefs.flush();
+    }
+    public static ArrayList<Integer> loadScoreBoard(){
+        if (prefs.contains("scoreBoard")) return parseStringToArray(prefs.getString("scoreBoard"));
+        return parseStringToArray("0 0 0 0 0");
+    }
     public static void saveScore(int score) {
         prefs.putString("score", String.valueOf(score));
         prefs.flush();
@@ -64,5 +75,22 @@ public class MemoryLoader {
             return Boolean.parseBoolean(prefs.getString("musicState"));
         saveMusicState(DEFAULT_SOUND_STATE);
         return true;
+    }
+
+    static ArrayList<Integer> parseStringToArray(String s) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        String[] ar = s.split(" ");
+        for (String string : ar) {
+            ans.add(Integer.parseInt(string));
+        }
+        return ans;
+    }
+
+    static String parseArrayToString(ArrayList<Integer> arr) {
+        String ans = ""+arr.get(0);
+        for(int i = 1; i < arr.size(); i++){
+            ans += " " + arr.get(i);
+        }
+        return ans;
     }
 }

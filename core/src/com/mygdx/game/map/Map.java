@@ -7,7 +7,8 @@ import com.mygdx.game.map.tetraminos.Block;
 import java.util.ArrayList;
 
 public class Map {
-    float posX, posY;
+    public float posX;
+    float posY;
     public int width, height;
     float blockSize;
     public ArrayList<ArrayList<Block>> mapList;
@@ -108,6 +109,24 @@ public class Map {
         for(int j = 0; j < width; j++){
             mapList.get(i).get(j).setType(-1);
         }
+    }
+
+    public void addColumns(int count) {
+        ArrayList<ArrayList<Block>> newMapList = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            newMapList.add(new ArrayList<Block>());
+            for (int j = 0; j < width + count * 2; j++) {
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                newMapList.get(i).add(zeroBlock);
+            }
+        }
+        for(int i = 0; i < height; i ++){
+            for (int j = 0; j < width; j++) {
+                newMapList.get(i).get(j+count).setType(mapList.get(i).get(j).type);
+            }
+        }
+        mapList = newMapList;
+        width += 2 * count;
     }
 }
 
