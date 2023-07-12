@@ -20,17 +20,25 @@ public class ShopScreen implements Screen {
 
     public ShopScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        uiComponentsList = new ArrayList<>();
+        uiInitialize();
+    }
 
+    private void uiInitialize() {
+
+        uiComponentsList = new ArrayList<>();
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1825);
-
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 25, 175);
+        TextButton musicShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Music shop", GameSettings.SCR_WIDTH / 2- 100, GameSettings.SCR_HEIGHT / 2 + 100);
+        TextButton assetShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Asset ", GameSettings.SCR_WIDTH / 2- 100, GameSettings.SCR_HEIGHT / 2 - 100);
+        musicShop.setOnClickListener(onMusicShopClickListener);
+        assetShop.setOnClickListener(onAssetShopClickListener);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         uiComponentsList.add(background);
         uiComponentsList.add(title);
         uiComponentsList.add(buttonExit);
-
+        uiComponentsList.add(musicShop);
+        uiComponentsList.add(assetShop);
     }
 
     @Override
@@ -90,8 +98,20 @@ public class ShopScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onReturnButtonClicked");
             myGdxGame.setScreen(myGdxGame.menuScreen);
+        }
+    };
+    UiComponent.OnClickListener onMusicShopClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            myGdxGame.setScreen(myGdxGame.shopMusicScreen);
+        }
+    };
+    UiComponent.OnClickListener onAssetShopClickListener = new UiComponent.OnClickListener() {
+        @Override
+        public void onClicked() {
+            Gdx.app.debug("onClicked", "onReturnButtonClicked");
+            myGdxGame.setScreen(myGdxGame.shopAssetScreen);
         }
     };
 }

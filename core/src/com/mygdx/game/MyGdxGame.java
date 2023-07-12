@@ -13,6 +13,8 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.SettingScreen;
+import com.mygdx.game.screens.ShopAssetScreen;
+import com.mygdx.game.screens.ShopMusicScreen;
 import com.mygdx.game.screens.ShopScreen;
 import com.mygdx.game.utils.GameSettings;
 
@@ -33,6 +35,8 @@ public class MyGdxGame extends Game {
 	public GameScreen gameScreen;
 	public MenuScreen menuScreen;
 	public ShopScreen shopScreen;
+	public ShopMusicScreen shopMusicScreen;
+	public ShopAssetScreen shopAssetScreen;
 	public SettingScreen settingScreen;
 
 	public int timer;
@@ -64,6 +68,9 @@ public class MyGdxGame extends Game {
 		menuScreen = new MenuScreen(this);
 		shopScreen = new ShopScreen(this);
 		settingScreen = new SettingScreen(this);
+		shopAssetScreen = new ShopAssetScreen(this);
+		shopMusicScreen = new ShopMusicScreen(this);
+
 
 
 		setScreen(menuScreen);
