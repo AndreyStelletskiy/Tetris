@@ -20,8 +20,8 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = percent(bufferX[1] - bufferY[i] + bufferY[1], map.width);
-            coordinatesY[i] = percent(bufferY[1] + bufferX[i] - bufferX[1], map.width);
+            coordinatesX[i] = bufferX[1] - bufferY[i] + bufferY[1];
+            coordinatesY[i] = bufferY[1] + bufferX[i] - bufferX[1];
         }
 
         if (!map.dontTetraminoConflict(this)) {
@@ -40,8 +40,8 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = percent(bufferX[1] + bufferY[i] - bufferY[1], map.width);
-            coordinatesY[i] = percent(bufferY[1] - bufferX[i] + bufferX[1], map.width);
+            coordinatesX[i] = bufferX[1] + bufferY[i] - bufferY[1];
+            coordinatesY[i] = bufferY[1] - bufferX[i] + bufferX[1];
         }
 
         if (!map.dontTetraminoConflict(this)) {
@@ -54,11 +54,11 @@ public class AbstractTetramino implements Cloneable {
     public void moveRight(Map map) {
         if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = percent(++coordinatesX[i], map.width);
+            coordinatesX[i] = ++coordinatesX[i];
         }
         if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = percent(--coordinatesX[i], map.width);
+                coordinatesX[i] = --coordinatesX[i];
             }
         }
     }
@@ -66,11 +66,11 @@ public class AbstractTetramino implements Cloneable {
     public void moveLeft(Map map) {
         if(!isMovable)return;
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = percent(--coordinatesX[i], map.width);
+            coordinatesX[i] = --coordinatesX[i];
         }
         if (!map.dontTetraminoConflict(this)) {
             for (int i = 0; i < 4; i++) {
-                coordinatesX[i] = percent(++coordinatesX[i], map.width);
+                coordinatesX[i] = ++coordinatesX[i];
             }
         }
     }
