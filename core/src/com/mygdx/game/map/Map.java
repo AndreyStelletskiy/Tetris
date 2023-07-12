@@ -7,7 +7,8 @@ import com.mygdx.game.map.tetraminos.Block;
 import java.util.ArrayList;
 
 public class Map {
-    float posX, posY;
+    public float posX;
+    float posY;
     public int width, height;
     float blockSize;
     public ArrayList<ArrayList<Block>> mapList;
@@ -35,11 +36,11 @@ public class Map {
     public boolean summon(AbstractTetramino tetr) {
         if (height == 5) {
             tetr.setCentralCoordinate(2, 2);
-            if(!tetraminoDontConflict(tetr))return false;
+            if(!dontTetraminoConflict(tetr))return false;
         }
         else {
             tetr.setCentralCoordinate(width / 2, height - 2);
-            if(!tetraminoDontConflict(tetr))return false;
+            if(!dontTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);
         return true;
@@ -47,7 +48,7 @@ public class Map {
     }
 
     public void addTetramino(AbstractTetramino tetr) {
-        if (tetraminoDontConflict(tetr)) {
+        if (dontTetraminoConflict(tetr)) {
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
             }
@@ -70,7 +71,7 @@ public class Map {
         }
     }
 
-    public boolean tetraminoDontConflict(AbstractTetramino tetr) {
+    public boolean dontTetraminoConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
             if (!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width))
                 return false;
@@ -108,6 +109,24 @@ public class Map {
         for(int j = 0; j < width; j++){
             mapList.get(i).get(j).setType(-1);
         }
+    }
+
+    public void addColumns(int count) {
+        ArrayList<ArrayList<Block>> newMapList = new ArrayList<>();
+        for (int i = 0; i < height; i++) {
+            newMapList.add(new ArrayList<Block>());
+            for (int j = 0; j < width + count * 2; j++) {
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                newMapList.get(i).add(zeroBlock);
+            }
+        }
+        for(int i = 0; i < height; i ++){
+            for (int j = 0; j < width; j++) {
+                newMapList.get(i).get(j+count).setType(mapList.get(i).get(j).type);
+            }
+        }
+        mapList = newMapList;
+        width += 2 * count;
     }
 }
 

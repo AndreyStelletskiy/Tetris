@@ -18,4 +18,120 @@ public class TetraminoFive extends AbstractTetramino{
         coordinatesY[2] = centralY;
         coordinatesY[3] = centralY - 1;
     }
+    @Override
+    public void rotateRight(Map map) {
+        int[] bufferX = new int[4];
+        int[] bufferY = new int[4];
+        System.arraycopy(coordinatesX, 0, bufferX, 0, 4);
+        System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
+        if (coordinatesX[0] == coordinatesX[1] - 1 && coordinatesX[2] == coordinatesX[1] + 1) {
+            coordinatesX[0] = coordinatesX[1];
+            coordinatesX[2] = coordinatesX[1];
+            coordinatesX[3] = coordinatesX[1] + 1;
+            coordinatesY[0] = coordinatesY[1] - 1;
+            coordinatesY[2] = coordinatesY[1] + 1;
+            coordinatesY[3] = coordinatesY[1];
+        } else if (coordinatesY[0] == coordinatesY[1] - 1 && coordinatesY[2] == coordinatesY[1] + 1) {
+            coordinatesX[0] = coordinatesX[1] + 1;
+            coordinatesX[2] = coordinatesX[1] - 1;
+            coordinatesX[3] = coordinatesX[1];
+            coordinatesY[0] = coordinatesY[1];
+            coordinatesY[2] = coordinatesY[1];
+            coordinatesY[3] = coordinatesY[1] + 1;
+        } else if (coordinatesX[0] == coordinatesX[1] + 1 && coordinatesX[2] == coordinatesX[1] - 1) {
+            coordinatesX[0] = coordinatesX[1];
+            coordinatesX[2] = coordinatesX[1];
+            coordinatesX[3] = coordinatesX[1] - 1;
+            coordinatesY[0] = coordinatesY[1] + 1;
+            coordinatesY[2] = coordinatesY[1] - 1;
+            coordinatesY[3] = coordinatesY[1];
+        } else {
+            coordinatesX[0] = coordinatesX[1] - 1;
+            coordinatesX[2] = coordinatesX[1] + 1;
+            coordinatesX[3] = coordinatesX[1];
+            coordinatesY[1] = coordinatesY[0];
+            coordinatesY[2] = coordinatesY[0];
+            coordinatesY[3] = coordinatesY[0] - 1;
+        }
+        for(int i = 0; i < 4; i ++){
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+            coordinatesY[i] = percent(coordinatesY[i], map.height);
+        }
+
+        if (!map.dontTetraminoConflict(this)) {
+            this.moveLeft(map);
+            if (!map.dontTetraminoConflict(this)) {
+                this.moveRight(map);
+                this.moveRight(map);
+            }
+            if (!map.dontTetraminoConflict(this)) {
+                this.moveLeft(map);
+                this.moveUp(map);
+                if (!map.dontTetraminoConflict(this)) {
+                    System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
+                    System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
+                    this.isMovable = false;
+                }
+            }
+        }
+    }
+    @Override
+    public void rotateLeft(Map map) {
+        int[] bufferX = new int[4];
+        int[] bufferY = new int[4];
+        System.arraycopy(coordinatesX, 0, bufferX, 0, 4);
+        System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
+
+        if (coordinatesX[0] == coordinatesX[1] - 1 && coordinatesX[2] == coordinatesX[1] + 1) {
+            coordinatesX[0] = coordinatesX[1];
+            coordinatesX[2] = coordinatesX[1];
+            coordinatesX[3] = coordinatesX[1] - 1;
+            coordinatesY[0] = coordinatesY[1] + 1;
+            coordinatesY[2] = coordinatesY[1] - 1;
+            coordinatesY[3] = coordinatesY[1];
+        } else if (coordinatesY[0] == coordinatesY[1] - 1 && coordinatesY[2] == coordinatesY[1] + 1) {
+            coordinatesX[0] = coordinatesX[1] + 1;
+            coordinatesX[2] = coordinatesX[1] - 1;
+            coordinatesX[3] = coordinatesX[1];
+            coordinatesY[0] = coordinatesY[1];
+            coordinatesY[2] = coordinatesY[1];
+            coordinatesY[3] = coordinatesY[1] + 1;
+        } else if (coordinatesX[0] == coordinatesX[1] + 1 && coordinatesX[2] == coordinatesX[1] - 1) {
+            coordinatesX[0] = coordinatesX[1];
+            coordinatesX[2] = coordinatesX[1];
+            coordinatesX[3] = coordinatesX[1] + 1;
+            coordinatesY[0] = coordinatesY[1] - 1;
+            coordinatesY[2] = coordinatesY[1] + 1;
+            coordinatesY[3] = coordinatesY[1];
+        } else {
+            coordinatesX[0] = coordinatesX[1] - 1;
+            coordinatesX[2] = coordinatesX[1] + 1;
+            coordinatesX[3] = coordinatesX[1];
+            coordinatesY[1] = coordinatesY[0];
+            coordinatesY[2] = coordinatesY[0];
+            coordinatesY[3] = coordinatesY[0] - 1;
+        }
+
+        for(int i = 0; i < 4; i ++){
+            coordinatesX[i] = percent(coordinatesX[i], map.width);
+            coordinatesY[i] = percent(coordinatesY[i], map.height);
+        }
+
+        if (!map.dontTetraminoConflict(this)) {
+            this.moveLeft(map);
+            if (!map.dontTetraminoConflict(this)) {
+                this.moveRight(map);
+                this.moveRight(map);
+            }
+            if (!map.dontTetraminoConflict(this)) {
+                this.moveLeft(map);
+                this.moveUp(map);
+                if (!map.dontTetraminoConflict(this)) {
+                    System.arraycopy(bufferX, 0, coordinatesX, 0, 4);
+                    System.arraycopy(bufferY, 0, coordinatesY, 0, 4);
+                    this.isMovable = false;
+                }
+            }
+        }
+    }
 }
