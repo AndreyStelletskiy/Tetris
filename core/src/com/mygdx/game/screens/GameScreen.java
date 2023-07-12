@@ -33,7 +33,7 @@ public class GameScreen implements Screen {
     int time = 0;
     int moveTime = GameSettings.MOVE_TIME;
     int difficultyStep = GameSettings.DIFFICULTY_STEP;
-    int localScore = 0;
+    public int localScore = 0;
     AbstractTetramino currentTetramino, previewTetramino, nextTetramino;
 
     Random random;
@@ -44,6 +44,9 @@ public class GameScreen implements Screen {
     TextButton Stop;
     TextButton buttonExit;
 
+    public int getLocalScore() {
+        return localScore;
+    }
 
     public GameScreen(final MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -209,7 +212,7 @@ public class GameScreen implements Screen {
         ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
         arrayList.add(localScore);
         Collections.sort(arrayList);
-        arrayList.remove(arrayList.size()-1);
+        arrayList.remove(0);
         MemoryLoader.saveScoreBoard(arrayList);
 
         gameState = 2;
