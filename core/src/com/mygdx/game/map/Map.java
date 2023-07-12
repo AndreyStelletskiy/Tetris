@@ -20,6 +20,8 @@ public class Map {
         this.height = height;
         this.blockSize = blockSize;
         mapList = new ArrayList<>();
+        System.out.println(height);
+        System.out.println(width);
         for (int i = 0; i < height; i++) {
             mapList.add(new ArrayList<Block>());
             for (int j = 0; j < width; j++) {

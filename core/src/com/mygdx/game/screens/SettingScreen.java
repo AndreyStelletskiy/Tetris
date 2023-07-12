@@ -68,9 +68,9 @@ public class SettingScreen implements Screen {
             case EASY:
                 return "20";
             case HARD:
-                return "24";
+                return "28";
             case MEDIUM:
-                return "22";
+                return "24";
             default:
                 return "(error)";
         }
@@ -79,11 +79,11 @@ public class SettingScreen implements Screen {
     private String getDifficultyLabelText(DifficultyMapHeight difficultyMapHeight) {
         switch (difficultyMapHeight) {
             case EASY:
-                return "26";
-            case HARD:
                 return "30";
+            case HARD:
+                return "38";
             case MEDIUM:
-                return "28";
+                return "34";
             default:
                 return "(error)";
         }

@@ -9,6 +9,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
+import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
@@ -17,6 +18,9 @@ public class GameOverScreen implements Screen {
 
     ArrayList<UiComponent> uiComponentsList;
     MyGdxGame myGdxGame;
+    TextView bResultst;
+    TextView prResultst;
+    TextView titleGOt;
 
     public GameOverScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
@@ -25,12 +29,12 @@ public class GameOverScreen implements Screen {
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Game Over", -1, 1825);
         TextView titleGO = new TextView(myGdxGame.largeFont.bitmapFont, "Your results", 35, 1600);
-        TextView titleGOt = new TextView(myGdxGame.largeFont.bitmapFont, "-", 605, 1600);
+        titleGOt = new TextView(myGdxGame.largeFont.bitmapFont, "-", 605, 1600);
 
         TextView prResults = new TextView(myGdxGame.largeFont.bitmapFont, "previous result", 35, 1450);
-        TextView prResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 705, 1450);
+        prResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 705, 1450);
         TextView bResults = new TextView(myGdxGame.largeFont.bitmapFont, "best result", 35, 1300);
-        TextView bResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 505, 1300);
+        bResultst = new TextView(myGdxGame.largeFont.bitmapFont, "-", 505, 1300);
 
 
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "To home", 25, 175);
@@ -54,6 +58,8 @@ public class GameOverScreen implements Screen {
     public void show() {
         SoundExecutor.stopPlaying();
         SoundExecutor.playGameOutSound();
+        titleGOt.text= ""+MemoryLoader.loadScore();
+
     }
 
     @Override

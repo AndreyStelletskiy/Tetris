@@ -10,6 +10,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
+import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class MenuScreen implements Screen {
         TextView scrboard4 = new TextView(myGdxGame.largeFont1.bitmapFont, "4.", 95, 1200);
         TextView scrboard5 = new TextView(myGdxGame.largeFont1.bitmapFont, "5.", 95, 1100);
 
-        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1500);
+        TextView scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+ MemoryLoader.loadScore(), 175, 1500);
         TextView scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1400);
         TextView scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1300);
         TextView scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, "-", 175, 1200);
