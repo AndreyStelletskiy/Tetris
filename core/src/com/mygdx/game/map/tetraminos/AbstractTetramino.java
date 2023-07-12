@@ -20,8 +20,8 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = bufferX[1] - bufferY[i] + bufferY[1];
-            coordinatesY[i] = bufferY[1] + bufferX[i] - bufferX[1];
+            coordinatesX[i] = percent(bufferX[1] - bufferY[i] + bufferY[1], map.width);
+            coordinatesY[i] = percent(bufferY[1] + bufferX[i] - bufferX[1], map.width);
         }
 
         if (!map.dontTetraminoConflict(this)) {
@@ -40,8 +40,8 @@ public class AbstractTetramino implements Cloneable {
         System.arraycopy(coordinatesY, 0, bufferY, 0, 4);
 
         for (int i = 0; i < 4; i++) {
-            coordinatesX[i] = bufferX[1] + bufferY[i] - bufferY[1];
-            coordinatesY[i] = bufferY[1] - bufferX[i] + bufferX[1];
+            coordinatesX[i] = percent(bufferX[1] + bufferY[i] - bufferY[1], map.width);
+            coordinatesY[i] = percent(bufferY[1] - bufferX[i] + bufferX[1], map.width);
         }
 
         if (!map.dontTetraminoConflict(this)) {
