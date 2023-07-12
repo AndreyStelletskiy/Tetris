@@ -17,9 +17,19 @@ public class MemoryLoader {
         prefs.putString("scoreBoard", parseArrayToString(arrayList));
         prefs.flush();
     }
+
     public static ArrayList<Integer> loadScoreBoard(){
         if (prefs.contains("scoreBoard")) return parseStringToArray(prefs.getString("scoreBoard"));
         return parseStringToArray("0 0 0 0 0");
+    }
+    public static void saveMusic (ArrayList<Integer> arrayList){
+        prefs.putString("music", parseArrayToString(arrayList));
+        prefs.flush();
+    }
+
+    public static ArrayList<Integer> loadMusic(){
+        if (prefs.contains("music")) return parseStringToArray(prefs.getString("scoreBoard"));
+        return parseStringToArray("0 0 0");
     }
     public static void saveScore(int score) {
         prefs.putString("score", String.valueOf(score));
