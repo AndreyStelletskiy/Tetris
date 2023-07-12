@@ -213,7 +213,8 @@ public class GameScreen implements Screen {
         ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
         arrayList.add(localScore);
         Collections.sort(arrayList);
-        arrayList.remove(0);
+        Collections.reverse(arrayList);
+        arrayList.remove(arrayList.size()-1);
         MemoryLoader.saveScoreBoard(arrayList);
 
         gameState = 2;
@@ -360,6 +361,7 @@ public class GameScreen implements Screen {
             ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
             arrayList.add(localScore);
             Collections.sort(arrayList);
+            Collections.reverse(arrayList);
             arrayList.remove(arrayList.size()-1);
             MemoryLoader.saveScoreBoard(arrayList);
 
