@@ -24,6 +24,11 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
+        uiInitialize();
+        myGdxGame.gameScreen = new GameScreen(myGdxGame);
+    }
+
+    private void uiInitialize() {
         uiComponentsList = new ArrayList<>();
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
@@ -52,9 +57,8 @@ public class GameOverScreen implements Screen {
         uiComponentsList.add(titleGOt);
         uiComponentsList.add(buttonExit);
         uiComponentsList.add(buttonStart);
-        myGdxGame.gameScreen = new GameScreen(myGdxGame);
-
     }
+
 
     @Override
     public void show() {
