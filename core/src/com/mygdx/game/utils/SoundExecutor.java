@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class SoundExecutor {
 
     static Sound backSound = Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"));
+    static Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop_sound.mp3"));
     static Sound[] tetrisSound = {
             Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"))
     };
@@ -38,6 +39,9 @@ public class SoundExecutor {
 
     public static void playTetrisSound() {
         tetrisSound[MathUtils.random(0, tetrisSound.length - 1)].play();
+    }
+    public static void playDropSound(){
+        dropSound.play();
     }
 
 
