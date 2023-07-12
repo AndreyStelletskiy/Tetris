@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         gameState = 0;
         gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyMapWightIdx();
         gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
-        blockSize = 30;
+        blockSize = 30 * 20 / gameMapWidht;
         random = new Random();
 
         gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
