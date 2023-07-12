@@ -36,11 +36,11 @@ public class Map {
     public boolean summon(AbstractTetramino tetr) {
         if (height == 5) {
             tetr.setCentralCoordinate(2, 2);
-            if(!dontTetraminoConflict(tetr))return false;
+            if(!tetraminoDontConflict(tetr))return false;
         }
         else {
             tetr.setCentralCoordinate(width / 2, height - 2);
-            if(!dontTetraminoConflict(tetr))return false;
+            if(!tetraminoDontConflict(tetr))return false;
         }
         addTetramino(tetr);
         return true;
@@ -48,7 +48,7 @@ public class Map {
     }
 
     public void addTetramino(AbstractTetramino tetr) {
-        if (dontTetraminoConflict(tetr)) {
+        if (tetraminoDontConflict(tetr)) {
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
             }
@@ -71,7 +71,7 @@ public class Map {
         }
     }
 
-    public boolean dontTetraminoConflict(AbstractTetramino tetr) {
+    public boolean tetraminoDontConflict(AbstractTetramino tetr) {
         for (int i = 0; i < 4; i++) {
             if (!(0 <= tetr.coordinatesY[i] && tetr.coordinatesY[i] < height && 0 <= tetr.coordinatesX[i] && tetr.coordinatesX[i] < width))
                 return false;

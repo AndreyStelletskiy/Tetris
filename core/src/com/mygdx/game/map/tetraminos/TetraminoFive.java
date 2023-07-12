@@ -77,8 +77,6 @@ public class TetraminoFive extends AbstractTetramino{
     }
     @Override
     public void rotateLeft(Map map) {
-        super.rotateRight(map);
-        super.rotateLeft(map);
         int[] bufferX = new int[4];
         int[] bufferY = new int[4];
         System.arraycopy(coordinatesX, 0, bufferX, 0, 4);
