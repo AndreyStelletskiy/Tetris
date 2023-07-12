@@ -284,6 +284,7 @@ public class GameScreen implements Screen {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveLeft(gameMap);
             gameMap.addTetramino(currentTetramino);
+            SoundExecutor.playlrSound();
         }
     };
     UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
@@ -292,6 +293,7 @@ public class GameScreen implements Screen {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveRight(gameMap);
             gameMap.addTetramino(currentTetramino);
+            SoundExecutor.playlrSound();
         }
     };
     UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
@@ -300,6 +302,7 @@ public class GameScreen implements Screen {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateLeft(gameMap);
             gameMap.addTetramino(currentTetramino);
+            SoundExecutor.playrevSound();
 
         }
     };
@@ -309,6 +312,7 @@ public class GameScreen implements Screen {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateRight(gameMap);
             gameMap.addTetramino(currentTetramino);
+            SoundExecutor.playrevSound();
         }
     };
     UiComponent.OnClickListener toDown1ButtonClickListener = new UiComponent.OnClickListener() {
