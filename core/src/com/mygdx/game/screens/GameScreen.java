@@ -11,7 +11,6 @@ import com.mygdx.game.map.tetraminos.TetraminoFive;
 import com.mygdx.game.map.tetraminos.TetraminoFour;
 import com.mygdx.game.map.tetraminos.TetraminoOne;
 import com.mygdx.game.map.tetraminos.TetraminoSeven;
-import com.mygdx.game.map.tetraminos.TetraminoSix;
 import com.mygdx.game.map.tetraminos.TetraminoThree;
 import com.mygdx.game.map.tetraminos.TetraminoTwo;
 import com.mygdx.game.ui.ImageView;
@@ -64,12 +63,12 @@ public class GameScreen implements Screen {
         miniMap = new Map(900, 1600, 5, 5, 30);
 
 
-        currentTetramino = createTetraminoWithSameType(random.nextInt(7));
+        currentTetramino = createTetraminoWithSameType(random.nextInt(5));
 
         gameMap.summon(currentTetramino);
 
 
-        nextTetramino = createTetraminoWithSameType(random.nextInt(7));
+        nextTetramino = createTetraminoWithSameType(random.nextInt(5));
 
         miniMap.summon(nextTetramino);
 
@@ -385,13 +384,9 @@ public class GameScreen implements Screen {
             //return new TetraminoFour(4,4);
             case 4:
                 return new TetraminoFour(4, 4);
-            case 5:
-                return new TetraminoFive(4, 4);
-            case 6:
-                return new TetraminoSix(4, 4);
             //return new TetraminoFour(4,4);
             default:
-                return new TetraminoSeven(4, 4);
+                return new TetraminoFive(4, 4);
             //return new TetraminoFour(4,4);
         }
     }
