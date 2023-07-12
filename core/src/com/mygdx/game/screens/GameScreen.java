@@ -259,7 +259,7 @@ public class GameScreen implements Screen {
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
-        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todoun.png");
+        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todounf.png");
         toDownButton.setOnClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
