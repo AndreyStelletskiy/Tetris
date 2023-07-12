@@ -47,6 +47,8 @@ public class GameScreen implements Screen {
         this.myGdxGame = myGdxGame;
         gameState = 0;
         gameMapWidht = MemoryLoader.loadDifficultyMapWight().getDifficultyMapWightIdx();
+
+        //Gdx.app.debug("gameScreen", ""+ MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx());
         gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
         blockSize = 30 * 20 / gameMapWidht;
         random = new Random();
@@ -91,7 +93,7 @@ public class GameScreen implements Screen {
                 currentTetramino.moveDown(gameMap);
                 for (int i = 0; i < gameMapHeight; i++) {
                     if (gameMap.isStringFull(i)) {
-                        Gdx.app.debug("" + i, "string colored");
+                        //Gdx.app.debug("" + i, "string colored");
                         gameMap.colorString(i);
                     }
                 }
@@ -163,7 +165,7 @@ public class GameScreen implements Screen {
         }
         gameMap.addTetramino(previewTetramino);
         gameMap.addTetramino(currentTetramino);
-        Gdx.app.debug("" + previewTetramino.INDEX, "" + previewTetramino.coordinatesX[1] + " " + previewTetramino.coordinatesY[1]);
+        //Gdx.app.debug("" + previewTetramino.INDEX, "" + previewTetramino.coordinatesX[1] + " " + previewTetramino.coordinatesY[1]);
 
     }
 

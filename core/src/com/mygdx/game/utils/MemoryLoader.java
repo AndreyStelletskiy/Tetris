@@ -21,8 +21,8 @@ public class MemoryLoader {
     }
 
     public static DifficultyMapWight loadDifficultyMapWight() {
-        if (prefs.contains("difficultyLevel")) {
-            int difficultyLevelIdx = Integer.parseInt(prefs.getString("difficultyLevel"));
+        if (prefs.contains("difficultyLevelWight")) {
+            int difficultyLevelIdx = Integer.parseInt(prefs.getString("difficultyLevelWight"));
             for (DifficultyMapWight difficultyLevel : DifficultyMapWight.values()) {
                 if (difficultyLevel.getDifficultyMapWightIdx() == difficultyLevelIdx)
                     return difficultyLevel;
@@ -33,8 +33,8 @@ public class MemoryLoader {
     }
 
     public static DifficultyMapHeight loadDifficultyMapHeight() {
-        if (prefs.contains("difficultyLevel")) {
-            int difficultyLevelIdx = Integer.parseInt(prefs.getString("difficultyLevel"));
+        if (prefs.contains("difficultyLevelHeight")) {
+            int difficultyLevelIdx = Integer.parseInt(prefs.getString("difficultyLevelHeight"));
             for (DifficultyMapHeight difficultyLevel : DifficultyMapHeight.values()) {
                 if (difficultyLevel.getDifficultyMapHeightIdx() == difficultyLevelIdx)
                     return difficultyLevel;
@@ -45,12 +45,12 @@ public class MemoryLoader {
     }
 
     public static void saveDifficultyLevelWight(DifficultyMapWight difficultyMapWight) {
-        prefs.putString("difficultyLevel", String.valueOf(difficultyMapWight.getDifficultyMapWightIdx()));
+        prefs.putString("difficultyLevelWight", String.valueOf(difficultyMapWight.getDifficultyMapWightIdx()));
         prefs.flush();
     }
 
     public static void saveDifficultyLevelHeight(DifficultyMapHeight difficultyMapHeight) {
-        prefs.putString("difficultyLevel", String.valueOf(difficultyMapHeight.getDifficultyMapHeightIdx()));
+        prefs.putString("difficultyLevelHeight", String.valueOf(difficultyMapHeight.getDifficultyMapHeightIdx()));
         prefs.flush();
     }
 

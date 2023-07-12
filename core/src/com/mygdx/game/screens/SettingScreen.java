@@ -151,7 +151,6 @@ public class SettingScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onReturnButtonClicked");
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
@@ -186,7 +185,6 @@ public class SettingScreen implements Screen {
     UiComponent.OnClickListener onChangeDifficultyWightClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onChangeDifficultyClicked");
             DifficultyMapWight difficultyMapWight = MemoryLoader.loadDifficultyMapWight();
             switch (difficultyMapWight) {
                 case EASY:
@@ -202,13 +200,14 @@ public class SettingScreen implements Screen {
             difficultyWight.text = getDifficultyLabelText(difficultyMapWight);
             MemoryLoader.saveDifficultyLevelWight(difficultyMapWight);
 
+
         }
     };
 
     UiComponent.OnClickListener onChangeDifficultyHeightClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onChangeDifficultyClicked");
+
             DifficultyMapHeight difficultyMapHeight = MemoryLoader.loadDifficultyMapHeight();
             switch (difficultyMapHeight) {
                 case EASY:
