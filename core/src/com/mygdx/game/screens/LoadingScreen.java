@@ -23,13 +23,13 @@ public class LoadingScreen implements Screen {
 
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/img.png");
         uiComponentsList.add(background);
-
     }
 
     @Override
     public void show() {
-
+        Gdx.app.debug("rrr", "start");
     }
+
 
     @Override
     public void render(float delta) {
