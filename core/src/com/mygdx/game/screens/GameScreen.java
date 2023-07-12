@@ -209,10 +209,12 @@ public class GameScreen implements Screen {
 
     private void gameOver() {
         MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
+
         ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
         arrayList.add(localScore);
         Collections.sort(arrayList);
-        arrayList.remove(0);
+        Collections.reverse(arrayList);
+        arrayList.remove(arrayList.size()-1);
         MemoryLoader.saveScoreBoard(arrayList);
 
         gameState = 2;
@@ -315,6 +317,7 @@ public class GameScreen implements Screen {
             while (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
             }
+            SoundExecutor.playDropSound();
         }
     };
     UiComponent.OnClickListener toDown2ButtonClickListener = new UiComponent.OnClickListener() {
@@ -352,12 +355,16 @@ public class GameScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
+
             MemoryLoader.saveScore(MemoryLoader.loadScore() + localScore);
+
             ArrayList<Integer> arrayList = MemoryLoader.loadScoreBoard();
             arrayList.add(localScore);
             Collections.sort(arrayList);
+            Collections.reverse(arrayList);
             arrayList.remove(arrayList.size()-1);
             MemoryLoader.saveScoreBoard(arrayList);
+
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
     };
