@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.screens.GameOverScreen;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.SettingScreen;
 import com.mygdx.game.screens.ShopScreen;
@@ -46,12 +47,17 @@ public class MyGdxGame extends Game {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT);
 
+		LoadingScreen loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
+
 		largeFont = new MyCustomFont(100, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		largeFontb = new MyCustomFont(100, "fonts/arnamu.ttf", new Color(0, 0, 0, 1));
 		bblargeFont = new MyCustomFont(130, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		largeFont1 = new MyCustomFont(75, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		commonFont = new MyCustomFont(50, "fonts/arnamu.ttf", new Color(1, 1, 1, 1));
 		secondaryFont = new MyCustomFont(50, "fonts/arnamu.ttf", new Color(0.5f, 0.5f, 1, 1));
+
+
 
 		gameOverScreen = new GameOverScreen(this);
 		gameScreen = new GameScreen(this);
