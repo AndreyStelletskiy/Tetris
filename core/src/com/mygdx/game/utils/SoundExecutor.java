@@ -9,7 +9,9 @@ import java.util.ArrayList;
 public class SoundExecutor {
 
     static Sound backSound = Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"));
+    static Sound revSound = Gdx.audio.newSound(Gdx.files.internal("rev.mp3"));
     static Sound dropSound = Gdx.audio.newSound(Gdx.files.internal("drop_sound.mp3"));
+    static Sound lrSound = Gdx.audio.newSound(Gdx.files.internal("lr.mp3"));
     static Sound[] tetrisSound = {
             Gdx.audio.newSound(Gdx.files.internal("tetris_theme.mp3"))
     };
@@ -42,6 +44,13 @@ public class SoundExecutor {
     }
     public static void playDropSound(){
         dropSound.play();
+    }
+    public static void playrevSound(){
+        revSound.play();
+    }
+
+    public static void playlrSound(){
+        lrSound.play();
     }
 
 
