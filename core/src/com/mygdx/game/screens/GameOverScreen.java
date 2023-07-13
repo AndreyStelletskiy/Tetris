@@ -117,25 +117,25 @@ public class GameOverScreen implements Screen {
 
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             Gdx.app.debug("onClicked1", "onReturnButtonClicked1");
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             myGdxGame.setScreen(myGdxGame.gameScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 }

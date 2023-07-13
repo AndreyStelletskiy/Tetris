@@ -22,6 +22,7 @@ public class TextButton extends UiComponent {
         this.text = text;
         GlyphLayout gl = new GlyphLayout(font, text);
         width = gl.width;
+        height = gl.height;
     }
 
     @Override

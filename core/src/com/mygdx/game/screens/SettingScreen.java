@@ -153,35 +153,35 @@ public class SettingScreen implements Screen {
     }
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
 
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
 
     UiComponent.OnClickListener onResetButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             MemoryLoader.clearAllSaves();
             uiInitialize();
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
 
     UiComponent.OnClickListener onChangeMusicClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             boolean isMusicOn = MemoryLoader.loadMusicState();
             MemoryLoader.saveMusicState(!isMusicOn);
             soundsButton.text = getSoundButtonText();
@@ -189,13 +189,13 @@ public class SettingScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
     UiComponent.OnClickListener onChangeDifficultyWightClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             DifficultyMapWight difficultyMapWight = MemoryLoader.loadDifficultyMapWight();
             switch (difficultyMapWight) {
                 case EASY:
@@ -216,13 +216,13 @@ public class SettingScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
     UiComponent.OnClickListener onChangeDifficultyHeightClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
 
             DifficultyMapHeight difficultyMapHeight = MemoryLoader.loadDifficultyMapHeight();
             switch (difficultyMapHeight) {
@@ -243,7 +243,7 @@ public class SettingScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 

@@ -76,14 +76,14 @@ public class ShopAssetScreen implements Screen {
 
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
 
             myGdxGame.setScreen(myGdxGame.shopScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 }

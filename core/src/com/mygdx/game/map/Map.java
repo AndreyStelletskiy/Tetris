@@ -5,6 +5,7 @@ import com.mygdx.game.map.tetraminos.AbstractTetramino;
 import com.mygdx.game.map.tetraminos.Block;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Map {
     public float posX;
@@ -39,7 +40,7 @@ public class Map {
             if(!dontTetraminoConflict(tetr))return false;
         }
         else {
-            tetr.setCentralCoordinate(width / 2, height - 2, this);
+            tetr.setCentralCoordinate((int) (Math.random() * (width-2)), height - 2, this);
             if(!dontTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);

@@ -22,7 +22,7 @@ public class UiComponent {
         isVisible = true;
     }
 
-    UiComponent(float x, float y) {
+    public UiComponent(float x, float y) {
         this.x = x;
         this.y = y;
         this.onClickListener = null;
@@ -38,13 +38,13 @@ public class UiComponent {
     }
     public boolean isHit(Boolean bool){
         if(bool && onClickListener != null){
-            onClickListener.onClicked();
+            onClickListener.onClicked(this);
         }
         return bool;
     }
 
     public interface OnClickListener {
-        void onClicked();
+        void onClicked(UiComponent uiComponent);
         void onClicked2();
 
     }

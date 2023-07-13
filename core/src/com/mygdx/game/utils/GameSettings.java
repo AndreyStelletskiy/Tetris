@@ -18,4 +18,6 @@ public class GameSettings {
     public static final int COUNT_OF_SIZE_WIGHT_EASY = 20;
     public static final int COUNT_OF_SIZE_WIGHT_MEDIUM = 24;
     public static final int COUNT_OF_SIZE_WIGHT_HARD = 28;
+    public static final int MUSIC_PRICE = 0;
+
 }

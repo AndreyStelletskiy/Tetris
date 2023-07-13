@@ -11,26 +11,19 @@ import java.util.ArrayList;
 public class MemoryLoader {
 
     private static final Preferences prefs = Gdx.app.getPreferences("User saves");
+    static ArrayList<String> musicNames;
+    static ArrayList<String> musicPaths;
 
-
-    public static void saveScoreBoard(ArrayList<Integer> arrayList){
+    public static void saveScoreBoard(ArrayList<Integer> arrayList) {
         prefs.putString("scoreBoard", parseArrayToString(arrayList));
         prefs.flush();
     }
 
-    public static ArrayList<Integer> loadScoreBoard(){
+    public static ArrayList<Integer> loadScoreBoard() {
         if (prefs.contains("scoreBoard")) return parseStringToArray(prefs.getString("scoreBoard"));
         return parseStringToArray("0 0 0 0 0");
     }
-    public static void saveMusic (ArrayList<Integer> arrayList){
-        prefs.putString("music", parseArrayToString(arrayList));
-        prefs.flush();
-    }
 
-    public static ArrayList<Integer> loadMusic(){
-        if (prefs.contains("music")) return parseStringToArray(prefs.getString("scoreBoard"));
-        return parseStringToArray("0 0 0");
-    }
     public static void saveScore(int score) {
         prefs.putString("score", String.valueOf(score));
         prefs.flush();
@@ -97,8 +90,8 @@ public class MemoryLoader {
     }
 
     static String parseArrayToString(ArrayList<Integer> arr) {
-        String ans = ""+arr.get(0);
-        for(int i = 1; i < arr.size(); i++){
+        String ans = "" + arr.get(0);
+        for (int i = 1; i < arr.size(); i++) {
             ans += " " + arr.get(i);
         }
         return ans;
@@ -110,5 +103,42 @@ public class MemoryLoader {
         MemoryLoader.saveMusicState(GameSettings.DEFAULT_SOUND_STATE);
         MemoryLoader.saveScoreBoard(parseStringToArray("0 0 0 0 0"));
         MemoryLoader.saveScore(0);
+    }
+
+    public static ArrayList<String> loadMusicNames() {
+        if (musicNames == null) {
+            musicNames = new ArrayList<>();
+            musicNames.add("Default song");
+            musicNames.add("Phonk");
+            musicNames.add("Dengi");
+        }
+        return musicNames;
+    }
+
+    public static ArrayList<String> loadMusicPaths() {
+        if (musicPaths == null) {
+            musicPaths = new ArrayList<>();
+            for(int i = 0; i < 3; i ++){
+                musicPaths.add("tetris_theme_" + i +".mp3");
+            }
+        }
+        return musicPaths;
+    }
+
+    public static void saveMusicStates(ArrayList<Integer> arrayList) {
+        prefs.putString("musicStates",parseArrayToString(arrayList));
+        prefs.flush();
+    }
+
+    public static ArrayList<Integer> loadMusicStates() {
+        if (prefs.contains("musicStates"))
+            return parseStringToArray(prefs.getString("musicStates"));
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            arrayList.add( 0);
+        }
+        arrayList.set(0,2);
+        saveMusicStates(arrayList);
+        return arrayList;
     }
 }

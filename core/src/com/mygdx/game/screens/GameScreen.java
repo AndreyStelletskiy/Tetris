@@ -293,7 +293,7 @@ public class GameScreen implements Screen {
 
     UiComponent.OnClickListener toLeftButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveLeft(gameMap);
             gameMap.addTetramino(currentTetramino);
@@ -302,12 +302,12 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.moveRight(gameMap);
             gameMap.addTetramino(currentTetramino);
@@ -316,12 +316,12 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateLeft(gameMap);
             gameMap.addTetramino(currentTetramino);
@@ -331,12 +331,12 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     UiComponent.OnClickListener toRightRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             gameMap.deleteTetramino(currentTetramino);
             currentTetramino.rotateRight(gameMap);
             gameMap.addTetramino(currentTetramino);
@@ -345,7 +345,7 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     DoubleClickImageView.OnDoubleClickListener toDown1ButtonClickListener = new DoubleClickImageView.OnDoubleClickListener() {
@@ -367,7 +367,7 @@ public class GameScreen implements Screen {
     };
     UiComponent.OnClickListener toDown2ButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             if (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
             }
@@ -375,13 +375,13 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
     UiComponent.OnClickListener pauseButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             switch (gameState) {
                 case 1:
                     gameState = 0;
@@ -404,12 +404,12 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
 
             updateScore();
 
@@ -418,7 +418,7 @@ public class GameScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
@@ -448,22 +448,22 @@ public class GameScreen implements Screen {
 
     void keyListen() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            toLeftButtonClickListener.onClicked();
+            toLeftButtonClickListener.onClicked( new UiComponent(0,0));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             toDown1ButtonClickListener.onClicked2();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            toDown2ButtonClickListener.onClicked();
+            toDown2ButtonClickListener.onClicked( new UiComponent(0,0));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            toRightButtonClickListener.onClicked();
+            toRightButtonClickListener.onClicked( new UiComponent(0,0));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            toRightRButtonClickListener.onClicked();
+            toRightRButtonClickListener.onClicked( new UiComponent(0,0));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-            toLeftRButtonClickListener.onClicked();
+            toLeftRButtonClickListener.onClicked( new UiComponent(0,0));
         }
     }
 

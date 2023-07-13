@@ -45,12 +45,12 @@ public class MenuScreen implements Screen {
 
         ArrayList<Integer> scoreBoard = MemoryLoader.loadScoreBoard();
         Gdx.app.debug("score", scoreBoard.toString());
-        scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+scoreBoard.get(0), 175, 1400);
-         scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+scoreBoard.get(1), 175, 1300);
-         scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+scoreBoard.get(2), 175, 1200);
-         scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+scoreBoard.get(3), 175, 1100);
-         scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, ""+scoreBoard.get(4), 175, 1000);
-         scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 575, 1625);
+        scr1 = new TextView(myGdxGame.largeFont1.bitmapFont, "" + scoreBoard.get(0), 175, 1400);
+        scr2 = new TextView(myGdxGame.largeFont1.bitmapFont, "" + scoreBoard.get(1), 175, 1300);
+        scr3 = new TextView(myGdxGame.largeFont1.bitmapFont, "" + scoreBoard.get(2), 175, 1200);
+        scr4 = new TextView(myGdxGame.largeFont1.bitmapFont, "" + scoreBoard.get(3), 175, 1100);
+        scr5 = new TextView(myGdxGame.largeFont1.bitmapFont, "" + scoreBoard.get(4), 175, 1000);
+        scrTotal = new TextView(myGdxGame.largeFont.bitmapFont, "" + MemoryLoader.loadScore(), 575, 1625);
 
         TextButton buttonStart = new TextButton(myGdxGame.bblargeFont.bitmapFont, "Play", 75, 850);
         buttonStart.setOnClickListener(onButtonStartClicked);
@@ -92,12 +92,12 @@ public class MenuScreen implements Screen {
         SoundExecutor.playStartSound();
         ArrayList<Integer> scoreBoard = MemoryLoader.loadScoreBoard();
         Gdx.app.debug("score", scoreBoard.toString());
-        scr1.text = ""+ scoreBoard.get(0);
-        scr2.text = ""+ scoreBoard.get(1);
-        scr3.text = ""+ scoreBoard.get(2);
-        scr4.text = ""+ scoreBoard.get(3);
-        scr5.text = ""+ scoreBoard.get(4);
-        scrTotal.text = ""+MemoryLoader.loadScore();
+        scr1.text = "" + scoreBoard.get(0);
+        scr2.text = "" + scoreBoard.get(1);
+        scr3.text = "" + scoreBoard.get(2);
+        scr4.text = "" + scoreBoard.get(3);
+        scr5.text = "" + scoreBoard.get(4);
+        scrTotal.text = "" + MemoryLoader.loadScore();
         myGdxGame.gameScreen = new GameScreen(myGdxGame);
     }
 
@@ -149,37 +149,36 @@ public class MenuScreen implements Screen {
     }
 
 
-
     private final UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             Gdx.app.debug("onClicked1", "onButtonStartClicked");
             myGdxGame.setScreen(myGdxGame.gameScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
 
     private final UiComponent.OnClickListener onButtonShopClicked = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             Gdx.app.debug("onClicked1", "onButtonShopClicked");
             myGdxGame.setScreen(myGdxGame.shopScreen);
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
     private final UiComponent.OnClickListener onButtonSettingsClicked = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             Gdx.app.debug("onClicked1", "onButtonSettingClicked");
             myGdxGame.setScreen(myGdxGame.settingScreen);
 
@@ -187,20 +186,20 @@ public class MenuScreen implements Screen {
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 
     private final UiComponent.OnClickListener onButtonExitClicked = new UiComponent.OnClickListener() {
         @Override
-        public void onClicked() {
+        public void onClicked(UiComponent uiComponent) {
             Gdx.app.debug("onClicked1", "onButtonExitClicked");
             Gdx.app.exit();
         }
 
         @Override
         public void onClicked2() {
-            onClicked();
+
         }
     };
 }
