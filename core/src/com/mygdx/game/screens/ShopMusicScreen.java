@@ -87,7 +87,7 @@ public class ShopMusicScreen implements Screen {
             }
         }
 
-        ScreenUtils.clear(1, 1, 1, 1);
+        ScreenUtils.clear(0.25F, 0.25F, 0.25F, 1);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();

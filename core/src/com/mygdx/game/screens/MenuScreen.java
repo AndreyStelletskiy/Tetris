@@ -35,7 +35,7 @@ public class MenuScreen implements Screen {
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Tetris", -1, 1825);
 
         TextView scrboard = new TextView(myGdxGame.largeFont.bitmapFont, "Score Board!", 45, 1500);
-        TextView totalScore = new TextView(myGdxGame.largeFont.bitmapFont, "Total Score", 45, 1625);
+        TextView totalScore = new TextView(myGdxGame.largeFont.bitmapFont, "Total Coins", 45, 1625);
         TextView scrboard1 = new TextView(myGdxGame.largeFont1.bitmapFont, "1.", 95, 1400);
         TextView scrboard2 = new TextView(myGdxGame.largeFont1.bitmapFont, "2.", 95, 1300);
         TextView scrboard3 = new TextView(myGdxGame.largeFont1.bitmapFont, "3.", 95, 1200);

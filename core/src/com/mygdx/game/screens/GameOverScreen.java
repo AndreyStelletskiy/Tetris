@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
         TextView titleGO = new TextView(myGdxGame.largeFont.bitmapFont, "Your results", 35, 1600);
         titleGOt = new TextView(myGdxGame.largeFont.bitmapFont,""+myGdxGame.gameScreen.getLocalScore() , 605, 1600);
 
-        TextView prResults = new TextView(myGdxGame.largeFont.bitmapFont, "Total score", 35, 1450);
+        TextView prResults = new TextView(myGdxGame.largeFont.bitmapFont, "Total Coins", 35, 1450);
         prResultst = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScore(), 525, 1450);
         TextView bResults = new TextView(myGdxGame.largeFont.bitmapFont, "Best result", 35, 1300);
         bResultst = new TextView(myGdxGame.largeFont.bitmapFont, ""+MemoryLoader.loadScoreBoard().get(0), 525, 1300);

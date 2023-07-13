@@ -13,6 +13,8 @@ public class MemoryLoader {
     private static final Preferences prefs = Gdx.app.getPreferences("User saves");
     static ArrayList<String> musicNames;
     static ArrayList<String> musicPaths;
+    static ArrayList<String> assetNames;
+    static ArrayList<String> assetPaths;
 
     public static void saveScoreBoard(ArrayList<Integer> arrayList) {
         prefs.putString("scoreBoard", parseArrayToString(arrayList));
@@ -141,4 +143,39 @@ public class MemoryLoader {
         saveMusicStates(arrayList);
         return arrayList;
     }
+    public static void saveAssetStates(ArrayList<Integer> arrayList) {
+        prefs.putString("assetStates",parseArrayToString(arrayList));
+        prefs.flush();
+    }
+
+    public static ArrayList<Integer> loadAssetStates() {
+        if (prefs.contains("assetStates"))
+            return parseStringToArray(prefs.getString("assetStates"));
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            arrayList.add( 0);
+        }
+        arrayList.set(0,2);
+        saveMusicStates(arrayList);
+        return arrayList;
+    }
+    public static ArrayList<String> loadAssetNames() {
+        if (assetNames == null) {
+            assetNames = new ArrayList<>();
+            assetNames.add("Default song");
+            assetNames.add("Phonk");
+        }
+        return assetNames;
+    }
+
+    public static ArrayList<String> loadAssetPaths() {
+        if (assetPaths == null) {
+            assetPaths = new ArrayList<>();
+            for(int i = 0; i < 2; i ++){
+                assetPaths.add("blockpack" + i + "/");
+            }
+        }
+        return assetPaths;
+    }
+
 }

@@ -121,16 +121,16 @@ public class GameScreen implements Screen {
                 }
             }
 
-            if (time%moveTime == 0) {
-                //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
-                currentTetramino.moveDown(gameMap);
-                for (int i = 0; i < gameMapHeight; i++) {
-                    if (gameMap.isStringFull(i)) {
-                        //Gdx.app.debug("" + i, "string colored");
-                        gameMap.colorString(i);
-                    }
-                }
-            }
+//            if (time%moveTime == 0) {
+//                //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
+//                currentTetramino.moveDown(gameMap);
+//                for (int i = 0; i < gameMapHeight; i++) {
+//                    if (gameMap.isStringFull(i)) {
+//                        //Gdx.app.debug("" + i, "string colored");
+//                        //gameMap.colorString(i);
+//                    }
+//                }
+//            }
             if (time%moveTime == 0) {
                 if (!currentTetramino.isMovable) {
                     ArrayList<Integer> stringsToDelete = new ArrayList<>();
