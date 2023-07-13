@@ -132,6 +132,7 @@ public class GameScreen implements Screen {
 //                }
 //            }
             if (time%moveTime == 0) {
+                currentTetramino.moveDown(gameMap);
                 if (!currentTetramino.isMovable) {
                     ArrayList<Integer> stringsToDelete = new ArrayList<>();
                     for (int i = 0; i < gameMapHeight; i++) {

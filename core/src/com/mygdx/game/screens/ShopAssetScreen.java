@@ -12,6 +12,7 @@ import com.mygdx.game.utils.GameSettings;
 import com.mygdx.game.utils.MathHelper;
 import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
+import com.mygdx.game.utils.Textures;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class ShopAssetScreen implements Screen {
     MyGdxGame myGdxGame;
     ArrayList<UiComponent> uiComponentsList;
     int itemIdx = 0;
-    int songsCount = 0;
+    int assetsCount = 0;
     TextButton buttonExit;
     ArrayList<ArrayList<UiComponent>> widgets;
 
@@ -28,14 +29,13 @@ public class ShopAssetScreen implements Screen {
     }
 
     private void uiInitialize() {
-        ImageView nextSongButton = new ImageView(GameSettings.SCR_WIDTH - 100, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toright.png");
-        ImageView previousSongButton = new ImageView(40, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toleft.png");
-        nextSongButton.setOnClickListener(nextSongButtonOnClickListener);
-        previousSongButton.setOnClickListener(previousSongButtonOnClickListener);
-        widgets = new ArrayList<>();
+        ImageView nextWidgetButton = new ImageView(GameSettings.SCR_WIDTH - 100, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toright.png");
+        ImageView previousWidgetButton = new ImageView(40, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toleft.png");
+        nextWidgetButton.setOnClickListener(nextWidgetButtonOnClickListener);
+        previousWidgetButton.setOnClickListener(previousWidgetButtonOnClickListener);
         uiComponentsList = new ArrayList<>();
-        uiComponentsList.add(nextSongButton);
-        uiComponentsList.add(previousSongButton);
+        uiComponentsList.add(nextWidgetButton);
+        uiComponentsList.add(previousWidgetButton);
         buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "Return Shop", 25, 85);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         uiComponentsList.add(buttonExit);
@@ -44,13 +44,13 @@ public class ShopAssetScreen implements Screen {
 
     private void widgetsInitialize() {
         widgets = new ArrayList<>();
-        for (int i = 0; i < songsCount; i++) {
+        for (int i = 0; i < assetsCount; i++) {
             widgets.add(new ArrayList<UiComponent>());
-            TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadMusicNames().get(i), GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
+            TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadAssetNames().get(i), GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
             TextButton textButton;
             switch (MemoryLoader.loadMusicStates().get(i)){
                 case 0:
-                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.MUSIC_PRICE,GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.ASSET_PRICE,GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
                     textButton.setOnClickListener(onBuyOnClickListener);
                     break;
                 case 1:
@@ -58,8 +58,7 @@ public class ShopAssetScreen implements Screen {
                     textButton.setOnClickListener(onChooseOnClickListener);
                     break;
                 default:
-                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "PLAY",GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
-                    textButton.setOnClickListener(onPlayOnClickListener);
+                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "CHOOSEN",GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
             }
 
             widgets.get(i).add(songName);
@@ -69,7 +68,7 @@ public class ShopAssetScreen implements Screen {
 
     @Override
     public void show() {
-        songsCount = MemoryLoader.loadMusicNames().size();
+        assetsCount = MemoryLoader.loadAssetNames().size();
         uiInitialize();
     }
 
@@ -127,12 +126,11 @@ public class ShopAssetScreen implements Screen {
 
     }
 
-    UiComponent.OnClickListener nextSongButtonOnClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener nextWidgetButtonOnClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked(UiComponent uiComponent) {
-            stopMusic();
             itemIdx += 1;
-            itemIdx = MathHelper.percent(itemIdx, songsCount);
+            itemIdx = MathHelper.percent(itemIdx, assetsCount);
         }
 
         @Override
@@ -140,12 +138,11 @@ public class ShopAssetScreen implements Screen {
 
         }
     };
-    UiComponent.OnClickListener previousSongButtonOnClickListener = new UiComponent.OnClickListener() {
+    UiComponent.OnClickListener previousWidgetButtonOnClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked(UiComponent uiComponent) {
-            stopMusic();
             itemIdx -= 1;
-            itemIdx = MathHelper.percent(itemIdx, songsCount);
+            itemIdx = MathHelper.percent(itemIdx, assetsCount);
         }
 
         @Override
@@ -171,9 +168,9 @@ public class ShopAssetScreen implements Screen {
         @Override
         public void onClicked(UiComponent uiComponent) {
             if(MemoryLoader.loadScore() >= GameSettings.MUSIC_PRICE) {
-                ArrayList<Integer> arrayList = MemoryLoader.loadMusicStates();
+                ArrayList<Integer> arrayList = MemoryLoader.loadAssetStates();
                 arrayList.set(itemIdx, 1);
-                MemoryLoader.saveMusicStates(arrayList);
+                MemoryLoader.saveAssetStates(arrayList);
                 widgetsInitialize();
                 MemoryLoader.saveScore(MemoryLoader.loadScore() - GameSettings.MUSIC_PRICE);
             }
@@ -187,16 +184,15 @@ public class ShopAssetScreen implements Screen {
     UiComponent.OnClickListener onChooseOnClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked(UiComponent uiComponent) {
-            ArrayList<Integer> arrayList = MemoryLoader.loadMusicStates();
-            for(int i = 0; i < songsCount; i++){
+            ArrayList<Integer> arrayList = MemoryLoader.loadAssetStates();
+            for(int i = 0; i < assetsCount; i++){
                 if(arrayList.get(i) == 2){
                     arrayList.set(i, 1);
                 }
             }
             arrayList.set(itemIdx, 2);
-            MemoryLoader.saveMusicStates(arrayList);
+            MemoryLoader.saveAssetStates(arrayList);
             widgetsInitialize();
-            SoundExecutor.setBackSound();
         }
 
         @Override
@@ -204,28 +200,7 @@ public class ShopAssetScreen implements Screen {
 
         }
     };
-    UiComponent.OnClickListener onPlayOnClickListener = new UiComponent.OnClickListener() {
-        @Override
-        public void onClicked(UiComponent uiComponent) {
-            if(((TextButton)uiComponent).text.equals("STOP")) {
-                stopMusic();
-            }
-            else{
-                ((TextButton)uiComponent).setText("STOP");
-                SoundExecutor.playBackSound();
-            }
-        }
-        @Override
-        public void onClicked2() {
 
-        }
-    };
-    void stopMusic(){
-        TextButton textButton = (TextButton) widgets.get(itemIdx).get(1);
-        if(textButton.text.equals("STOP")){
-            textButton.setText("PLAY");
-            SoundExecutor.stopPlaying();
-        }
-    }
+
 
 }

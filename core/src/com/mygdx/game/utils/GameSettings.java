@@ -9,6 +9,7 @@ public class GameSettings {
 
     public static DifficultyMapWight DEFAULT_DIFFICULTY_WIGHT = DifficultyMapWight.MEDIUM;
     public static DifficultyMapHeight DEFAULT_DIFFICULTY_HEIGHT = DifficultyMapHeight.MEDIUM;
+
     public static final int COUNT_OF_SIZE_HEIGHT_EASY = 30;
     public static final int COUNT_OF_SIZE_HEIGHT_MEDIUM = 34;
     public static final int COUNT_OF_SIZE_HEIGHT_HARD = 38;

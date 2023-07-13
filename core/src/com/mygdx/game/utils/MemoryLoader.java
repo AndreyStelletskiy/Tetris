@@ -162,8 +162,8 @@ public class MemoryLoader {
     public static ArrayList<String> loadAssetNames() {
         if (assetNames == null) {
             assetNames = new ArrayList<>();
-            assetNames.add("Default song");
-            assetNames.add("Phonk");
+            assetNames.add("Default");
+            assetNames.add("Noir");
         }
         return assetNames;
     }
@@ -172,7 +172,7 @@ public class MemoryLoader {
         if (assetPaths == null) {
             assetPaths = new ArrayList<>();
             for(int i = 0; i < 2; i ++){
-                assetPaths.add("blockpack" + i + "/");
+                assetPaths.add("block_pack" + i + "/");
             }
         }
         return assetPaths;
