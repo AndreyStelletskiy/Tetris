@@ -263,13 +263,13 @@ public class GameScreen implements Screen {
         uiComponentsList = new ArrayList<>();
         uiComponentsListGame = new ArrayList<>();
 
-        ImageView toLeftButton = new ImageView(50, 50, 220, 220, "Buttons/toleft.png");
+        ImageView toLeftButton = new ImageView(30, 50, 220, 220, "Buttons/toleftf.png");
         toLeftButton.setOnClickListener(toLeftButtonClickListener);
-        ImageView toRightButton = new ImageView(810, 50, 220, 220, "Buttons/toright.png");
+        ImageView toRightButton = new ImageView(830, 50, 220, 220, "Buttons/torightf.png");
         toRightButton.setOnClickListener(toRightButtonClickListener);
-        ImageView toLeftRButton = new ImageView(50, 250, 220, 220, "Buttons/toleftr.png");
+        ImageView toLeftRButton = new ImageView(100, 260, 220, 220, "Buttons/toleftr.png");
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
-        ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
+        ImageView toRightRButton = new ImageView(750, 260, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
         ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todown.png");
         toDownButton.setOnClickListener(toDown1ButtonClickListener);
