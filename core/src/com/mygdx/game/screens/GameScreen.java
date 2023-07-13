@@ -101,16 +101,17 @@ public class GameScreen implements Screen {
             time ++;
 
             if(time % difficultyStep == 0){
-                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS){
+                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS) {
                     gameMap.deleteTetramino(currentTetramino);
                     gameMap.deleteTetramino(previewTetramino);
                     gameMap.addColumns(1);
 
                     gameMap.addTetramino(currentTetramino);
                     gameMap.addTetramino(previewTetramino);
-
-                    gameMapWidht+=2;
-                    gameMap.posX =( GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
+                    if (localScore > 500) {
+                        gameMapWidht += 2;
+                        gameMap.posX = (GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
+                    }
                 }
                 else{
                     moveTime -= 1;
