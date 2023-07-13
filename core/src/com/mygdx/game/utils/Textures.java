@@ -11,7 +11,7 @@ public class Textures {
     static {
         updateTextures();
     }
-    static void updateTextures(){
+    public static void updateTextures(){
         ArrayList<Integer> arrayList = MemoryLoader.loadAssetStates();
         for(int i = 0; i < arrayList.size(); i++){
             if(arrayList.get(i) == 2){
@@ -23,5 +23,7 @@ public class Textures {
             textures.put(i,new Texture(ASSET_PATH + "block_" + i + ".bmp") );
         }
         textures.put(-2,new Texture(ASSET_PATH + "block_" + -2 + ".bmp"));
+        textures.put(-3,new Texture(ASSET_PATH + "gameBG.bmp"));
+        textures.put(-4,new Texture(ASSET_PATH + "mapBG.bmp"));
     }
 }

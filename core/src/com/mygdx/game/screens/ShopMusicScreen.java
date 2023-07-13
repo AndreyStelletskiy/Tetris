@@ -48,6 +48,7 @@ public class ShopMusicScreen implements Screen {
             widgets.add(new ArrayList<UiComponent>());
             TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadMusicNames().get(i), GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
             TextButton textButton;
+            //MemoryLoader.saveMusicStates(MemoryLoader.parseStringToArray("2 0 0"));
             switch (MemoryLoader.loadMusicStates().get(i)){
                 case 0:
                     textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.MUSIC_PRICE,GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );

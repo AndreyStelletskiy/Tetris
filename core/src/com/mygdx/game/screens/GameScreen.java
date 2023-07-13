@@ -23,6 +23,7 @@ import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
 import com.mygdx.game.utils.MemoryLoader;
 import com.mygdx.game.utils.SoundExecutor;
+import com.mygdx.game.utils.Textures;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +43,8 @@ public class GameScreen implements Screen {
 
     Random random;
 
-    int gameState, blockSize;
+    int gameState;
+    float blockSize;
     public int gameMapWidht;
     public int gameMapHeight;
     TextButton Stop;
@@ -60,11 +62,17 @@ public class GameScreen implements Screen {
 
         //Gdx.app.debug("gameScreen", ""+ MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx());
         gameMapHeight = MemoryLoader.loadDifficultyMapHeight().getDifficultyMapHeightIdx();
-        blockSize = 30 * 20 / gameMapWidht;
+        blockSize = 30 * (float)20 / gameMapWidht;
         random = new Random();
 
-        gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2-100 - (gameMapWidht - 1) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
-        miniMap = new Map(900, 1600, 5, 5, 30);
+        if(MemoryLoader.loadAssetStates().get(1) == 2) {
+            gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - 100 - ((float)(gameMapWidht - 1)) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize, GameSettings.BLOCK_STEP * 20 / gameMapWidht);
+            miniMap = new Map(900, 1600, 5, 5, 30, GameSettings.BLOCK_STEP);
+        }
+        else{
+            gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - 100 - ((float)(gameMapWidht - 1)) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize, 0);
+            miniMap = new Map(900, 1600, 5, 5, 30, 0);
+        }
 
 
         currentTetramino = createTetraminoWithSameType(random.nextInt(7));
@@ -76,13 +84,14 @@ public class GameScreen implements Screen {
 
         miniMap.summon(nextTetramino);
 
-        UIInitialize();
+
 
 
     }
 
     @Override
     public void show() {
+        UIInitialize();
         SoundExecutor.pauseStartPlaying();
         SoundExecutor.playBackSound();
     }
@@ -100,26 +109,7 @@ public class GameScreen implements Screen {
         if (gameState == 0) {
             time ++;
 
-            if(time % difficultyStep == 0){
-                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS) {
-                    gameMap.deleteTetramino(currentTetramino);
-                    gameMap.deleteTetramino(previewTetramino);
-                    gameMap.addColumns(1);
 
-                    gameMap.addTetramino(currentTetramino);
-                    gameMap.addTetramino(previewTetramino);
-                    if (localScore > 500) {
-                        gameMapWidht += 2;
-                        gameMap.posX = (GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
-                    }
-                }
-                else{
-                    moveTime -= 1;
-                    if(moveTime == 0){
-                        moveTime = 1;
-                    }
-                }
-            }
 
 //            if (time%moveTime == 0) {
 //                //Gdx.app.debug("" + currentTetramino.INDEX, "" + currentTetramino.coordinatesX[1] + " " + currentTetramino.coordinatesY[1]);
@@ -158,9 +148,29 @@ public class GameScreen implements Screen {
                     miniMap.summon(nextTetramino);
                 }
             }
+            if(time % difficultyStep == 0){
+                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS) {
+                    Gdx.app.debug("gameScreen", "columns added");
+                    gameMap.deleteTetramino(currentTetramino);
+                    gameMap.deleteTetramino(previewTetramino);
+                    gameMapWidht += 2;
+                    gameMap.blockSize = 30 * (float)20 / gameMapWidht;
+                    gameMap.addColumns(1);
+                    currentTetramino.setCentralCoordinate(currentTetramino.X+1, currentTetramino.Y+1, gameMap);
+                    previewTetramino.setCentralCoordinate(previewTetramino.X+1, previewTetramino.Y+1, gameMap);
+                    gameMap.addTetramino(currentTetramino);
+                    gameMap.addTetramino(previewTetramino);
+                }
+                else{
+                    moveTime -= 1;
+                    if(moveTime == 0){
+                        moveTime = 1;
+                    }
+                }
+            }
         }
 
-        ScreenUtils.clear(1, 0, 0, 1);
+        ScreenUtils.clear(1, 1, 1, 0);
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
         myGdxGame.batch.begin();
@@ -269,6 +279,7 @@ public class GameScreen implements Screen {
         uiComponentsList = new ArrayList<>();
         uiComponentsListGame = new ArrayList<>();
 
+        ImageView backGround = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, Textures.textures.get(-3) );
         ImageView toLeftButton = new ImageView(30, 50, 220, 220, "Buttons/toleft.png");
         toLeftButton.setOnClickListener(toLeftButtonClickListener);
         ImageView toRightButton = new ImageView(830, 50, 220, 220, "Buttons/toright.png");
@@ -287,6 +298,7 @@ public class GameScreen implements Screen {
         buttonExit = new ImageView(900, 1200, 150, 150,"Buttons/home.png");
         buttonExit.setOnClickListener(onReturnButtonClickListener);
         buttonExit.isVisible=false;
+        uiComponentsList.add(backGround);
         uiComponentsList.add(StopB);
         uiComponentsList.add(score);
         //uiComponentsList.add(scoreR);

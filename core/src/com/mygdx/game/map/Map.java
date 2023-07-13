@@ -1,8 +1,11 @@
 package com.mygdx.game.map;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.tetraminos.AbstractTetramino;
 import com.mygdx.game.map.tetraminos.Block;
+import com.mygdx.game.ui.ImageView;
+import com.mygdx.game.utils.Textures;
 
 import java.util.ArrayList;
 
@@ -10,27 +13,38 @@ public class Map {
     public float posX;
     float posY;
     public int width, height;
-    float blockSize;
+    public float blockSize;
+    float step;
+    ImageView fone;
     public ArrayList<ArrayList<Block>> mapList;
 
 
-    public Map(float posX, float posY, int width, int height, float blockSize) {
+    public Map(float posX, float posY, int width, int height, float blockSize, float step) {
+        this.step = step;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
         this.blockSize = blockSize;
+        if(width == 5){
+            fone = new ImageView(posX - 3 - step, posY - 4 , width*(blockSize+step) + step  + 6, height * (blockSize+step)   + 8, Textures.textures.get(-4));
+        }
+        else{
+            fone = new ImageView(posX - 12 - step,  posY - 20-  step, width*(blockSize+step) +step  + 24, height * (blockSize+step) + step  + 40, Textures.textures.get(-4));
+        }
         mapList = new ArrayList<>();
-        System.out.println(height);
-        System.out.println(width);
+        mapList = createClearMap(width,height);
+    }
+    public ArrayList<ArrayList<Block>> createClearMap(int width, int height){
+        ArrayList<ArrayList<Block>> mapList = new ArrayList<>();
         for (int i = 0; i < height; i++) {
             mapList.add(new ArrayList<Block>());
             for (int j = 0; j < width; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
+                Block zeroBlock = new Block(posX + j * (blockSize+step), posY + i * (blockSize+step), blockSize, blockSize, Textures.textures.get(0), 0);
                 mapList.get(i).add(zeroBlock);
             }
-
         }
+        return mapList;
     }
 
     public boolean summon(AbstractTetramino tetr) {
@@ -66,6 +80,7 @@ public class Map {
     }
 
     public void draw(MyGdxGame myGdxGame) {
+        fone.draw(myGdxGame);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 mapList.get(i).get(j).draw(myGdxGame);
@@ -83,10 +98,6 @@ public class Map {
         }
         return true;
     }
-    public boolean downCheck(){
-        return true;
-    }
-
     public boolean isStringFull(int indx) {
         for (int i = 0; i < width; i++) {
             if (mapList.get(indx).get(i).type == 0 || mapList.get(indx).get(i).type == -2) {
@@ -114,14 +125,8 @@ public class Map {
     }
 
     public void addColumns(int count) {
-        ArrayList<ArrayList<Block>> newMapList = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            newMapList.add(new ArrayList<Block>());
-            for (int j = 0; j < width + count * 2; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
-                newMapList.get(i).add(zeroBlock);
-            }
-        }
+        //posX -= count*(blockSize + step);
+        ArrayList<ArrayList<Block>> newMapList = createClearMap(width + count * 2, height);
         for(int i = 0; i < height; i ++){
             for (int j = 0; j < width; j++) {
                 newMapList.get(i).get(j+count).setType(mapList.get(i).get(j).type);
@@ -129,6 +134,7 @@ public class Map {
         }
         mapList = newMapList;
         width += 2 * count;
+        fone = new ImageView(posX - 12 - step,  posY - 20-  step, width*(blockSize+step) +step  + 24, height * (blockSize+step) + step  + 40, Textures.textures.get(-4));
     }
 }
 

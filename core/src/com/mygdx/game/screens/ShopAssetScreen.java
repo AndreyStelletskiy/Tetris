@@ -48,7 +48,7 @@ public class ShopAssetScreen implements Screen {
             widgets.add(new ArrayList<UiComponent>());
             TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadAssetNames().get(i), GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
             TextButton textButton;
-            switch (MemoryLoader.loadMusicStates().get(i)){
+            switch (MemoryLoader.loadAssetStates().get(i)){
                 case 0:
                     textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.ASSET_PRICE,GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
                     textButton.setOnClickListener(onBuyOnClickListener);
@@ -167,12 +167,12 @@ public class ShopAssetScreen implements Screen {
     UiComponent.OnClickListener onBuyOnClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked(UiComponent uiComponent) {
-            if(MemoryLoader.loadScore() >= GameSettings.MUSIC_PRICE) {
+            if(MemoryLoader.loadScore() >= GameSettings.ASSET_PRICE) {
                 ArrayList<Integer> arrayList = MemoryLoader.loadAssetStates();
                 arrayList.set(itemIdx, 1);
                 MemoryLoader.saveAssetStates(arrayList);
                 widgetsInitialize();
-                MemoryLoader.saveScore(MemoryLoader.loadScore() - GameSettings.MUSIC_PRICE);
+                MemoryLoader.saveScore(MemoryLoader.loadScore() - GameSettings.ASSET_PRICE);
             }
         }
 
@@ -193,6 +193,7 @@ public class ShopAssetScreen implements Screen {
             arrayList.set(itemIdx, 2);
             MemoryLoader.saveAssetStates(arrayList);
             widgetsInitialize();
+            Textures.updateTextures();
         }
 
         @Override

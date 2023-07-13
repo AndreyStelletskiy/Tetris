@@ -82,7 +82,7 @@ public class MemoryLoader {
         return true;
     }
 
-    static ArrayList<Integer> parseStringToArray(String s) {
+    public static ArrayList<Integer> parseStringToArray(String s) {
         ArrayList<Integer> ans = new ArrayList<>();
         String[] ar = s.split(" ");
         for (String string : ar) {
@@ -91,7 +91,7 @@ public class MemoryLoader {
         return ans;
     }
 
-    static String parseArrayToString(ArrayList<Integer> arr) {
+    public static String parseArrayToString(ArrayList<Integer> arr) {
         String ans = "" + arr.get(0);
         for (int i = 1; i < arr.size(); i++) {
             ans += " " + arr.get(i);
@@ -133,11 +133,12 @@ public class MemoryLoader {
     }
 
     public static ArrayList<Integer> loadMusicStates() {
-        if (prefs.contains("musicStates"))
+        if (prefs.contains("musicStates")) {
             return parseStringToArray(prefs.getString("musicStates"));
+        }
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            arrayList.add( 0);
+            arrayList.add(0);
         }
         arrayList.set(0,2);
         saveMusicStates(arrayList);
@@ -156,7 +157,7 @@ public class MemoryLoader {
             arrayList.add( 0);
         }
         arrayList.set(0,2);
-        saveMusicStates(arrayList);
+        saveAssetStates(arrayList);
         return arrayList;
     }
     public static ArrayList<String> loadAssetNames() {
@@ -172,7 +173,7 @@ public class MemoryLoader {
         if (assetPaths == null) {
             assetPaths = new ArrayList<>();
             for(int i = 0; i < 2; i ++){
-                assetPaths.add("block_pack" + i + "/");
+                assetPaths.add("asset_pack" + i + "/");
             }
         }
         return assetPaths;

@@ -39,11 +39,12 @@ public class Block extends ImageView {
 
     public void setType(int type) {
         this.type = type;
-        if(type == -1) {
-            setImgTexture(new Texture("block_" + type + "_0.bmp"));
-        }
-        else{
-            setImgTexture(Textures.textures.get(type));
-        }
+        setImgTexture(Textures.textures.get(type));
+//        if(type == -1) {
+//            setImgTexture(new Texture("block_" + type + "_0.bmp"));
+//        }
+//        else{
+//            setImgTexture(Textures.textures.get(type));
+//        }
     }
 }
