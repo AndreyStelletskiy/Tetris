@@ -6,17 +6,18 @@ import com.mygdx.game.map.Map;
 
 public class TetraminoFive extends AbstractTetramino{
     public TetraminoFive(int centralX, int centralY) {
+        super();
         INDEX = 5;
-        coordinatesX = new int[4];
-        coordinatesY = new int[4];
-        coordinatesX[0] = centralX - 1;
-        coordinatesX[1] = centralX;
-        coordinatesX[2] = centralX + 1;
-        coordinatesX[3] = centralX;
-        coordinatesY[0] = centralY;
-        coordinatesY[1] = centralY;
-        coordinatesY[2] = centralY;
-        coordinatesY[3] = centralY - 1;
+        vectorX = new int[4];
+        vectorY = new int[4];
+        vectorX[0] = centralX - 1;
+        vectorX[1] = centralX;
+        vectorX[2] = centralX + 1;
+        vectorX[3] = centralX;
+        vectorY[0] = centralY;
+        vectorY[1] = centralY;
+        vectorY[2] = centralY;
+        vectorY[3] = centralY - 1;
     }
 
 }

@@ -24,15 +24,15 @@ public class Block extends ImageView {
     /*void createTextures(){
         textures = new Texture[6];
         for(int i = 0; i < 6; i++){
-            textures[i] = new Texture("block_" + i + ".jpg");
+            textures[i] = new Texture("block_" + i + ".bmp");
         }
     }*/
 
     @Override
     public void draw(MyGdxGame myGdxGame) {
-        if(type == -1){
-            setImgTexture(new Texture("block_-1_" + myGdxGame.timer%2+".jpg"));
-        }
+//        if(type == -1){
+//            setImgTexture(new Texture("block_-1_" + myGdxGame.timer%2+".bmp"));
+//        }
         super.draw(myGdxGame);
 
     }
@@ -40,7 +40,7 @@ public class Block extends ImageView {
     public void setType(int type) {
         this.type = type;
         if(type == -1) {
-            setImgTexture(new Texture("block_" + type + "_0.jpg"));
+            setImgTexture(new Texture("block_" + type + "_0.bmp"));
         }
         else{
             setImgTexture(Textures.textures.get(type));

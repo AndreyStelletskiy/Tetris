@@ -26,7 +26,7 @@ public class Map {
         for (int i = 0; i < height; i++) {
             mapList.add(new ArrayList<Block>());
             for (int j = 0; j < width; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
                 mapList.get(i).add(zeroBlock);
             }
 
@@ -35,11 +35,11 @@ public class Map {
 
     public boolean summon(AbstractTetramino tetr) {
         if (height == 5) {
-            tetr.setCentralCoordinate(2, 2);
+            tetr.setCentralCoordinate(2, 2, this);
             if(!dontTetraminoConflict(tetr))return false;
         }
         else {
-            tetr.setCentralCoordinate(width / 2, height - 2);
+            tetr.setCentralCoordinate(width / 2, height - 2, this);
             if(!dontTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);
@@ -48,6 +48,7 @@ public class Map {
     }
 
     public void addTetramino(AbstractTetramino tetr) {
+        tetr.updateCoords(this);
         if (dontTetraminoConflict(tetr)) {
             for (int i = 0; i < 4; i++) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(tetr.INDEX);
@@ -56,6 +57,7 @@ public class Map {
     }
 
     public void deleteTetramino(AbstractTetramino tetr) {
+        tetr.updateCoords(this);
         for (int i = 0; i < 4; i++) {
             if(mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).type == tetr.INDEX) {
                 mapList.get(tetr.coordinatesY[i]).get(tetr.coordinatesX[i]).setType(0);
@@ -116,7 +118,7 @@ public class Map {
         for (int i = 0; i < height; i++) {
             newMapList.add(new ArrayList<Block>());
             for (int j = 0; j < width + count * 2; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
                 newMapList.get(i).add(zeroBlock);
             }
         }

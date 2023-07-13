@@ -11,6 +11,7 @@ import com.mygdx.game.map.tetraminos.TetraminoFive;
 import com.mygdx.game.map.tetraminos.TetraminoFour;
 import com.mygdx.game.map.tetraminos.TetraminoOne;
 import com.mygdx.game.map.tetraminos.TetraminoSeven;
+import com.mygdx.game.map.tetraminos.TetraminoSix;
 import com.mygdx.game.map.tetraminos.TetraminoThree;
 import com.mygdx.game.map.tetraminos.TetraminoTwo;
 import com.mygdx.game.ui.ImageView;
@@ -63,12 +64,12 @@ public class GameScreen implements Screen {
         miniMap = new Map(900, 1600, 5, 5, 30);
 
 
-        currentTetramino = createTetraminoWithSameType(random.nextInt(5));
+        currentTetramino = createTetraminoWithSameType(random.nextInt(7));
 
         gameMap.summon(currentTetramino);
 
 
-        nextTetramino = createTetraminoWithSameType(random.nextInt(5));
+        nextTetramino = createTetraminoWithSameType(random.nextInt(7));
 
         miniMap.summon(nextTetramino);
 
@@ -97,11 +98,13 @@ public class GameScreen implements Screen {
 
             if(time % difficultyStep == 0){
                 if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS){
+                    gameMap.deleteTetramino(currentTetramino);
+                    gameMap.deleteTetramino(previewTetramino);
                     gameMap.addColumns(1);
-                    for (int i = 0; i < 4; i++) {
-                        currentTetramino.coordinatesX[i]++;
-                        previewTetramino.coordinatesX[i]++;
-                    }
+
+                    gameMap.addTetramino(currentTetramino);
+                    gameMap.addTetramino(previewTetramino);
+
                     gameMapWidht+=2;
                     gameMap.posX =( GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
                 }
@@ -145,7 +148,7 @@ public class GameScreen implements Screen {
                     if (!gameMap.summon(currentTetramino)) {
                         gameOver();
                     }
-                    nextTetramino = createTetraminoWithSameType(random.nextInt(5));
+                    nextTetramino = createTetraminoWithSameType(random.nextInt(7));
                     miniMap.summon(nextTetramino);
                 }
             }
@@ -179,10 +182,13 @@ public class GameScreen implements Screen {
             gameMap.deleteTetramino(previewTetramino);
         }
         previewTetramino = createTetraminoWithSameType(currentTetramino.INDEX);
+        previewTetramino.X = currentTetramino.X;
+        previewTetramino.Y = currentTetramino.Y;
         for (int i = 0; i < 4; i++) {
-            previewTetramino.coordinatesX[i] = currentTetramino.coordinatesX[i];
-            previewTetramino.coordinatesY[i] = currentTetramino.coordinatesY[i];
+            previewTetramino.vectorX[i] = currentTetramino.vectorX[i];
+            previewTetramino.vectorY[i] = currentTetramino.vectorY[i];
         }
+        previewTetramino.updateCoords(gameMap);
         previewTetramino.INDEX = -2;
         gameMap.deleteTetramino(currentTetramino);
         while (previewTetramino.isMovable) {
@@ -264,7 +270,7 @@ public class GameScreen implements Screen {
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
-        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todownf.png");
+        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todown.png");
         toDownButton.setOnClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
@@ -385,9 +391,13 @@ public class GameScreen implements Screen {
             case 4:
                 return new TetraminoFour(4, 4);
             //return new TetraminoFour(4,4);
-            default:
+            case 5:
                 return new TetraminoFive(4, 4);
             //return new TetraminoFour(4,4);
+            case 6:
+                return new TetraminoSix(4, 4);
+            default:
+                return new TetraminoSeven(4, 4);
         }
     }
 
