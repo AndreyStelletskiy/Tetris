@@ -39,7 +39,7 @@ public class Map {
             if(!dontTetraminoConflict(tetr))return false;
         }
         else {
-            tetr.setCentralCoordinate(width / 2, height - 2, this);
+            tetr.setCentralCoordinate((int) (Math.random()*(width-2)), height - 2, this);
             if(!dontTetraminoConflict(tetr))return false;
         }
         addTetramino(tetr);
