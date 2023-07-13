@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.map.Map;
@@ -45,7 +46,8 @@ public class GameScreen implements Screen {
     public int gameMapWidht;
     public int gameMapHeight;
     TextButton Stop;
-    TextButton buttonExit;
+    ImageView StopB;
+    ImageView buttonExit;
 
     public int getLocalScore() {
         return localScore;
@@ -61,7 +63,7 @@ public class GameScreen implements Screen {
         blockSize = 30 * 20 / gameMapWidht;
         random = new Random();
 
-        gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
+        gameMap = new Map((GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2-100 - (gameMapWidht - 1) / 10 * blockSize, 640, gameMapWidht, gameMapHeight, blockSize);
         miniMap = new Map(900, 1600, 5, 5, 30);
 
 
@@ -99,16 +101,17 @@ public class GameScreen implements Screen {
             time ++;
 
             if(time % difficultyStep == 0){
-                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS){
+                if( time <= difficultyStep * GameSettings.STEPS_ADDING_COLUMNS) {
                     gameMap.deleteTetramino(currentTetramino);
                     gameMap.deleteTetramino(previewTetramino);
                     gameMap.addColumns(1);
 
                     gameMap.addTetramino(currentTetramino);
                     gameMap.addTetramino(previewTetramino);
-
-                    gameMapWidht+=2;
-                    gameMap.posX =( GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
+                    if (localScore > 500) {
+                        gameMapWidht += 2;
+                        gameMap.posX = (GameSettings.SCR_WIDTH - gameMapWidht * blockSize) / 2 - (gameMapWidht - 1) / 10 * blockSize;
+                    }
                 }
                 else{
                     moveTime -= 1;
@@ -162,7 +165,8 @@ public class GameScreen implements Screen {
         myGdxGame.batch.begin();
 
         for (UiComponent component : uiComponentsList) {
-            component.draw(myGdxGame);
+            if(component.isVisible){
+            component.draw(myGdxGame);}
         }
         for (UiComponent component : uiComponentsListGame) {
             component.draw(myGdxGame);
@@ -264,23 +268,25 @@ public class GameScreen implements Screen {
         uiComponentsList = new ArrayList<>();
         uiComponentsListGame = new ArrayList<>();
 
-        ImageView toLeftButton = new ImageView(30, 50, 220, 220, "Buttons/toleftf.png");
+        ImageView toLeftButton = new ImageView(30, 50, 220, 220, "Buttons/toleft.png");
         toLeftButton.setOnClickListener(toLeftButtonClickListener);
-        ImageView toRightButton = new ImageView(830, 50, 220, 220, "Buttons/torightf.png");
+        ImageView toRightButton = new ImageView(830, 50, 220, 220, "Buttons/toright.png");
         toRightButton.setOnClickListener(toRightButtonClickListener);
-        ImageView toLeftRButton = new ImageView(100, 260, 220, 220, "Buttons/toleftr.png");
+        ImageView toLeftRButton = new ImageView(100, 260, 220, 220, "Buttons/rotatel.png");
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
-        ImageView toRightRButton = new ImageView(750, 260, 220, 220, "Buttons/torightr.png");
+        ImageView toRightRButton = new ImageView(750, 260, 220, 220, "Buttons/rotater.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
         DoubleClickImageView toDownButton = new DoubleClickImageView(430, 145, 220, 220, "Buttons/todown.png");
         toDownButton.setOnDoubleClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
-        Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 720, 600);
-        Stop.setOnClickListener(pauseButtonClickListener);
-        buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "", 25, 85);
+        //Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 720, 600);
+        StopB = new ImageView(900, 1400, 150,150, "Buttons/pause.png");
+        StopB.setOnClickListener(pauseButtonClickListener);
+        buttonExit = new ImageView(900, 1200, 150, 150,"Buttons/home.png");
         buttonExit.setOnClickListener(onReturnButtonClickListener);
-        uiComponentsList.add(Stop);
+        buttonExit.isVisible=false;
+        uiComponentsList.add(StopB);
         uiComponentsList.add(score);
         //uiComponentsList.add(scoreR);
         uiComponentsListGame.add(toLeftButton);
@@ -354,6 +360,7 @@ public class GameScreen implements Screen {
         public void onClicked1() {
             if (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
+                SoundExecutor.playlrSound();
             }
         }
 
@@ -391,14 +398,14 @@ public class GameScreen implements Screen {
                     break;
             }
             if (gameState == 0) {
-                Stop.setText("Pause");
+                StopB.setImgTexture(new Texture("Buttons/pause.png"));
                 SoundExecutor.resumePlaying();
-                buttonExit.setText("");
+                buttonExit.isVisible=false;
             }
             if (gameState == 1) {
-                Stop.setText("Resume");
+                StopB.setImgTexture(new Texture("Buttons/resume.png"));
                 SoundExecutor.pausePlaying();
-                buttonExit.setText("Return Home");
+                buttonExit.isVisible=true;
             }
         }
 
