@@ -33,11 +33,19 @@ public class UiComponent {
 
     public boolean isHit(float tx, float ty){
         boolean isTouchHitComponent = x < tx && tx < x + width && y > ty && ty > y - height;
-        if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
-        return isTouchHitComponent;
+
+        return isHit(isTouchHitComponent);
+    }
+    public boolean isHit(Boolean bool){
+        if(bool && onClickListener != null){
+            onClickListener.onClicked();
+        }
+        return bool;
     }
 
     public interface OnClickListener {
         void onClicked();
+        void onClicked2();
+
     }
 }

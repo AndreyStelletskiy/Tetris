@@ -64,7 +64,6 @@ public class MyGdxGame extends Game {
 
 
 
-		gameScreen = new GameScreen(this);
 		gameOverScreen = new GameOverScreen(this);
 		menuScreen = new MenuScreen(this);
 		shopScreen = new ShopScreen(this);

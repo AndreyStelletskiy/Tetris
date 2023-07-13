@@ -24,8 +24,6 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        uiInitialize();
-        myGdxGame.gameScreen = new GameScreen(myGdxGame);
     }
 
     private void uiInitialize() {
@@ -63,6 +61,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void show() {
         uiInitialize();
+        myGdxGame.gameScreen = new GameScreen(myGdxGame);
         SoundExecutor.stopPlaying();
         SoundExecutor.playGameOutSound();
 
@@ -119,16 +118,24 @@ public class GameOverScreen implements Screen {
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onReturnButtonClicked");
+            Gdx.app.debug("onClicked1", "onReturnButtonClicked1");
             myGdxGame.setScreen(myGdxGame.menuScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
     UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonStartClicked");
-            myGdxGame.gameScreen = new GameScreen(myGdxGame);
             myGdxGame.setScreen(myGdxGame.gameScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 }

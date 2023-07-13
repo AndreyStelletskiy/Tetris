@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class Textures {
     public static HashMap<Integer, Texture> textures;
+
     static {
         textures = new HashMap<>();
         for(int i = 0; i < 8; i++){

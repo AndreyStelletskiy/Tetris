@@ -157,6 +157,11 @@ public class SettingScreen implements Screen {
 
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
 
 
@@ -165,6 +170,11 @@ public class SettingScreen implements Screen {
         public void onClicked() {
             MemoryLoader.clearAllSaves();
             uiInitialize();
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -175,6 +185,11 @@ public class SettingScreen implements Screen {
             boolean isMusicOn = MemoryLoader.loadMusicState();
             MemoryLoader.saveMusicState(!isMusicOn);
             soundsButton.text = getSoundButtonText();
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -198,6 +213,11 @@ public class SettingScreen implements Screen {
 
 
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
 
     UiComponent.OnClickListener onChangeDifficultyHeightClickListener = new UiComponent.OnClickListener() {
@@ -219,6 +239,11 @@ public class SettingScreen implements Screen {
             difficultyHeight.text = getDifficultyLabelText(difficultyMapHeight);
             MemoryLoader.saveDifficultyLevelHeight(difficultyMapHeight);
 
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 

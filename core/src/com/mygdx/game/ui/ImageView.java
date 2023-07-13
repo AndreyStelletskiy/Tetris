@@ -26,8 +26,7 @@ public class ImageView extends UiComponent{
     @Override
     public boolean isHit(float tx, float ty) {
         boolean isTouchHitComponent = x < tx && tx < x + width && y < ty && ty < y + height;
-        if (isTouchHitComponent && onClickListener != null) onClickListener.onClicked();
-        return isTouchHitComponent;
+        return super.isHit(isTouchHitComponent);
     }
     public void setImgTexture(Texture texture) {
         imgTexture = texture;

@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.UiComponent;
-import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
 
@@ -80,6 +79,11 @@ public class ShopAssetScreen implements Screen {
         public void onClicked() {
 
             myGdxGame.setScreen(myGdxGame.shopScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 }

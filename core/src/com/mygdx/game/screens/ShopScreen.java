@@ -101,18 +101,33 @@ public class ShopScreen implements Screen {
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.menuScreen);
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
     UiComponent.OnClickListener onMusicShopClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             myGdxGame.setScreen(myGdxGame.shopMusicScreen);
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
     UiComponent.OnClickListener onAssetShopClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onReturnButtonClicked");
+            Gdx.app.debug("onClicked1", "onReturnButtonClicked1");
             myGdxGame.setScreen(myGdxGame.shopAssetScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 }

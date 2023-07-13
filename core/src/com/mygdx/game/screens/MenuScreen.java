@@ -2,7 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.ImageView;
@@ -99,6 +98,7 @@ public class MenuScreen implements Screen {
         scr4.text = ""+ scoreBoard.get(3);
         scr5.text = ""+ scoreBoard.get(4);
         scrTotal.text = ""+MemoryLoader.loadScore();
+        myGdxGame.gameScreen = new GameScreen(myGdxGame);
     }
 
     @Override
@@ -153,9 +153,13 @@ public class MenuScreen implements Screen {
     private final UiComponent.OnClickListener onButtonStartClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonStartClicked");
-            myGdxGame.gameScreen = new GameScreen(myGdxGame);
+            Gdx.app.debug("onClicked1", "onButtonStartClicked");
             myGdxGame.setScreen(myGdxGame.gameScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -163,25 +167,40 @@ public class MenuScreen implements Screen {
     private final UiComponent.OnClickListener onButtonShopClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonShopClicked");
+            Gdx.app.debug("onClicked1", "onButtonShopClicked");
             myGdxGame.setScreen(myGdxGame.shopScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
     private final UiComponent.OnClickListener onButtonSettingsClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonSettingClicked");
+            Gdx.app.debug("onClicked1", "onButtonSettingClicked");
             myGdxGame.setScreen(myGdxGame.settingScreen);
 
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
     private final UiComponent.OnClickListener onButtonExitClicked = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
-            Gdx.app.debug("onClicked", "onButtonExitClicked");
+            Gdx.app.debug("onClicked1", "onButtonExitClicked");
             Gdx.app.exit();
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 }

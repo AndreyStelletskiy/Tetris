@@ -14,6 +14,7 @@ import com.mygdx.game.map.tetraminos.TetraminoSeven;
 import com.mygdx.game.map.tetraminos.TetraminoSix;
 import com.mygdx.game.map.tetraminos.TetraminoThree;
 import com.mygdx.game.map.tetraminos.TetraminoTwo;
+import com.mygdx.game.ui.DoubleClickImageView;
 import com.mygdx.game.ui.ImageView;
 import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
@@ -271,8 +272,8 @@ public class GameScreen implements Screen {
         toLeftRButton.setOnClickListener(toLeftRButtonClickListener);
         ImageView toRightRButton = new ImageView(810, 250, 220, 220, "Buttons/torightr.png");
         toRightRButton.setOnClickListener(toRightRButtonClickListener);
-        ImageView toDownButton = new ImageView(430, 145, 220, 220, "Buttons/todown.png");
-        toDownButton.setOnClickListener(toDown1ButtonClickListener);
+        DoubleClickImageView toDownButton = new DoubleClickImageView(430, 145, 220, 220, "Buttons/todown.png");
+        toDownButton.setOnDoubleClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
         Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 720, 600);
@@ -298,6 +299,11 @@ public class GameScreen implements Screen {
             gameMap.addTetramino(currentTetramino);
             SoundExecutor.playlrSound();
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
     UiComponent.OnClickListener toRightButtonClickListener = new UiComponent.OnClickListener() {
         @Override
@@ -306,6 +312,11 @@ public class GameScreen implements Screen {
             currentTetramino.moveRight(gameMap);
             gameMap.addTetramino(currentTetramino);
             SoundExecutor.playlrSound();
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
     UiComponent.OnClickListener toLeftRButtonClickListener = new UiComponent.OnClickListener() {
@@ -317,6 +328,11 @@ public class GameScreen implements Screen {
             SoundExecutor.playrevSound();
 
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
     UiComponent.OnClickListener toRightRButtonClickListener = new UiComponent.OnClickListener() {
         @Override
@@ -326,10 +342,23 @@ public class GameScreen implements Screen {
             gameMap.addTetramino(currentTetramino);
             SoundExecutor.playrevSound();
         }
-    };
-    UiComponent.OnClickListener toDown1ButtonClickListener = new UiComponent.OnClickListener() {
+
         @Override
-        public void onClicked() {
+        public void onClicked2() {
+            onClicked();
+        }
+    };
+    DoubleClickImageView.OnDoubleClickListener toDown1ButtonClickListener = new DoubleClickImageView.OnDoubleClickListener() {
+
+        @Override
+        public void onClicked1() {
+            if (currentTetramino.isMovable) {
+                currentTetramino.moveDown(gameMap);
+            }
+        }
+
+        @Override
+        public void onClicked2() {
             while (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
             }
@@ -342,6 +371,11 @@ public class GameScreen implements Screen {
             if (currentTetramino.isMovable) {
                 currentTetramino.moveDown(gameMap);
             }
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -367,14 +401,24 @@ public class GameScreen implements Screen {
                 buttonExit.setText("Return Home");
             }
         }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
+        }
     };
     UiComponent.OnClickListener onReturnButtonClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
 
-           updateScore();
+            updateScore();
 
             myGdxGame.setScreen(myGdxGame.menuScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -407,7 +451,7 @@ public class GameScreen implements Screen {
             toLeftButtonClickListener.onClicked();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            toDown1ButtonClickListener.onClicked();
+            toDown1ButtonClickListener.onClicked2();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             toDown2ButtonClickListener.onClicked();

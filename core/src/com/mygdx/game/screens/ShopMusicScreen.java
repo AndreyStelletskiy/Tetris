@@ -2,7 +2,6 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.ui.ImageView;
@@ -11,7 +10,6 @@ import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
 import com.mygdx.game.utils.MathHelper;
-import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
 
@@ -111,12 +109,22 @@ public class ShopMusicScreen implements Screen {
             itemIdx += 1;
             itemIdx = MathHelper.percent(itemIdx, songsCount);
         }
+
+        @Override
+        public void onClicked2() {
+
+        }
     };
     UiComponent.OnClickListener previousSongButtonOnClickListener = new UiComponent.OnClickListener() {
         @Override
         public void onClicked() {
             itemIdx -= 1;
             itemIdx = MathHelper.percent(itemIdx, songsCount);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 
@@ -125,6 +133,11 @@ public class ShopMusicScreen implements Screen {
         public void onClicked() {
 
             myGdxGame.setScreen(myGdxGame.shopScreen);
+        }
+
+        @Override
+        public void onClicked2() {
+            onClicked();
         }
     };
 }
