@@ -80,6 +80,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        SoundExecutor.pauseStartPlaying();
         SoundExecutor.playBackSound();
     }
 
@@ -274,7 +275,7 @@ public class GameScreen implements Screen {
         toDownButton.setOnClickListener(toDown1ButtonClickListener);
         TextView score = new TextView(myGdxGame.commonFont.bitmapFont, "Score", 920, 1875);
         //TextView scoreR = new TextView(myGdxGame.commonFont.bitmapFont, "0", 935, 1825);
-        Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 780, 600);
+        Stop = new TextButton(myGdxGame.largeFontb.bitmapFont, "Pause", 720, 600);
         Stop.setOnClickListener(pauseButtonClickListener);
         buttonExit = new TextButton(myGdxGame.largeFontb.bitmapFont, "", 25, 85);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
@@ -361,7 +362,7 @@ public class GameScreen implements Screen {
                 buttonExit.setText("");
             }
             if (gameState == 1) {
-                Stop.setText("Continue");
+                Stop.setText("Resume");
                 SoundExecutor.pausePlaying();
                 buttonExit.setText("Return Home");
             }

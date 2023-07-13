@@ -90,7 +90,7 @@ public class MenuScreen implements Screen {
     @Override
     public void show() {
         SoundExecutor.stopPlaying();
-
+        SoundExecutor.playStartSound();
         ArrayList<Integer> scoreBoard = MemoryLoader.loadScoreBoard();
         Gdx.app.debug("score", scoreBoard.toString());
         scr1.text = ""+ scoreBoard.get(0);
@@ -146,7 +146,6 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 
 
