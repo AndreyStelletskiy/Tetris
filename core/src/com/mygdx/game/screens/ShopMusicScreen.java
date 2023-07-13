@@ -11,6 +11,7 @@ import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
 import com.mygdx.game.utils.MathHelper;
+import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,6 @@ public class ShopMusicScreen implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override

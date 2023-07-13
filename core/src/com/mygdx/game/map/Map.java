@@ -26,7 +26,7 @@ public class Map {
         for (int i = 0; i < height; i++) {
             mapList.add(new ArrayList<Block>());
             for (int j = 0; j < width; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
                 mapList.get(i).add(zeroBlock);
             }
 
@@ -116,7 +116,7 @@ public class Map {
         for (int i = 0; i < height; i++) {
             newMapList.add(new ArrayList<Block>());
             for (int j = 0; j < width + count * 2; j++) {
-                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.jpg", 0);
+                Block zeroBlock = new Block(posX + j * blockSize, posY + i * blockSize, blockSize, blockSize, "block_0.bmp", 0);
                 newMapList.get(i).add(zeroBlock);
             }
         }

@@ -9,6 +9,7 @@ import com.mygdx.game.ui.TextButton;
 import com.mygdx.game.ui.TextView;
 import com.mygdx.game.ui.UiComponent;
 import com.mygdx.game.utils.GameSettings;
+import com.mygdx.game.utils.SoundExecutor;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class ShopScreen implements Screen {
 
     @Override
     public void show() {
-
+        SoundExecutor.stopStartSound();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class ShopScreen implements Screen {
 
     @Override
     public void pause() {
-
+        SoundExecutor.stopStartSound();
     }
 
     @Override
