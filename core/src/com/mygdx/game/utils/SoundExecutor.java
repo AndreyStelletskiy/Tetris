@@ -5,9 +5,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 
-import java.util.ArrayList;
-
 public class SoundExecutor {
+
 
     static Music backSound = Gdx.audio.newMusic(Gdx.files.internal("tetris_theme.mp3"));
     static Music startSound = Gdx.audio.newMusic(Gdx.files.internal("start.mp3"));
@@ -30,7 +29,8 @@ public class SoundExecutor {
         backSound.stop();
     }
     public static void resumePlaying() {
-        backSound.play();
+        if(MemoryLoader.loadMusicState()) {
+        backSound.play();}
     }
     public static void pausePlaying() {
         backSound.pause();
