@@ -29,8 +29,8 @@ public class ShopAssetScreen implements Screen {
     }
 
     private void uiInitialize() {
-        ImageView nextWidgetButton = new ImageView(GameSettings.SCR_WIDTH - 100, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toright.png");
-        ImageView previousWidgetButton = new ImageView(40, GameSettings.SCR_HEIGHT/2 - 50, 60, 60, "Buttons/toleft.png");
+        ImageView nextWidgetButton = new ImageView(GameSettings.SCR_WIDTH - 160, GameSettings.SCR_HEIGHT/2 - 60, 120, 120, "Buttons/toright.png");
+        ImageView previousWidgetButton = new ImageView(40, GameSettings.SCR_HEIGHT/2 - 60, 120, 120, "Buttons/toleft.png");
         nextWidgetButton.setOnClickListener(nextWidgetButtonOnClickListener);
         previousWidgetButton.setOnClickListener(previousWidgetButtonOnClickListener);
         uiComponentsList = new ArrayList<>();
@@ -46,22 +46,26 @@ public class ShopAssetScreen implements Screen {
         widgets = new ArrayList<>();
         for (int i = 0; i < assetsCount; i++) {
             widgets.add(new ArrayList<UiComponent>());
-            TextView songName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadAssetNames().get(i), GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2);
+            TextView assetName = new TextView(myGdxGame.largeFont.bitmapFont, MemoryLoader.loadAssetNames().get(i), GameSettings.SCR_WIDTH/2, GameSettings.SCR_HEIGHT/2);
+            assetName.x -= assetName.width/2;
             TextButton textButton;
             switch (MemoryLoader.loadAssetStates().get(i)){
                 case 0:
-                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.ASSET_PRICE,GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "BUY" + GameSettings.ASSET_PRICE,GameSettings.SCR_WIDTH/2, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton.x -= textButton.width/2;
                     textButton.setOnClickListener(onBuyOnClickListener);
                     break;
                 case 1:
-                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "CHOOSE",GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "CHOOSE",GameSettings.SCR_WIDTH/2, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton.x -= textButton.width/2;
                     textButton.setOnClickListener(onChooseOnClickListener);
                     break;
                 default:
-                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "CHOOSEN",GameSettings.SCR_WIDTH/2-200, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton = new TextButton(myGdxGame.commonFont.bitmapFont, "CHOOSEN",GameSettings.SCR_WIDTH/2, GameSettings.SCR_HEIGHT/2-300 );
+                    textButton.x -= textButton.width/2;
             }
 
-            widgets.get(i).add(songName);
+            widgets.get(i).add(assetName);
             widgets.get(i).add(textButton);
         }
     }

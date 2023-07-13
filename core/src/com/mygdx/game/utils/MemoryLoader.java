@@ -111,7 +111,7 @@ public class MemoryLoader {
         if (musicNames == null) {
             musicNames = new ArrayList<>();
             musicNames.add("Default song");
-            musicNames.add("Tetris Phonk Remix");
+            musicNames.add("Phonk Remix");
             musicNames.add("Best Song");
             musicNames.add("Mortal Combat");
             musicNames.add("Doom");

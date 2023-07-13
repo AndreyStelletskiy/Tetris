@@ -30,8 +30,10 @@ public class ShopScreen implements Screen {
         ImageView background = new ImageView(0, 0, GameSettings.SCR_WIDTH, GameSettings.SCR_HEIGHT, "backgrounds/homeBG.png");
         TextView title = new TextView(myGdxGame.largeFont.bitmapFont, "Shop", -1, 1825);
         TextButton buttonExit = new TextButton(myGdxGame.largeFont.bitmapFont, "Return home", 25, 175);
-        TextButton musicShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Music shop", GameSettings.SCR_WIDTH / 2- 100, GameSettings.SCR_HEIGHT / 2 + 100);
-        TextButton assetShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Asset ", GameSettings.SCR_WIDTH / 2- 100, GameSettings.SCR_HEIGHT / 2 - 100);
+        TextButton musicShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Music shop", GameSettings.SCR_WIDTH / 2, GameSettings.SCR_HEIGHT / 2 + 100);
+        musicShop.x -= musicShop.width/2;
+        TextButton assetShop = new TextButton(myGdxGame.largeFont.bitmapFont, "Asset ", GameSettings.SCR_WIDTH / 2, GameSettings.SCR_HEIGHT / 2 - 100);
+        assetShop.x -= assetShop.width/2;
         musicShop.setOnClickListener(onMusicShopClickListener);
         assetShop.setOnClickListener(onAssetShopClickListener);
         buttonExit.setOnClickListener(onReturnButtonClickListener);
