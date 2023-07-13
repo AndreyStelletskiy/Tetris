@@ -111,8 +111,10 @@ public class MemoryLoader {
         if (musicNames == null) {
             musicNames = new ArrayList<>();
             musicNames.add("Default song");
-            musicNames.add("Phonk");
-            musicNames.add("Dengi");
+            musicNames.add("Tetris Phonk Remix");
+            musicNames.add("Best Song");
+            musicNames.add("Mortal Combat");
+            musicNames.add("Doom");
         }
         return musicNames;
     }
@@ -120,7 +122,7 @@ public class MemoryLoader {
     public static ArrayList<String> loadMusicPaths() {
         if (musicPaths == null) {
             musicPaths = new ArrayList<>();
-            for(int i = 0; i < 3; i ++){
+            for(int i = 0; i < 5; i ++){
                 musicPaths.add("tetris_theme_" + i +".mp3");
             }
         }
@@ -137,7 +139,7 @@ public class MemoryLoader {
             return parseStringToArray(prefs.getString("musicStates"));
         }
         ArrayList<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             arrayList.add(0);
         }
         arrayList.set(0,2);
