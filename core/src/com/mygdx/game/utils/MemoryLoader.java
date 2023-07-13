@@ -104,6 +104,8 @@ public class MemoryLoader {
         MemoryLoader.saveDifficultyLevelHeight(DEFAULT_DIFFICULTY_HEIGHT);
         MemoryLoader.saveMusicState(GameSettings.DEFAULT_SOUND_STATE);
         MemoryLoader.saveScoreBoard(parseStringToArray("0 0 0 0 0"));
+        MemoryLoader.saveMusicStates(parseStringToArray("2 0 0 0 0"));
+        MemoryLoader.saveAssetStates(parseStringToArray("2 0"));
         MemoryLoader.saveScore(0);
     }
 
